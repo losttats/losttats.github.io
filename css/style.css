@@ -5961,7 +5961,7 @@ button {
   z-index: 1;
   bottom: 10px;
   left: 0;
-  width: 100%;
+  width: 20%;
 }
 .cover-learn-more a > i {
   font-size: 3rem;
