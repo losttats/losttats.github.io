@@ -186,7 +186,7 @@
 </ol>
 <h2 id="居中为何要用transform而不用marginLeft等"><a href="#居中为何要用transform而不用marginLeft等" class="headerlink" title="居中为何要用transform而不用marginLeft等"></a>居中为何要用transform而不用marginLeft等</h2><p>transform属于合成属性，对合成属性进行transition/animation动画将会创建一个合成层，这使得动画元素在一个独立的层中进行动画。通常情况下，浏览器会将一个层中的内容先绘制进一个位图当中，然后再作为纹理上传到GPU，只要该层的内容不改变，就不会引发重绘，浏览器会通过重新复合来形成一个新的帧。</p>
 <p>top/left属于布局属性，该属性的变化会导致重排，即对这些节点及受这些节点影响的其他节点进行CSS计算→布局→重绘过程，浏览器需要将整个层重绘并重新上传到GPU，造成了极大的性能开销。</p>
-<h2 id="发布-订阅模式-vs-观察者模式"><a href="#发布-订阅模式-vs-观察者模式" class="headerlink" title="发布-订阅模式 vs 观察者模式"></a>发布-订阅模式 vs 观察者模式</h2><p><img src="/pubsub.png" alt="模式"></p>
+<h2 id="发布-订阅模式-vs-观察者模式"><a href="#发布-订阅模式-vs-观察者模式" class="headerlink" title="发布-订阅模式 vs 观察者模式"></a>发布-订阅模式 vs 观察者模式</h2><p><img src="/images/pubsub.png" alt="模式"></p>
 <ul>
 <li><p>在观察者模式中，观察者是知道发布者的存在的，而发布者也一直保持着对观察者的记录。在发布-订阅模式中，发布者和订阅者不知道对方的存在，它们通过消息代理进行通信。</p>
 </li>

@@ -400,7 +400,7 @@ return function(){
 </ol>
 <h2 id="居中为何要用transform而不用marginLeft等"><a href="#居中为何要用transform而不用marginLeft等" class="headerlink" title="居中为何要用transform而不用marginLeft等"></a>居中为何要用transform而不用marginLeft等</h2><p>transform属于合成属性，对合成属性进行transition/animation动画将会创建一个合成层，这使得动画元素在一个独立的层中进行动画。通常情况下，浏览器会将一个层中的内容先绘制进一个位图当中，然后再作为纹理上传到GPU，只要该层的内容不改变，就不会引发重绘，浏览器会通过重新复合来形成一个新的帧。</p>
 <p>top/left属于布局属性，该属性的变化会导致重排，即对这些节点及受这些节点影响的其他节点进行CSS计算→布局→重绘过程，浏览器需要将整个层重绘并重新上传到GPU，造成了极大的性能开销。</p>
-<h2 id="发布-订阅模式-vs-观察者模式"><a href="#发布-订阅模式-vs-观察者模式" class="headerlink" title="发布-订阅模式 vs 观察者模式"></a>发布-订阅模式 vs 观察者模式</h2><p><img src="/pubsub.png" alt="模式"></p>
+<h2 id="发布-订阅模式-vs-观察者模式"><a href="#发布-订阅模式-vs-观察者模式" class="headerlink" title="发布-订阅模式 vs 观察者模式"></a>发布-订阅模式 vs 观察者模式</h2><p><img src="/images/pubsub.png" alt="模式"></p>
 <ul>
 <li><p>在观察者模式中，观察者是知道发布者的存在的，而发布者也一直保持着对观察者的记录。在发布-订阅模式中，发布者和订阅者不知道对方的存在，它们通过消息代理进行通信。</p>
 </li>
@@ -487,7 +487,7 @@ return function(){
 <h2 id="this"><a href="#this" class="headerlink" title="this"></a>this</h2><blockquote>
 <p>以函数形式调用时，this永远指向window对象<br>以方法形式调用时，this就是调用该方法的对象<br>以构造函数形式调用时，this指向新建的对象</p>
 </blockquote>
-<h2 id="原型和原型链"><a href="#原型和原型链" class="headerlink" title="原型和原型链"></a>原型和原型链</h2><p><img src="/prototype.png" alt="原型链"></p>
+<h2 id="原型和原型链"><a href="#原型和原型链" class="headerlink" title="原型和原型链"></a>原型和原型链</h2><p><img src="/images/prototype.png" alt="原型链"></p>
 <blockquote>
 <p>上图中蓝色的即为原型链</p>
 </blockquote>
@@ -526,9 +526,9 @@ return function(){
 <ul>
 <li><p>V8内存限制<br>V8只能使用系统的一部分内存。具体来说，在64位系统下，V8最多只能分配1.4G；在32位系统下，最多只能分配0.7G。<br>这么做的原因是由两个因素共同决定的：一是JS单线程的执行机制，另一个是JS垃圾回收机制的限制。<br>首先，JS是单线程运行的，一旦进入到垃圾回收阶段，其他的各种运行逻辑都要暂停。其次，垃圾回收是一个非常耗时的操作。所以，V8通过限制堆内存来获取更快的响应速度。</p>
 </li>
-<li><p>内存的回收<br>V8把堆内存分成了两部分——新生代内存和老生代内存。<br>新生代内存就是临时分配的内存，存活时间短。老生代时常驻内存，存活时间长。V8的堆内存就是这两个内存之和。<br><img src="/memory.png" alt="新老生代内存"></p>
+<li><p>内存的回收<br>V8把堆内存分成了两部分——新生代内存和老生代内存。<br>新生代内存就是临时分配的内存，存活时间短。老生代时常驻内存，存活时间长。V8的堆内存就是这两个内存之和。<br><img src="/images/memory.png" alt="新老生代内存"></p>
 <ul>
-<li><p>新生代内存回收策略（Scavenge算法）：<br>新生代内存在64位系统和32位系统下的默认限制分别为32Mb和16Mb。<br>首先将新生代内存一分为二：<br><img src="/memory2.png" alt="新生代内存"><br>其中From部分表示正在使用的内存，To是目前闲置的内存。<br>当进行垃圾回收时，V8将From部分的对象检查一遍，如果是存活对象则复制到To内存中（顺序摆放），如果是非存活对象直接回收即可。<br>当所有的From中的存活对象按照顺序进入到To内存之后，二者<strong>角色互换</strong>。From现在被闲置，To位正在使用，如此循环。<br>这样的操作可以使正在使用的内存区中的数据顺序摆放，便于后续的空间分配。</p>
+<li><p>新生代内存回收策略（Scavenge算法）：<br>新生代内存在64位系统和32位系统下的默认限制分别为32Mb和16Mb。<br>首先将新生代内存一分为二：<br><img src="/images/memory2.png" alt="新生代内存"><br>其中From部分表示正在使用的内存，To是目前闲置的内存。<br>当进行垃圾回收时，V8将From部分的对象检查一遍，如果是存活对象则复制到To内存中（顺序摆放），如果是非存活对象直接回收即可。<br>当所有的From中的存活对象按照顺序进入到To内存之后，二者<strong>角色互换</strong>。From现在被闲置，To位正在使用，如此循环。<br>这样的操作可以使正在使用的内存区中的数据顺序摆放，便于后续的空间分配。</p>
 </li>
 <li><p>老生代内存回收策略：<br>如果新生代内存中的变量经过多次回收后仍然存在，则会被放入老生代内存中，这种现象称为<strong>晋升</strong><br>以下操作会触发晋升：</p>
 <ul>
