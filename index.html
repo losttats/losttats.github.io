@@ -70,7 +70,7 @@
     
     
     
-    <article id="post-css" class="article article-type-post" itemscope
+    <article id="post-react" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -78,8 +78,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2020/02/23/css/"
-    >CSS小技巧</a
+  <a class="article-title" href="/2020/02/23/react/"
+    >react基础知识</a
   >
 </h2>
   
@@ -89,12 +89,12 @@
 
     
     <div class="article-meta">
-      <a href="/2020/02/23/css/" class="article-date">
-  <time datetime="2020-02-23T12:46:25.000Z" itemprop="datePublished">2020-02-23</time>
+      <a href="/2020/02/23/react/" class="article-date">
+  <time datetime="2020-02-23T11:17:47.930Z" itemprop="datePublished">2020-02-23</time>
 </a>
       
   <div class="article-category">
-    <a class="article-category-link" href="/categories/CSS/">CSS</a>
+    <a class="article-category-link" href="/categories/React/">React</a>
   </div>
 
       
@@ -113,98 +113,16 @@
       
 
       
-      <h2 id="自定义弹窗"><a href="#自定义弹窗" class="headerlink" title="自定义弹窗"></a>自定义弹窗</h2><blockquote>
-<p>主要思路是弄一个半透明的遮罩</p>
-</blockquote>
-<pre><code>#bc{
-    display: none;
-    position: fixed;
-    left: 0;
-    top:0;
-    width: 100%;
-    height:100%;
-    background-color: rgba(0,0,0,0.5)
-}</code></pre>
+      <h2 id="react事件机制原理"><a href="#react事件机制原理" class="headerlink" title="react事件机制原理"></a>react事件机制原理</h2><h3 id="对事件机制的初步理解"><a href="#对事件机制的初步理解" class="headerlink" title="对事件机制的初步理解"></a>对事件机制的初步理解</h3><p>react的所有事件并没有绑定到具体的DOM节点上，而是绑定在了document上面，然后由统一的事件处理程序来处理。同时，基于浏览器的事件机制（冒泡），所有节点的事件都会在document上触发。</p>
+<p>因为合成事件的触发是基于浏览器的事件机制来实现的，通过冒泡机制冒泡到最顶层元素，然后再由dispatchEvent统一处理。因此有</p>
+<ul>
+<li>原生事件阻止冒泡肯定会组织合成事件的触发</li>
+<li>合成事件阻止冒泡不会影响原生事件</li>
+</ul>
+<p>浏览器的事件执行需要经过三个阶段：捕获阶段→目标元素阶段→冒泡阶段。</p>
+<p>节点上的原生事件执行是在目标阶段，而合成事件执行是在冒泡阶段。故原生事件执行先于合成事件。二者最好不要混用。</p>
       
-      <a class="article-more-link" href="/2020/02/23/css/">阅读更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8A%80%E5%B7%A7/" rel="tag">技巧</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-htmlBasic" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/02/23/htmlBasic/"
-    >HTML基础知识</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/02/23/htmlBasic/" class="article-date">
-  <time datetime="2020-02-23T12:46:25.000Z" itemprop="datePublished">2020-02-23</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/HTML/">HTML</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="块元素和内联元素"><a href="#块元素和内联元素" class="headerlink" title="块元素和内联元素"></a>块元素和内联元素</h2><blockquote>
-<p>块元素：独占一行的元素，入div、p、h1等等<br>内联元素（行内元素）：只占自身大小的元素，如a、span等等</p>
-</blockquote>
-<p>一般情况下只用块元素包含内联元素<br>a元素可以包含任何元素，<strong>除了它本身</strong><br>p元素不能包含任何块元素</p>
-      
-      <a class="article-more-link" href="/2020/02/23/htmlBasic/">阅读更多...</a>
+      <a class="article-more-link" href="/2020/02/23/react/">阅读更多...</a>
       
       
       <!-- reward -->
@@ -218,274 +136,6 @@
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-jsBasic" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/02/23/jsBasic/"
-    >JS基础知识</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/02/23/jsBasic/" class="article-date">
-  <time datetime="2020-02-23T12:46:25.000Z" itemprop="datePublished">2020-02-23</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JS/">JS</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="js数据类型"><a href="#js数据类型" class="headerlink" title="js数据类型"></a>js数据类型</h2><blockquote>
-<p>js共有六种数据类型：number、string、boolean、undefined、null、object(BigInt、symbol)<br>其中object属于引用数据类型，其他的称为基本数据类型</p>
-</blockquote>
-<ul>
-<li><p>number：</p>
-<ul>
-<li>js可以表示的数字最大值为Number.MAX_VALUE，绝对值最小值为Number.MIN_VALUE</li>
-<li>如果使用number表示的值超过了最大值，则会返回infinity表示正无穷</li>
-<li>在js中进行浮点数运算可能得到一个不精确的结果</li>
-</ul>
-</li>
-<li><p>null：<strong>typeof null === “object”</strong>，但是null并不是对象</p>
-</li>
-<li><p>undefined：当声明一个变量却不给它赋值时，它的值为undefined</p>
-</li>
-</ul>
-<h2 id="数据类型转换"><a href="#数据类型转换" class="headerlink" title="数据类型转换"></a>数据类型转换</h2><ol>
-<li><p>转为string</p>
-<ul>
-<li>调用被转换数据类型的toString方法，返回转换结果。null和undefined没有该方法</li>
-<li>调用String函数，返回转换结果。对于boolean和number实际上就是调用其toString方法</li>
-<li>+“”</li>
-</ul>
-</li>
-<li><p>转为number</p>
-<ul>
-<li>使用Number函数<ul>
-<li>若是纯数字字符串，则转换为数字</li>
-<li>若字符串中含有非数字，则转换为NaN</li>
-<li>若为空串，则转换为0</li>
-<li>true转换为1，false转换为0</li>
-<li>null转换为0</li>
-<li>undefined转换为NaN</li>
-<li>空数组转换为0</li>
-<li>空对象转换为NaN</li>
-<li>对象调用其valueOf()</li>
-</ul>
-</li>
-<li>使用parseInt、parseFloat函数（字符串专用）<ul>
-<li>parseInt：将一个字符串中有效的整数提取出来（从左往右识别），一个都没有则返回NaN</li>
-<li>parseFloat：取小数</li>
-<li>若对非string类型使用上述两个函数，则会先转为string再操作</li>
-<li>上述函数第二个参数可以指定数字的进制</li>
-</ul>
-</li>
-<li>-0</li>
-<li>*1</li>
-<li>/1</li>
-</ul>
-</li>
-<li><p>转为boolean</p>
-<ul>
-<li>使用Boolean函数<ul>
-<li>数字：除了0和NaN都为true</li>
-<li>字符串：除了空串都为true</li>
-<li>null和undefined都为false</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<h2 id="this"><a href="#this" class="headerlink" title="this"></a>this</h2><blockquote>
-<p>以函数形式调用时，this永远指向window对象<br>以方法形式调用时，this就是调用该方法的对象<br>以构造函数形式调用时，this指向新建的对象</p>
-</blockquote>
-<h2 id="原型和原型链"><a href="#原型和原型链" class="headerlink" title="原型和原型链"></a>原型和原型链</h2><p><img src="/prototype.png" alt="原型链"></p>
-<blockquote>
-<p>上图中蓝色的即为原型链</p>
-</blockquote>
-<p><strong>prototype属性只有函数才有</strong></p>
-<p>obj.__proto__相当于Object.getPrototypeOf(obj)</p>
-<p>在上图中，如果我们去获取person.constructor，这时person中并没有constructor属性。那么它会从person的原型，即Person.prototype中读取。<br>因此<strong>person.constructor===Person.prototype.constructor === Person</strong></p>
-<h2 id="typeof和instanceof"><a href="#typeof和instanceof" class="headerlink" title="typeof和instanceof"></a>typeof和instanceof</h2><ul>
-<li><p>对于原始类型，除了null都可以调用typeof显示正确类型<br>但是对于引用数据类型，除了函数外都会显示object</p>
-</li>
-<li><p>对于引用数据类型使用instanceof判断会更好。只要检索的数据位于某对象原型链上即返回true</p>
-</li>
-</ul>
-<h2 id="类数组对象"><a href="#类数组对象" class="headerlink" title="类数组对象"></a>类数组对象</h2><blockquote>
-<p>类数组对象：拥有一个length属性和若干索引属性的对象（无法使用数组方法）</p>
-</blockquote>
-<ul>
-<li><p>间接调用类数组对象：  </p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">var arrayLike &#x3D; &#123;</span><br><span class="line">    0:&#39;name&#39;,</span><br><span class="line">    1:&#39;age&#39;,</span><br><span class="line">    2:&#39;sex&#39;,</span><br><span class="line">    length:3</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">Array.prototype.join.call(arrayLike,&#39;&amp;&#39;);</span><br><span class="line">&#x2F;&#x2F;name&amp;age&amp;sex</span><br><span class="line"></span><br><span class="line">Array.prototype.slice.call(arrayLike, 0);</span><br><span class="line">&#x2F;&#x2F;[&quot;name&quot;, &quot;age&quot;, &quot;sex&quot;]</span><br><span class="line"></span><br><span class="line">Array.prototype.map.call(arrayLike, function(item)&#123;</span><br><span class="line">    return item.toUpperCase();</span><br><span class="line">&#125;);</span><br><span class="line">&#x2F;&#x2F;[&quot;NAME&quot;, &quot;AGE&quot;, &quot;SEX&quot;]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>类数组转数组  </p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">var arrayLike &#x3D; &#123;</span><br><span class="line">    0:&#39;name&#39;,</span><br><span class="line">    1:&#39;age&#39;,</span><br><span class="line">    2:&#39;sex&#39;,</span><br><span class="line">    length:3</span><br><span class="line">&#125; </span><br><span class="line">&#x2F;&#x2F;1</span><br><span class="line">Array.prototype.slice.call(arrayLike);</span><br><span class="line">&#x2F;&#x2F;2</span><br><span class="line">Array.prototype.splice.call(arrayLike, 0);</span><br><span class="line">&#x2F;&#x2F;3</span><br><span class="line">Array.from(arrayLike);</span><br><span class="line">&#x2F;&#x2F;4</span><br><span class="line">Array.prototype.concat.apply([], arrayLike)</span><br><span class="line">&#x2F;&#x2F;ES6展开运算符</span><br><span class="line">[...arrayLike]</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="浅拷贝和深拷贝"><a href="#浅拷贝和深拷贝" class="headerlink" title="浅拷贝和深拷贝"></a>浅拷贝和深拷贝</h2><blockquote>
-<p>浅拷贝：复制引用的拷贝方式<br>深拷贝：完全地拷贝一个对象，即使是一个嵌套了对象的对象，二者也是相互独立的，修改一个对象的属性不会影响另一个</p>
-</blockquote>
-<ul>
-<li>深拷贝数组或对象：  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JSON.parse(JSON.stringify(arr))</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="V8引擎的垃圾回收"><a href="#V8引擎的垃圾回收" class="headerlink" title="V8引擎的垃圾回收"></a>V8引擎的垃圾回收</h2><blockquote>
-<p>JS采用自己的一套垃圾回收算法进行自动的内存管理</p>
-</blockquote>
-<ul>
-<li><p>V8内存限制<br>V8只能使用系统的一部分内存。具体来说，在64位系统下，V8最多只能分配1.4G；在32位系统下，最多只能分配0.7G。<br>这么做的原因是由两个因素共同决定的：一是JS单线程的执行机制，另一个是JS垃圾回收机制的限制。<br>首先，JS是单线程运行的，一旦进入到垃圾回收阶段，其他的各种运行逻辑都要暂停。其次，垃圾回收是一个非常耗时的操作。所以，V8通过限制堆内存来获取更快的响应速度。</p>
-</li>
-<li><p>内存的回收<br>V8把堆内存分成了两部分——新生代内存和老生代内存。<br>新生代内存就是临时分配的内存，存活时间短。老生代时常驻内存，存活时间长。V8的堆内存就是这两个内存之和。<br><img src="/memory.png" alt="新老生代内存"></p>
-<ul>
-<li><p>新生代内存回收策略（Scavenge算法）：<br>新生代内存在64位系统和32位系统下的默认限制分别为32Mb和16Mb。<br>首先将新生代内存一分为二：<br><img src="/memory2.png" alt="新生代内存"><br>其中From部分表示正在使用的内存，To是目前闲置的内存。<br>当进行垃圾回收时，V8将From部分的对象检查一遍，如果是存活对象则复制到To内存中（顺序摆放），如果是非存活对象直接回收即可。<br>当所有的From中的存活对象按照顺序进入到To内存之后，二者<strong>角色互换</strong>。From现在被闲置，To位正在使用，如此循环。<br>这样的操作可以使正在使用的内存区中的数据顺序摆放，便于后续的空间分配。</p>
-</li>
-<li><p>老生代内存回收策略：<br>如果新生代内存中的变量经过多次回收后仍然存在，则会被放入老生代内存中，这种现象称为<strong>晋升</strong><br>以下操作会触发晋升：</p>
-<ul>
-<li><p>已经经历过一次Scavenge回收</p>
-</li>
-<li><p>新生代中闲置空间内存占用超过25%</p>
-<p>第一步进行标记-清除。首先遍历堆中的所有对象，对它们做上标记，然后对于代码环境中<strong>使用的变量</strong>以及被<strong>强引用</strong>的变量取消标记。然后在清除阶段进行空间回收<br>第二步，整理内存碎片。在清除阶段结束之后，把存活的对象全部往一端靠拢。由于是移动对象，执行速度慢，故此阶段是整个过程中最耗时的部分。</p>
-</li>
-</ul>
-</li>
-<li><p>增量标记<br>由于JS的单线程机制，V8在进行垃圾回收时，不可避免地会阻塞业务逻辑的执行。如果老生代的垃圾回收任务很重，那么会严重地影响应用的性能。为了避免这样的问题，V8采取了增量标记的方案，即将一口气完成的标记任务分为很多小的部分完成，每完成一个小部分就转而去执行js应用逻辑，之后再继续进行垃圾回收，如此循环。</p>
-</li>
-</ul>
-</li>
-</ul>
-
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-jsQuestions" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/02/23/jsQuestions/"
-    >JS面试题</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/02/23/jsQuestions/" class="article-date">
-  <time datetime="2020-02-23T12:46:25.000Z" itemprop="datePublished">2020-02-23</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JS/">JS</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id=""><a href="#" class="headerlink" title="[] == ![]"></a>[] == ![]</h2><p>==中，左右两边都需要转换为数字进行比较<br>左边[]转换为数字0<br>![]需要转为一个布尔值，由于[]是一个引用类型，故![]转为false，再转为数字0<br>因此原式相当于0 == 0，<strong>结果为true</strong></p>
-      
-      <a class="article-more-link" href="/2020/02/23/jsQuestions/">阅读更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>
 
 
     </footer>
@@ -522,7 +172,7 @@
     
     <div class="article-meta">
       <a href="/2020/02/23/jsSkill/" class="article-date">
-  <time datetime="2020-02-23T12:46:25.000Z" itemprop="datePublished">2020-02-23</time>
+  <time datetime="2020-02-23T11:17:47.928Z" itemprop="datePublished">2020-02-23</time>
 </a>
       
   <div class="article-category">
@@ -827,7 +477,7 @@ return function(){
 
 </article>
     
-    <article id="post-react" class="article article-type-post" itemscope
+    <article id="post-jsQuestions" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -835,8 +485,8 @@ return function(){
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2020/02/23/react/"
-    >react基础知识</a
+  <a class="article-title" href="/2020/02/23/jsQuestions/"
+    >JS面试题</a
   >
 </h2>
   
@@ -846,12 +496,12 @@ return function(){
 
     
     <div class="article-meta">
-      <a href="/2020/02/23/react/" class="article-date">
-  <time datetime="2020-02-23T12:46:25.000Z" itemprop="datePublished">2020-02-23</time>
+      <a href="/2020/02/23/jsQuestions/" class="article-date">
+  <time datetime="2020-02-23T11:17:47.926Z" itemprop="datePublished">2020-02-23</time>
 </a>
       
   <div class="article-category">
-    <a class="article-category-link" href="/categories/React/">React</a>
+    <a class="article-category-link" href="/categories/JS/">JS</a>
   </div>
 
       
@@ -870,16 +520,97 @@ return function(){
       
 
       
-      <h2 id="react事件机制原理"><a href="#react事件机制原理" class="headerlink" title="react事件机制原理"></a>react事件机制原理</h2><h3 id="对事件机制的初步理解"><a href="#对事件机制的初步理解" class="headerlink" title="对事件机制的初步理解"></a>对事件机制的初步理解</h3><p>react的所有事件并没有绑定到具体的DOM节点上，而是绑定在了document上面，然后由统一的事件处理程序来处理。同时，基于浏览器的事件机制（冒泡），所有节点的事件都会在document上触发。</p>
-<p>因为合成事件的触发是基于浏览器的事件机制来实现的，通过冒泡机制冒泡到最顶层元素，然后再由dispatchEvent统一处理。因此有</p>
-<ul>
-<li>原生事件阻止冒泡肯定会组织合成事件的触发</li>
-<li>合成事件阻止冒泡不会影响原生事件</li>
-</ul>
-<p>浏览器的事件执行需要经过三个阶段：捕获阶段→目标元素阶段→冒泡阶段。</p>
-<p>节点上的原生事件执行是在目标阶段，而合成事件执行是在冒泡阶段。故原生事件执行先于合成事件。二者最好不要混用。</p>
+      <h2 id=""><a href="#" class="headerlink" title="[] == ![]"></a>[] == ![]</h2><p>==中，左右两边都需要转换为数字进行比较<br>左边[]转换为数字0<br>![]需要转为一个布尔值，由于[]是一个引用类型，故![]转为false，再转为数字0<br>因此原式相当于0 == 0，<strong>结果为true</strong></p>
       
-      <a class="article-more-link" href="/2020/02/23/react/">阅读更多...</a>
+      <a class="article-more-link" href="/2020/02/23/jsQuestions/">阅读更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-jsBasic" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/02/23/jsBasic/"
+    >JS基础知识</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/02/23/jsBasic/" class="article-date">
+  <time datetime="2020-02-23T11:17:47.921Z" itemprop="datePublished">2020-02-23</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JS/">JS</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="js数据类型"><a href="#js数据类型" class="headerlink" title="js数据类型"></a>js数据类型</h2><blockquote>
+<p>js共有六种数据类型：number、string、boolean、undefined、null、object(BigInt、symbol)<br>其中object属于引用数据类型，其他的称为基本数据类型</p>
+</blockquote>
+<ul>
+<li><p>number：</p>
+<ul>
+<li>js可以表示的数字最大值为Number.MAX_VALUE，绝对值最小值为Number.MIN_VALUE</li>
+<li>如果使用number表示的值超过了最大值，则会返回infinity表示正无穷</li>
+<li>在js中进行浮点数运算可能得到一个不精确的结果</li>
+</ul>
+</li>
+<li><p>null：<strong>typeof null === “object”</strong>，但是null并不是对象</p>
+</li>
+<li><p>undefined：当声明一个变量却不给它赋值时，它的值为undefined</p>
+      
+      <a class="article-more-link" href="/2020/02/23/jsBasic/">阅读更多...</a>
       
       
       <!-- reward -->
@@ -893,6 +624,170 @@ return function(){
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-htmlBasic" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/02/23/htmlBasic/"
+    >HTML基础知识</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/02/23/htmlBasic/" class="article-date">
+  <time datetime="2020-02-23T11:17:47.919Z" itemprop="datePublished">2020-02-23</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/HTML/">HTML</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="块元素和内联元素"><a href="#块元素和内联元素" class="headerlink" title="块元素和内联元素"></a>块元素和内联元素</h2><blockquote>
+<p>块元素：独占一行的元素，入div、p、h1等等<br>内联元素（行内元素）：只占自身大小的元素，如a、span等等</p>
+</blockquote>
+<p>一般情况下只用块元素包含内联元素<br>a元素可以包含任何元素，<strong>除了它本身</strong><br>p元素不能包含任何块元素</p>
+      
+      <a class="article-more-link" href="/2020/02/23/htmlBasic/">阅读更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-css" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/02/23/css/"
+    >CSS小技巧</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/02/23/css/" class="article-date">
+  <time datetime="2020-02-23T11:17:47.912Z" itemprop="datePublished">2020-02-23</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/CSS/">CSS</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="自定义弹窗"><a href="#自定义弹窗" class="headerlink" title="自定义弹窗"></a>自定义弹窗</h2><blockquote>
+<p>主要思路是弄一个半透明的遮罩</p>
+</blockquote>
+<pre><code>#bc{
+    display: none;
+    position: fixed;
+    left: 0;
+    top:0;
+    width: 100%;
+    height:100%;
+    background-color: rgba(0,0,0,0.5)
+}</code></pre>
+      
+      <a class="article-more-link" href="/2020/02/23/css/">阅读更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8A%80%E5%B7%A7/" rel="tag">技巧</a></li></ul>
 
 
     </footer>
@@ -951,7 +846,7 @@ return function(){
       </li>
     </ul>
   </div>
-  <div style="position:absolute; bottom: 0; right: 0;">
+  <div style="position:fixed; bottom: 0; right: 0;">
     <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=26655232&auto=1&height=66"></iframe>
   </div>
 </footer>
