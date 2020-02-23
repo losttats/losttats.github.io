@@ -70,7 +70,7 @@
     
     
     
-    <article id="post-react" class="article article-type-post" itemscope
+    <article id="post-css" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -78,8 +78,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2020/02/23/react/"
-    >react</a
+  <a class="article-title" href="/2020/02/23/css/"
+    >CSS小技巧</a
   >
 </h2>
   
@@ -89,10 +89,14 @@
 
     
     <div class="article-meta">
-      <a href="/2020/02/23/react/" class="article-date">
-  <time datetime="2020-02-23T11:17:47.930Z" itemprop="datePublished">2020-02-23</time>
+      <a href="/2020/02/23/css/" class="article-date">
+  <time datetime="2020-02-23T12:46:25.000Z" itemprop="datePublished">2020-02-23</time>
 </a>
       
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/CSS/">CSS</a>
+  </div>
+
       
       
       
@@ -109,39 +113,290 @@
       
 
       
-      <h2 id="react事件机制原理"><a href="#react事件机制原理" class="headerlink" title="react事件机制原理"></a>react事件机制原理</h2><h3 id="对事件机制的初步理解"><a href="#对事件机制的初步理解" class="headerlink" title="对事件机制的初步理解"></a>对事件机制的初步理解</h3><p>react的所有事件并没有绑定到具体的DOM节点上，而是绑定在了document上面，然后由统一的事件处理程序来处理。同时，基于浏览器的事件机制（冒泡），所有节点的事件都会在document上触发。</p>
-<p>因为合成事件的触发是基于浏览器的事件机制来实现的，通过冒泡机制冒泡到最顶层元素，然后再由dispatchEvent统一处理。因此有</p>
+      <h2 id="自定义弹窗"><a href="#自定义弹窗" class="headerlink" title="自定义弹窗"></a>自定义弹窗</h2><blockquote>
+<p>主要思路是弄一个半透明的遮罩</p>
+</blockquote>
+<pre><code>#bc{
+    display: none;
+    position: fixed;
+    left: 0;
+    top:0;
+    width: 100%;
+    height:100%;
+    background-color: rgba(0,0,0,0.5)
+}</code></pre>
+      
+      <a class="article-more-link" href="/2020/02/23/css/">阅读更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8A%80%E5%B7%A7/" rel="tag">技巧</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-htmlBasic" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/02/23/htmlBasic/"
+    >HTML基础知识</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/02/23/htmlBasic/" class="article-date">
+  <time datetime="2020-02-23T12:46:25.000Z" itemprop="datePublished">2020-02-23</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/HTML/">HTML</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="块元素和内联元素"><a href="#块元素和内联元素" class="headerlink" title="块元素和内联元素"></a>块元素和内联元素</h2><blockquote>
+<p>块元素：独占一行的元素，入div、p、h1等等<br>内联元素（行内元素）：只占自身大小的元素，如a、span等等</p>
+</blockquote>
+<p>一般情况下只用块元素包含内联元素<br>a元素可以包含任何元素，<strong>除了它本身</strong><br>p元素不能包含任何块元素</p>
+      
+      <a class="article-more-link" href="/2020/02/23/htmlBasic/">阅读更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-jsBasic" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/02/23/jsBasic/"
+    >JS基础知识</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/02/23/jsBasic/" class="article-date">
+  <time datetime="2020-02-23T12:46:25.000Z" itemprop="datePublished">2020-02-23</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JS/">JS</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id="js数据类型"><a href="#js数据类型" class="headerlink" title="js数据类型"></a>js数据类型</h2><blockquote>
+<p>js共有六种数据类型：number、string、boolean、undefined、null、object(BigInt、symbol)<br>其中object属于引用数据类型，其他的称为基本数据类型</p>
+</blockquote>
 <ul>
-<li>原生事件阻止冒泡肯定会组织合成事件的触发</li>
-<li>合成事件阻止冒泡不会影响原生事件</li>
-</ul>
-<p>浏览器的事件执行需要经过三个阶段：捕获阶段→目标元素阶段→冒泡阶段。</p>
-<p>节点上的原生事件执行是在目标阶段，而合成事件执行是在冒泡阶段。故原生事件执行先于合成事件。二者最好不要混用。</p>
-<h3 id="对于合成的理解"><a href="#对于合成的理解" class="headerlink" title="对于合成的理解"></a>对于合成的理解</h3><ul>
-<li>对原生事件的封装</li>
-<li>对某些原生事件的升级和改造</li>
-<li>不同浏览器事件的兼容处理</li>
-</ul>
-<h3 id="事件注册机制"><a href="#事件注册机制" class="headerlink" title="事件注册机制"></a>事件注册机制</h3><p>react事件注册过程其实主要做了两件事情：事件注册、事件储存。</p>
-<p>事件注册：组件挂载阶段，根据组件内的声明的事件类型——onChange、onClick等，给document上添加事件（addEventListener），并指定统一的事件处理程序dispatchEvent。<br>事件储存：把react组件内的所有事件统一的存放到一个对象中，缓存起来，为了触发事件的时候查找到对应的方法执行。</p>
-<p>具体步骤：首先react拿到将要挂载的组件的虚拟DOM，然后处理其props，判断其内是否有声明为事件的属性，比如onClick等。得到事件的类型和事件对应的处理程序Fn后执行以下三步：</p>
+<li><p>number：</p>
 <ul>
-<li>完成事件注册</li>
-<li>将react DOM、事件类型、处理函数Fn放入数组存储</li>
-<li>组件挂载完成后，处理上一步生成的数组，经过遍历把事件处理函数存到listenerBank（一个对象）中</li>
-</ul>
-<h3 id="事件执行机制"><a href="#事件执行机制" class="headerlink" title="事件执行机制"></a>事件执行机制</h3><p>事件触发过程：</p>
-<ul>
-<li>进入统一的事件分发函数（dispatchEvent）</li>
-<li>结合原生事件找到当前节点对应的ReactDOMComponent对象</li>
-<li>开始事件的合成<ul>
-<li>根据当前事件类型生成指定的合成对象</li>
-<li>封装原生事件和冒泡机制</li>
-<li>查找当前元素及其所有父级</li>
-<li>在listenerBank中查找事件回调并合成到event</li>
+<li>js可以表示的数字最大值为Number.MAX_VALUE，绝对值最小值为Number.MIN_VALUE</li>
+<li>如果使用number表示的值超过了最大值，则会返回infinity表示正无穷</li>
+<li>在js中进行浮点数运算可能得到一个不精确的结果</li>
 </ul>
 </li>
-<li>批量处理合成事件内的回调事件</li>
+<li><p>null：<strong>typeof null === “object”</strong>，但是null并不是对象</p>
+</li>
+<li><p>undefined：当声明一个变量却不给它赋值时，它的值为undefined</p>
+</li>
+</ul>
+<h2 id="数据类型转换"><a href="#数据类型转换" class="headerlink" title="数据类型转换"></a>数据类型转换</h2><ol>
+<li><p>转为string</p>
+<ul>
+<li>调用被转换数据类型的toString方法，返回转换结果。null和undefined没有该方法</li>
+<li>调用String函数，返回转换结果。对于boolean和number实际上就是调用其toString方法</li>
+<li>+“”</li>
+</ul>
+</li>
+<li><p>转为number</p>
+<ul>
+<li>使用Number函数<ul>
+<li>若是纯数字字符串，则转换为数字</li>
+<li>若字符串中含有非数字，则转换为NaN</li>
+<li>若为空串，则转换为0</li>
+<li>true转换为1，false转换为0</li>
+<li>null转换为0</li>
+<li>undefined转换为NaN</li>
+<li>空数组转换为0</li>
+<li>空对象转换为NaN</li>
+<li>对象调用其valueOf()</li>
+</ul>
+</li>
+<li>使用parseInt、parseFloat函数（字符串专用）<ul>
+<li>parseInt：将一个字符串中有效的整数提取出来（从左往右识别），一个都没有则返回NaN</li>
+<li>parseFloat：取小数</li>
+<li>若对非string类型使用上述两个函数，则会先转为string再操作</li>
+<li>上述函数第二个参数可以指定数字的进制</li>
+</ul>
+</li>
+<li>-0</li>
+<li>*1</li>
+<li>/1</li>
+</ul>
+</li>
+<li><p>转为boolean</p>
+<ul>
+<li>使用Boolean函数<ul>
+<li>数字：除了0和NaN都为true</li>
+<li>字符串：除了空串都为true</li>
+<li>null和undefined都为false</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="this"><a href="#this" class="headerlink" title="this"></a>this</h2><blockquote>
+<p>以函数形式调用时，this永远指向window对象<br>以方法形式调用时，this就是调用该方法的对象<br>以构造函数形式调用时，this指向新建的对象</p>
+</blockquote>
+<h2 id="原型和原型链"><a href="#原型和原型链" class="headerlink" title="原型和原型链"></a>原型和原型链</h2><p><img src="/prototype.png" alt="原型链"></p>
+<blockquote>
+<p>上图中蓝色的即为原型链</p>
+</blockquote>
+<p><strong>prototype属性只有函数才有</strong></p>
+<p>obj.__proto__相当于Object.getPrototypeOf(obj)</p>
+<p>在上图中，如果我们去获取person.constructor，这时person中并没有constructor属性。那么它会从person的原型，即Person.prototype中读取。<br>因此<strong>person.constructor===Person.prototype.constructor === Person</strong></p>
+<h2 id="typeof和instanceof"><a href="#typeof和instanceof" class="headerlink" title="typeof和instanceof"></a>typeof和instanceof</h2><ul>
+<li><p>对于原始类型，除了null都可以调用typeof显示正确类型<br>但是对于引用数据类型，除了函数外都会显示object</p>
+</li>
+<li><p>对于引用数据类型使用instanceof判断会更好。只要检索的数据位于某对象原型链上即返回true</p>
+</li>
+</ul>
+<h2 id="类数组对象"><a href="#类数组对象" class="headerlink" title="类数组对象"></a>类数组对象</h2><blockquote>
+<p>类数组对象：拥有一个length属性和若干索引属性的对象（无法使用数组方法）</p>
+</blockquote>
+<ul>
+<li><p>间接调用类数组对象：  </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">var arrayLike &#x3D; &#123;</span><br><span class="line">    0:&#39;name&#39;,</span><br><span class="line">    1:&#39;age&#39;,</span><br><span class="line">    2:&#39;sex&#39;,</span><br><span class="line">    length:3</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">Array.prototype.join.call(arrayLike,&#39;&amp;&#39;);</span><br><span class="line">&#x2F;&#x2F;name&amp;age&amp;sex</span><br><span class="line"></span><br><span class="line">Array.prototype.slice.call(arrayLike, 0);</span><br><span class="line">&#x2F;&#x2F;[&quot;name&quot;, &quot;age&quot;, &quot;sex&quot;]</span><br><span class="line"></span><br><span class="line">Array.prototype.map.call(arrayLike, function(item)&#123;</span><br><span class="line">    return item.toUpperCase();</span><br><span class="line">&#125;);</span><br><span class="line">&#x2F;&#x2F;[&quot;NAME&quot;, &quot;AGE&quot;, &quot;SEX&quot;]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>类数组转数组  </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">var arrayLike &#x3D; &#123;</span><br><span class="line">    0:&#39;name&#39;,</span><br><span class="line">    1:&#39;age&#39;,</span><br><span class="line">    2:&#39;sex&#39;,</span><br><span class="line">    length:3</span><br><span class="line">&#125; </span><br><span class="line">&#x2F;&#x2F;1</span><br><span class="line">Array.prototype.slice.call(arrayLike);</span><br><span class="line">&#x2F;&#x2F;2</span><br><span class="line">Array.prototype.splice.call(arrayLike, 0);</span><br><span class="line">&#x2F;&#x2F;3</span><br><span class="line">Array.from(arrayLike);</span><br><span class="line">&#x2F;&#x2F;4</span><br><span class="line">Array.prototype.concat.apply([], arrayLike)</span><br><span class="line">&#x2F;&#x2F;ES6展开运算符</span><br><span class="line">[...arrayLike]</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="浅拷贝和深拷贝"><a href="#浅拷贝和深拷贝" class="headerlink" title="浅拷贝和深拷贝"></a>浅拷贝和深拷贝</h2><blockquote>
+<p>浅拷贝：复制引用的拷贝方式<br>深拷贝：完全地拷贝一个对象，即使是一个嵌套了对象的对象，二者也是相互独立的，修改一个对象的属性不会影响另一个</p>
+</blockquote>
+<ul>
+<li>深拷贝数组或对象：  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JSON.parse(JSON.stringify(arr))</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="V8引擎的垃圾回收"><a href="#V8引擎的垃圾回收" class="headerlink" title="V8引擎的垃圾回收"></a>V8引擎的垃圾回收</h2><blockquote>
+<p>JS采用自己的一套垃圾回收算法进行自动的内存管理</p>
+</blockquote>
+<ul>
+<li><p>V8内存限制<br>V8只能使用系统的一部分内存。具体来说，在64位系统下，V8最多只能分配1.4G；在32位系统下，最多只能分配0.7G。<br>这么做的原因是由两个因素共同决定的：一是JS单线程的执行机制，另一个是JS垃圾回收机制的限制。<br>首先，JS是单线程运行的，一旦进入到垃圾回收阶段，其他的各种运行逻辑都要暂停。其次，垃圾回收是一个非常耗时的操作。所以，V8通过限制堆内存来获取更快的响应速度。</p>
+</li>
+<li><p>内存的回收<br>V8把堆内存分成了两部分——新生代内存和老生代内存。<br>新生代内存就是临时分配的内存，存活时间短。老生代时常驻内存，存活时间长。V8的堆内存就是这两个内存之和。<br><img src="/memory.png" alt="新老生代内存"></p>
+<ul>
+<li><p>新生代内存回收策略（Scavenge算法）：<br>新生代内存在64位系统和32位系统下的默认限制分别为32Mb和16Mb。<br>首先将新生代内存一分为二：<br><img src="/memory2.png" alt="新生代内存"><br>其中From部分表示正在使用的内存，To是目前闲置的内存。<br>当进行垃圾回收时，V8将From部分的对象检查一遍，如果是存活对象则复制到To内存中（顺序摆放），如果是非存活对象直接回收即可。<br>当所有的From中的存活对象按照顺序进入到To内存之后，二者<strong>角色互换</strong>。From现在被闲置，To位正在使用，如此循环。<br>这样的操作可以使正在使用的内存区中的数据顺序摆放，便于后续的空间分配。</p>
+</li>
+<li><p>老生代内存回收策略：<br>如果新生代内存中的变量经过多次回收后仍然存在，则会被放入老生代内存中，这种现象称为<strong>晋升</strong><br>以下操作会触发晋升：</p>
+<ul>
+<li><p>已经经历过一次Scavenge回收</p>
+</li>
+<li><p>新生代中闲置空间内存占用超过25%</p>
+<p>第一步进行标记-清除。首先遍历堆中的所有对象，对它们做上标记，然后对于代码环境中<strong>使用的变量</strong>以及被<strong>强引用</strong>的变量取消标记。然后在清除阶段进行空间回收<br>第二步，整理内存碎片。在清除阶段结束之后，把存活的对象全部往一端靠拢。由于是移动对象，执行速度慢，故此阶段是整个过程中最耗时的部分。</p>
+</li>
+</ul>
+</li>
+<li><p>增量标记<br>由于JS的单线程机制，V8在进行垃圾回收时，不可避免地会阻塞业务逻辑的执行。如果老生代的垃圾回收任务很重，那么会严重地影响应用的性能。为了避免这样的问题，V8采取了增量标记的方案，即将一口气完成的标记任务分为很多小的部分完成，每完成一个小部分就转而去执行js应用逻辑，之后再继续进行垃圾回收，如此循环。</p>
+</li>
+</ul>
+</li>
 </ul>
 
       
@@ -155,6 +410,83 @@
     <footer class="article-footer">
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-jsQuestions" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/02/23/jsQuestions/"
+    >JS面试题</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/02/23/jsQuestions/" class="article-date">
+  <time datetime="2020-02-23T12:46:25.000Z" itemprop="datePublished">2020-02-23</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JS/">JS</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h2 id=""><a href="#" class="headerlink" title="[] == ![]"></a>[] == ![]</h2><p>==中，左右两边都需要转换为数字进行比较<br>左边[]转换为数字0<br>![]需要转为一个布尔值，由于[]是一个引用类型，故![]转为false，再转为数字0<br>因此原式相当于0 == 0，<strong>结果为true</strong></p>
+      
+      <a class="article-more-link" href="/2020/02/23/jsQuestions/">阅读更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>
+
 
     </footer>
 
@@ -179,7 +511,7 @@
        
 <h2 itemprop="name">
   <a class="article-title" href="/2020/02/23/jsSkill/"
-    >jsSkill</a
+    >JS小技巧</a
   >
 </h2>
   
@@ -190,9 +522,13 @@
     
     <div class="article-meta">
       <a href="/2020/02/23/jsSkill/" class="article-date">
-  <time datetime="2020-02-23T11:17:47.928Z" itemprop="datePublished">2020-02-23</time>
+  <time datetime="2020-02-23T12:46:25.000Z" itemprop="datePublished">2020-02-23</time>
 </a>
       
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JS/">JS</a>
+  </div>
+
       
       
       
@@ -474,6 +810,8 @@ return function(){
     <footer class="article-footer">
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8A%80%E5%B7%A7/" rel="tag">技巧</a></li></ul>
+
 
     </footer>
 
@@ -489,7 +827,7 @@ return function(){
 
 </article>
     
-    <article id="post-jsQuestions" class="article article-type-post" itemscope
+    <article id="post-react" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -497,8 +835,8 @@ return function(){
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2020/02/23/jsQuestions/"
-    >jsQuestions</a
+  <a class="article-title" href="/2020/02/23/react/"
+    >react基础知识</a
   >
 </h2>
   
@@ -508,686 +846,12 @@ return function(){
 
     
     <div class="article-meta">
-      <a href="/2020/02/23/jsQuestions/" class="article-date">
-  <time datetime="2020-02-23T11:17:47.926Z" itemprop="datePublished">2020-02-23</time>
-</a>
-      
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id=""><a href="#" class="headerlink" title="[] == ![]"></a>[] == ![]</h2><p>==中，左右两边都需要转换为数字进行比较<br>左边[]转换为数字0<br>![]需要转为一个布尔值，由于[]是一个引用类型，故![]转为false，再转为数字0<br>因此原式相当于0 == 0，<strong>结果为true</strong></p>
-<h2 id="如何让if-a-1-amp-amp-a-2-条件成立？"><a href="#如何让if-a-1-amp-amp-a-2-条件成立？" class="headerlink" title="如何让if(a == 1 &amp;&amp; a == 2)条件成立？"></a>如何让if(a == 1 &amp;&amp; a == 2)条件成立？</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var a &#x3D; &#123;</span><br><span class="line">    value:0,</span><br><span class="line">    valueOf:function()&#123;</span><br><span class="line">        this.value++;</span><br><span class="line">        return this.value;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="数组扁平化"><a href="#数组扁平化" class="headerlink" title="数组扁平化"></a>数组扁平化</h2><blockquote>
-<p>let ary = [1, [2, [3, [4, 5]]], 6];<br>let str = JSON.stringify(ary);</p>
-</blockquote>
-<ol>
-<li><p>ES6中的flat方法</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ary &#x3D; ary.flat(Infinity);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>replace + split</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ary &#x3D; str.replace(&#x2F;(\[|\])&#x2F;g,&#39;&#39;).split(&#39;,&#39;)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>replace + JSON.parse</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">str &#x3D; str.replace(&#x2F;(\[|\])&#x2F;g,&#39;&#39;);</span><br><span class="line">str &#x3D; &#39;[&#39; + str + &#39;]&#39;;</span><br><span class="line">ary &#x3D; JSON.parse(str);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>递归</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">let result &#x3D; [];</span><br><span class="line">let fun &#x3D; function(ary)&#123;</span><br><span class="line">    for(let i &#x3D; 0;i &lt; ary.length;i++)&#123;</span><br><span class="line">        let item &#x3D; ary[i];</span><br><span class="line">        if(Array.isArray(ary[i]))&#123;</span><br><span class="line">            fn(item);</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            result.push(item);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>reduce</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function flatten(ary)&#123;</span><br><span class="line">    return ary.reduce(</span><br><span class="line">        (pre,cur) &#x3D;&gt; (</span><br><span class="line">            pre.concat(</span><br><span class="line">                Array.isArray(cur)?flatten(cur):cur</span><br><span class="line">            )</span><br><span class="line">        ),[]</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>扩展运算符</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">while(ary.some(Array.isArray))&#123;</span><br><span class="line">    ary &#x3D; [].concat(...ary)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h2 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h2><ol>
-<li><p>双层for循环</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function distinct(arr) &#123;</span><br><span class="line">    for(let i &#x3D; 0,len &#x3D; arr.length;i &lt; len;i++)&#123;</span><br><span class="line">        for(let j &#x3D; i + 1;j &lt; len;j++)&#123;</span><br><span class="line">            if(arr[i] &#x3D;&#x3D;&#x3D; arr[j])&#123;</span><br><span class="line">                arr.splice(j,1);</span><br><span class="line">                &#x2F;&#x2F;splice会改变数组长度，故将下标长度减一</span><br><span class="line">                len--;</span><br><span class="line">                j--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Array.filter + indexOf</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function distinct(arr) &#123;</span><br><span class="line">    &#x2F;&#x2F;利用indexOf检查元素在数组中第一次出现的位置是否是当前位置，如果不是则该元素是重复元素</span><br><span class="line"></span><br><span class="line">    return arr.filter(</span><br><span class="line">        (item,index) &#x3D;&gt; &#123;</span><br><span class="line">            return arr.indexOf(item) &#x3D;&#x3D;&#x3D; index</span><br><span class="line">        &#125;</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>排序 + 相邻元素去重</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function distinct(arr) &#123;</span><br><span class="line">    var res &#x3D; [];</span><br><span class="line">    var sortedArr &#x3D; arr.concat().sort();</span><br><span class="line">    var last;</span><br><span class="line">    for (var i &#x3D; 0,len &#x3D; sortedArr.length;i &lt; len;i++)&#123;</span><br><span class="line">        &#x2F;&#x2F;如果是第一个元素或相邻元素不相同</span><br><span class="line">        if(!i || last !&#x3D;&#x3D; sortedArr[i])&#123;</span><br><span class="line">            res.push(sortedArr[i])</span><br><span class="line">        &#125;</span><br><span class="line">        last &#x3D; sortedArr[i];</span><br><span class="line">    &#125;</span><br><span class="line">    return res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>ES6的Set方法</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(arr) &#x3D;&gt; [...new Set(arr)]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Object键值对</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function distinct(arr)&#123;</span><br><span class="line">    &#x2F;&#x2F;利用空对象，将数组的值存为Object的key值。如果obj没有item这一项属性，则将其设置为true。反之，如果有，说明之前设置过，即该项为重复项，返回false过滤之</span><br><span class="line">    var obj &#x3D; &#123;&#125;;</span><br><span class="line">    return arr.filter(</span><br><span class="line">        (item,index) &#x3D;&gt; (</span><br><span class="line">            &#x2F;&#x2F;用typeOf item + item是因为123和&#39;123&#39;在直接用item的情况下是无法分辨的，会被当做同一项</span><br><span class="line">            obj.hasOwnProperty(typeof item + item) ? false : (obj[typeof item + item] &#x3D; true)</span><br><span class="line">        )</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>reduce实现对象数组去重</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">var res &#x3D; [</span><br><span class="line">        &#123; name: &quot;张三&quot;, age: &quot;18&quot; &#125;,</span><br><span class="line">        &#123; name: &quot;张三&quot;, age: &quot;19&quot; &#125;,</span><br><span class="line">        &#123; name: &quot;张三&quot;, age: &quot;20&quot; &#125;,</span><br><span class="line">        &#123; name: &quot;李四&quot;, age: &quot;19&quot; &#125;,</span><br><span class="line">        &#123; name: &quot;王五&quot;, age: &quot;20&quot; &#125;,</span><br><span class="line">        &#123; name: &quot;赵六&quot;, age: &quot;21&quot; &#125;</span><br><span class="line">    ]</span><br><span class="line">var temp &#x3D; &#123;&#125;;</span><br><span class="line">res &#x3D; res.reduce(</span><br><span class="line">    (pre,cur) &#x3D;&gt; &#123;</span><br><span class="line">        &#x2F;&#x2F;如果临时对象中没有该项名字就加入，同时加入到pre中</span><br><span class="line">        if(!temp[cur.name])&#123;</span><br><span class="line">            temp[cur.name] &#x3D; true;</span><br><span class="line">            pre.push(cur);</span><br><span class="line">        &#125;</span><br><span class="line">        return pre</span><br><span class="line">    &#125;,[]</span><br><span class="line">    &#x2F;&#x2F;initialValue得放一个空数组[]，不然没法push</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h2 id="web项目中常见的安全问题及防范"><a href="#web项目中常见的安全问题及防范" class="headerlink" title="web项目中常见的安全问题及防范"></a>web项目中常见的安全问题及防范</h2><ol>
-<li><p>输入检查<br>防止输入注入型攻击。所有的输入数据都需要检查，除了前端检查之外，还要防止有些程序绕开前端检查直接把数据发送给服务器，后端也要检查所有输入数据。<br>根据产品文档进行合法性检查：数值型，手机号，邮箱等等。<br>检查文本是否含有控制字符，过滤之。<br>长度检查。<br>Querystring中参数值字符串转义，使用urlencode函数处理。</p>
-</li>
-<li><p>文件上传 </p>
-<blockquote>
-<p>防止文件注入型攻击 </p>
-</blockquote>
-<ul>
-<li><p>文件上传目录设置为不可执行</p>
-</li>
-<li><p>判断文件类型，结合MIME type与文件拓展名设置文件白名单。对于图片文件，可以利用图片库函数深层次检查是否是真图片。</p>
-</li>
-<li><p>重命名文件名</p>
-</li>
-<li><p>文件服务器使用独立的域名</p>
-</li>
-</ul>
-</li>
-<li><p>输出转义<br>防止XSS（跨站脚本攻击）。向页面中输出的文本数据进行html encode，即将一些html中的特殊字符转换成普通字符。如&amp;转成&amp;amp；、&lt;转成&amp;lt；、’、”等等。对应函数：javascriptencode，php中的htmlentities。<br>同理，xml数据包中的字符串值使用xmlencode转义，json数据包的字符串值使用jsonencode转义。</p>
-</li>
-<li><p>XSS处理</p>
-<blockquote>
-<p>XSS的本质是HTML注入，用户输入的数据被当作代码执行</p>
-</blockquote>
-<ul>
-<li><p>cookie使用HttpOnly限制<br>使得在客户端的js代码不能读取cookie的值，但是无法防止从HTTP header中获取。</p>
-</li>
-<li><p>输出文本HTML转义  </p>
-</li>
-<li><p>检查输入的url</p>
-</li>
-<li><p>对传入js函数的文本型参数值进行JavaScript转义</p>
-</li>
-</ul>
-</li>
-</ol>
-<h2 id="居中为何要用transform而不用marginLeft等"><a href="#居中为何要用transform而不用marginLeft等" class="headerlink" title="居中为何要用transform而不用marginLeft等"></a>居中为何要用transform而不用marginLeft等</h2><p>transform属于合成属性，对合成属性进行transition/animation动画将会创建一个合成层，这使得动画元素在一个独立的层中进行动画。通常情况下，浏览器会将一个层中的内容先绘制进一个位图当中，然后再作为纹理上传到GPU，只要该层的内容不改变，就不会引发重绘，浏览器会通过重新复合来形成一个新的帧。</p>
-<p>top/left属于布局属性，该属性的变化会导致重排，即对这些节点及受这些节点影响的其他节点进行CSS计算→布局→重绘过程，浏览器需要将整个层重绘并重新上传到GPU，造成了极大的性能开销。</p>
-<h2 id="发布-订阅模式-vs-观察者模式"><a href="#发布-订阅模式-vs-观察者模式" class="headerlink" title="发布-订阅模式 vs 观察者模式"></a>发布-订阅模式 vs 观察者模式</h2><p><img src="/pubsub.png" alt="模式"></p>
-<ul>
-<li><p>在观察者模式中，观察者是知道发布者的存在的，而发布者也一直保持着对观察者的记录。在发布-订阅模式中，发布者和订阅者不知道对方的存在，它们通过消息代理进行通信。</p>
-</li>
-<li><p>发布-订阅模式中，组件是松散耦合的。观察者模式中则恰恰相反。</p>
-</li>
-<li><p>观察者模式通常是同步的。即当事件触发时，发布者就会去调用观察者的方法。而发布-订阅模式通常是异步的（消息队列）。</p>
-</li>
-<li><p>观察者模式需要在单个应用程序地址空间中实现，而发布-订阅模式更像交叉应用模式。</p>
-</li>
-</ul>
-
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-jsDatabase" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/02/23/jsDatabase/"
-    >jsDatabase</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/02/23/jsDatabase/" class="article-date">
-  <time datetime="2020-02-23T11:17:47.924Z" itemprop="datePublished">2020-02-23</time>
-</a>
-      
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-htmlBasic" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/02/23/htmlBasic/"
-    >htmlBasic</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/02/23/htmlBasic/" class="article-date">
-  <time datetime="2020-02-23T11:17:47.919Z" itemprop="datePublished">2020-02-23</time>
-</a>
-      
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="块元素和内联元素"><a href="#块元素和内联元素" class="headerlink" title="块元素和内联元素"></a>块元素和内联元素</h2><blockquote>
-<p>块元素：独占一行的元素，入div、p、h1等等<br>内联元素（行内元素）：只占自身大小的元素，如a、span等等</p>
-</blockquote>
-<p>一般情况下只用块元素包含内联元素<br>a元素可以包含任何元素，<strong>除了它本身</strong><br>p元素不能包含任何块元素</p>
-<h2 id="css选择器"><a href="#css选择器" class="headerlink" title="css选择器"></a>css选择器</h2><blockquote>
-<p>css由选择器和声明块组成，声明块中的一组组<em>名值对</em>称为声明</p>
-</blockquote>
-<h4 id="各类选择器："><a href="#各类选择器：" class="headerlink" title="各类选择器："></a>各类选择器：</h4><ul>
-<li><p>元素选择器：选择页面中的所有指定元素<br>  `h1{</p>
-<pre><code>...</code></pre><p>  }`</p>
-</li>
-<li><p>id选择器：通过元素的id选择唯一的指定元素<br>  `#id{</p>
-<pre><code>...</code></pre><p>  }`</p>
-</li>
-<li><p>类选择器：通过元素的class属性选择一组元素<br>  `.className{</p>
-<pre><code>...</code></pre><p>  }`</p>
-</li>
-<li><p>通配选择器：选中所有元素  </p>
-<blockquote>
-<p>不建议使用，拉低性能</p>
-</blockquote>
-<p>  `*{</p>
-<pre><code>...</code></pre><p>  }`</p>
-</li>
-<li><p>伪类选择器：选择某种特殊状态中的元素<br>  `a:link{</p>
-<pre><code>...</code></pre><p>  }`</p>
-</li>
-<li><p>伪元素选择器：选择某些特殊位置的元素<br>  `p:first-letter{</p>
-<pre><code>...</code></pre><p>  }`</p>
-</li>
-<li><p>属性选择器：根据元素的某个属性值选择元素<br>  `input[placeholder=”input”]{</p>
-<pre><code>...</code></pre><p>  }`</p>
-</li>
-<li><p>兄弟元素选择器：选择兄弟元素<br>  `h1 + p {</p>
-<pre><code>//选择h1后紧邻的单个兄弟元素  </code></pre><p>  }<code></code>h1 ~ p {</p>
-<pre><code>//选择h1后所有的兄弟元素  </code></pre><p>  }`</p>
-</li>
-<li><p>后代元素选择器（包含选择器）：选择后代元素<br>  `h1 p{</p>
-<pre><code>...</code></pre><p>  }`</p>
-</li>
-<li><p>子元素选择器：选择子元素<br>  `h1 &gt; p{</p>
-<pre><code>...</code></pre><p>  }`</p>
-</li>
-</ul>
-<h4 id="选择器的优先级"><a href="#选择器的优先级" class="headerlink" title="选择器的优先级"></a>选择器的优先级</h4><ol>
-<li>内联样式（1000）  </li>
-<li>id选择器（100）   </li>
-<li>类和伪类（10）    </li>
-<li>元素选择器（1）   </li>
-<li>通配选择器    </li>
-<li>继承的样式（无优先级）</li>
-</ol>
-<p>有交集选择器时，优先级叠加<br>并集选择器优先级互相独立</p>
-<p>优先级相同时，选择靠后的样式<br><strong>!important</strong>标注的样式获得最高优先级</p>
-<h4 id="a元素伪类编写顺序"><a href="#a元素伪类编写顺序" class="headerlink" title="a元素伪类编写顺序"></a>a元素伪类编写顺序</h4><blockquote>
-<p>link visited hover active</p>
-</blockquote>
-<h2 id="盒子模型"><a href="#盒子模型" class="headerlink" title="盒子模型"></a>盒子模型</h2><blockquote>
-<p>盒子模型：内容区（content）、内边距（padding）、边框（border）、外边距（margin）<br>盒子大小由内容区、内边距、边框共同决定</p>
-</blockquote>
-<p>由于页面中的元素都是靠左靠上摆放的，所以当我们设置上、左外边距时会改变盒子自身的位置，而设置其他两个外边距则会改变其他盒子的位置</p>
-<p>当元素的宽度值为auto时，指定内边距不会影响可见框的大小，而是会自动修改宽度以适应内边距</p>
-<h2 id="垂直外边距重叠"><a href="#垂直外边距重叠" class="headerlink" title="垂直外边距重叠"></a>垂直外边距重叠</h2><p>在网页中垂直方向的相邻外边距会发生外边距的重叠<br>兄弟元素之间的相邻外边距会取二者的最大值而不是求和<br>父子元素的垂直外边距如果相邻，则子元素的外边距会设置给父元素</p>
-<h2 id="display-none和visibility-hidden"><a href="#display-none和visibility-hidden" class="headerlink" title="display:none和visibility:hidden"></a>display:none和visibility:hidden</h2><p>display:none：隐藏元素，且不再占用位置<br>visibility:hidden：隐藏元素，保留该元素在网页中的位置</p>
-<h2 id="文档流"><a href="#文档流" class="headerlink" title="文档流"></a>文档流</h2><blockquote>
-<p>文档流处于网页最底层，它表示的是一个网页中的位置，我们创建的元素默认都在文档流中</p>
-</blockquote>
-<ul>
-<li>块元素在文档流中：    <ul>
-<li>独占一行，自上向下排列</li>
-<li>默认宽度是父元素的100%（auto）</li>
-<li>默认高度被内容撑开</li>
-</ul>
-</li>
-<li>内联元素在文档流中：<ul>
-<li>只占自身大小，默认从左向右排列，容纳不了则换行</li>
-<li>不能设置宽高</li>
-<li>默认宽度和默认高度都被内容撑开</li>
-</ul>
-</li>
-</ul>
-<p>float可以使元素浮动，脱离文档流<br>元素浮动之后，会像左上或右上移动，直到遇到父元素的边框或者其他浮动元素<br>如果浮动元素上面是一个没有浮动的块元素，则浮动元素不会超过块元素<br>如果一行容不下多个浮动元素，则会发生自动换行<br>文字会自动环绕在浮动元素周围</p>
-<p>元素脱离文档流之后，其后元素会补上空缺的位置<br>块元素脱离文档流之后，默认宽高均被内容撑开<br>内联元素脱离文档流之后会变成块元素</p>
-<h2 id="父元素高度塌陷"><a href="#父元素高度塌陷" class="headerlink" title="父元素高度塌陷"></a>父元素高度塌陷</h2><blockquote>
-<p>在文档流中，父元素的默认高度是被子元素所撑开的。但是当子元素设置浮动之后，它脱离了文档流，导致子元素无法继续撑开父元素的高度，这时父元素发生高度塌陷。父元素高度塌陷之后，父元素下面的元素会向上挤，导致网页布局混乱。</p>
-</blockquote>
-<h4 id="如何解决"><a href="#如何解决" class="headerlink" title="如何解决"></a>如何解决</h4><ol>
-<li><p>开启BFC  </p>
-<ul>
-<li>根据w3c标准，页面中的元素都有一个隐含属性block formatting context，即<strong>BFC</strong>。它的默认值是关闭。开启BFC之后，元素会具有以下特性：     <ul>
-<li>父元素的垂直外边距不会和子元素重叠</li>
-<li>开启BFC的元素不会被浮动元素所覆盖</li>
-<li>开启BFC的元素可以包含浮动的子元素 </li>
-</ul>
-</li>
-<li>如何开启BFC（均有一定副作用）<ul>
-<li>设置元素浮动</li>
-<li>设置元素绝对定位</li>
-<li>设置元素为inline-block</li>
-<li>将元素的overflow设置为一个非visible的值（推荐hidden）</li>
-</ul>
-</li>
-<li>IE6及以下不支持BFC，但是有另一个隐含属hasLayout，开启后也可解决问题。开启方式推荐将元素的zoom设置为1.同时，设置宽度width也会开启hasLayout</li>
-</ul>
-</li>
-<li><p>空白div</p>
-<ul>
-<li>在高度塌陷的父元素最后添加一个空白的div，该div用于撑开父元素高度。当之前的子元素浮动导致了高度塌陷时，在空白div中清除浮动，即可解决高度塌陷问题。缺点是添加了多余的结构</li>
-</ul>
-</li>
-<li><p>after伪类</p>
-<ul>
-<li>通过after伪类在高度塌陷的父元素最后添加一个空白的块元素（display），然后对其进行浮动清除，原理同2。几乎无副作用（IE6及以下不支持，需用zoom）。该方法还可提取到css文件中，便于调用</li>
-</ul>
-</li>
-</ol>
-<h2 id="position"><a href="#position" class="headerlink" title="position"></a>position</h2><blockquote>
-<p>position属性可用于设置元素的定位</p>
-</blockquote>
-<ul>
-<li><p>static：默认值，元素未开启定位</p>
-</li>
-<li><p>relative：开启元素的相对定位</p>
-<ul>
-<li>相对定位的元素不会脱离文档流，它的位置还会被保留</li>
-<li>当元素开启了相对定位而不设置偏移量时，元素本身无任何变化</li>
-<li>相对定位是相对于元素在文档流中的原位置进行定位</li>
-<li>相对定位会使元素提升一个层级</li>
-</ul>
-</li>
-<li><p>absolute：开启元素的绝对定位</p>
-<ul>
-<li>开启绝对定位会使元素脱离文档流</li>
-<li>当元素开启了绝对定位而不设置偏移量时，元素本身无任何变化</li>
-<li>绝对定位是相对于与其最近的开启了定位的祖先元素进行定位的。如果没有，则相对于浏览器窗口进行定位。所以一般情况下，开启了某元素的绝对定位之后，我们会同时开启其父元素的相对定位</li>
-<li>绝对定位会使元素提升一个层级</li>
-</ul>
-</li>
-<li><p>fixed：固定定位（绝对定位的一种）</p>
-<ul>
-<li>大部分性质跟绝对定位一样</li>
-<li>不同的是固定定位永远相对于浏览器窗口进行定位</li>
-<li>不会因为滚动条的移动而消失</li>
-<li>IE6及以下不支持</li>
-</ul>
-</li>
-</ul>
-<p>如果定位元素的层级相同，则结构上下面的元素会覆盖上面的元素<br>无论父元素层级多高，它都不会覆盖子元素<br><strong>对于开启了定位的元素</strong>，可以通过z-index为其指定层级<br>绝对定位或固定定位时同时设置left和right等同于隐式地设置宽度</p>
-<h2 id="同时解决外边距重叠和高度塌陷问题"><a href="#同时解决外边距重叠和高度塌陷问题" class="headerlink" title="同时解决外边距重叠和高度塌陷问题"></a>同时解决外边距重叠和高度塌陷问题</h2><pre><code>clearfix:before,
-clearfix:after{
-    content:&quot;&quot;;
-    display:table;
-    clear:both;
-}</code></pre><h2 id="解决图片在flex下失真的情况"><a href="#解决图片在flex下失真的情况" class="headerlink" title="解决图片在flex下失真的情况"></a>解决图片在flex下失真的情况</h2><ol>
-<li>flex-shrink：0<br>给img设置flex-shrink：0。<br>flex-shrink的默认值为1，如果没有显式定义该属性，浏览器将会自动按照默认值1在所有因子相加之后计算比例来进行空间收缩。设置为0表示不收缩。<br>flex元素仅在默认宽度之和大于容器的时候才会发生收缩，其收缩的大小是根据flex-shrink的值。（仅兼容IE11）</li>
-<li>height：100%<br>在父元素没有设置高度的情况下，给图片设置height：100% </li>
-<li>外层div标签包裹<br>用div标签包裹图片（产生了无用结构）</li>
-</ol>
-<h2 id="background"><a href="#background" class="headerlink" title="background"></a>background</h2><p>background-position：图片自身地百分比位置与容器同样的百分比位置重合</p>
-
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-es6Basic" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/02/23/es6Basic/"
-    >es6Basic</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/02/23/es6Basic/" class="article-date">
-  <time datetime="2020-02-23T11:17:47.917Z" itemprop="datePublished">2020-02-23</time>
-</a>
-      
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-css" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/02/23/css/"
-    >css</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/02/23/css/" class="article-date">
-  <time datetime="2020-02-23T11:17:47.912Z" itemprop="datePublished">2020-02-23</time>
-</a>
-      
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h2 id="自定义弹窗"><a href="#自定义弹窗" class="headerlink" title="自定义弹窗"></a>自定义弹窗</h2><blockquote>
-<p>主要思路是弄一个半透明的遮罩</p>
-</blockquote>
-<pre><code>#bc{
-    display: none;
-    position: fixed;
-    left: 0;
-    top:0;
-    width: 100%;
-    height:100%;
-    background-color: rgba(0,0,0,0.5)
-}</code></pre><h2 id="定宽高比"><a href="#定宽高比" class="headerlink" title="定宽高比"></a>定宽高比</h2><blockquote>
-<p>padding的百分比是相对于其包含块的宽度来确定的</p>
-</blockquote>
-<pre><code>div{
-    width: 100px;
-    background: red;
-    display: flex;
-}   
-div:after{
-        content: &apos;&apos;;
-        padding-top: 100%;
-}</code></pre>
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-browser" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/02/23/browser/"
-    >browser</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/02/23/browser/" class="article-date">
-  <time datetime="2020-02-23T11:17:47.911Z" itemprop="datePublished">2020-02-23</time>
-</a>
-      
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-jsBasic" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2013/07/13/jsBasic/"
-    >JS基础知识</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2013/07/13/jsBasic/" class="article-date">
-  <time datetime="2013-07-13T12:46:25.000Z" itemprop="datePublished">2013-07-13</time>
+      <a href="/2020/02/23/react/" class="article-date">
+  <time datetime="2020-02-23T12:46:25.000Z" itemprop="datePublished">2020-02-23</time>
 </a>
       
   <div class="article-category">
-    <a class="article-category-link" href="/categories/JS/">JS</a>
+    <a class="article-category-link" href="/categories/React/">React</a>
   </div>
 
       
@@ -1206,128 +870,17 @@ div:after{
       
 
       
-      <h2 id="js数据类型"><a href="#js数据类型" class="headerlink" title="js数据类型"></a>js数据类型</h2><blockquote>
-<p>js共有六种数据类型：number、string、boolean、undefined、null、object(BigInt、symbol)<br>其中object属于引用数据类型，其他的称为基本数据类型</p>
-</blockquote>
+      <h2 id="react事件机制原理"><a href="#react事件机制原理" class="headerlink" title="react事件机制原理"></a>react事件机制原理</h2><h3 id="对事件机制的初步理解"><a href="#对事件机制的初步理解" class="headerlink" title="对事件机制的初步理解"></a>对事件机制的初步理解</h3><p>react的所有事件并没有绑定到具体的DOM节点上，而是绑定在了document上面，然后由统一的事件处理程序来处理。同时，基于浏览器的事件机制（冒泡），所有节点的事件都会在document上触发。</p>
+<p>因为合成事件的触发是基于浏览器的事件机制来实现的，通过冒泡机制冒泡到最顶层元素，然后再由dispatchEvent统一处理。因此有</p>
 <ul>
-<li><p>number：</p>
-<ul>
-<li>js可以表示的数字最大值为Number.MAX_VALUE，绝对值最小值为Number.MIN_VALUE</li>
-<li>如果使用number表示的值超过了最大值，则会返回infinity表示正无穷</li>
-<li>在js中进行浮点数运算可能得到一个不精确的结果</li>
+<li>原生事件阻止冒泡肯定会组织合成事件的触发</li>
+<li>合成事件阻止冒泡不会影响原生事件</li>
 </ul>
-</li>
-<li><p>null：<strong>typeof null === “object”</strong>，但是null并不是对象</p>
-</li>
-<li><p>undefined：当声明一个变量却不给它赋值时，它的值为undefined</p>
-</li>
-</ul>
-<h2 id="数据类型转换"><a href="#数据类型转换" class="headerlink" title="数据类型转换"></a>数据类型转换</h2><ol>
-<li><p>转为string</p>
-<ul>
-<li>调用被转换数据类型的toString方法，返回转换结果。null和undefined没有该方法</li>
-<li>调用String函数，返回转换结果。对于boolean和number实际上就是调用其toString方法</li>
-<li>+“”</li>
-</ul>
-</li>
-<li><p>转为number</p>
-<ul>
-<li>使用Number函数<ul>
-<li>若是纯数字字符串，则转换为数字</li>
-<li>若字符串中含有非数字，则转换为NaN</li>
-<li>若为空串，则转换为0</li>
-<li>true转换为1，false转换为0</li>
-<li>null转换为0</li>
-<li>undefined转换为NaN</li>
-<li>空数组转换为0</li>
-<li>空对象转换为NaN</li>
-<li>对象调用其valueOf()</li>
-</ul>
-</li>
-<li>使用parseInt、parseFloat函数（字符串专用）<ul>
-<li>parseInt：将一个字符串中有效的整数提取出来（从左往右识别），一个都没有则返回NaN</li>
-<li>parseFloat：取小数</li>
-<li>若对非string类型使用上述两个函数，则会先转为string再操作</li>
-<li>上述函数第二个参数可以指定数字的进制</li>
-</ul>
-</li>
-<li>-0</li>
-<li>*1</li>
-<li>/1</li>
-</ul>
-</li>
-<li><p>转为boolean</p>
-<ul>
-<li>使用Boolean函数<ul>
-<li>数字：除了0和NaN都为true</li>
-<li>字符串：除了空串都为true</li>
-<li>null和undefined都为false</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<h2 id="this"><a href="#this" class="headerlink" title="this"></a>this</h2><blockquote>
-<p>以函数形式调用时，this永远指向window对象<br>以方法形式调用时，this就是调用该方法的对象<br>以构造函数形式调用时，this指向新建的对象</p>
-</blockquote>
-<h2 id="原型和原型链"><a href="#原型和原型链" class="headerlink" title="原型和原型链"></a>原型和原型链</h2><p><img src="/prototype.png" alt="原型链"></p>
-<blockquote>
-<p>上图中蓝色的即为原型链</p>
-</blockquote>
-<p><strong>prototype属性只有函数才有</strong></p>
-<p>obj.__proto__相当于Object.getPrototypeOf(obj)</p>
-<p>在上图中，如果我们去获取person.constructor，这时person中并没有constructor属性。那么它会从person的原型，即Person.prototype中读取。<br>因此<strong>person.constructor===Person.prototype.constructor === Person</strong></p>
-<h2 id="typeof和instanceof"><a href="#typeof和instanceof" class="headerlink" title="typeof和instanceof"></a>typeof和instanceof</h2><ul>
-<li><p>对于原始类型，除了null都可以调用typeof显示正确类型<br>但是对于引用数据类型，除了函数外都会显示object</p>
-</li>
-<li><p>对于引用数据类型使用instanceof判断会更好。只要检索的数据位于某对象原型链上即返回true</p>
-</li>
-</ul>
-<h2 id="类数组对象"><a href="#类数组对象" class="headerlink" title="类数组对象"></a>类数组对象</h2><blockquote>
-<p>类数组对象：拥有一个length属性和若干索引属性的对象（无法使用数组方法）</p>
-</blockquote>
-<ul>
-<li><p>间接调用类数组对象：  </p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">var arrayLike &#x3D; &#123;</span><br><span class="line">    0:&#39;name&#39;,</span><br><span class="line">    1:&#39;age&#39;,</span><br><span class="line">    2:&#39;sex&#39;,</span><br><span class="line">    length:3</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">Array.prototype.join.call(arrayLike,&#39;&amp;&#39;);</span><br><span class="line">&#x2F;&#x2F;name&amp;age&amp;sex</span><br><span class="line"></span><br><span class="line">Array.prototype.slice.call(arrayLike, 0);</span><br><span class="line">&#x2F;&#x2F;[&quot;name&quot;, &quot;age&quot;, &quot;sex&quot;]</span><br><span class="line"></span><br><span class="line">Array.prototype.map.call(arrayLike, function(item)&#123;</span><br><span class="line">    return item.toUpperCase();</span><br><span class="line">&#125;);</span><br><span class="line">&#x2F;&#x2F;[&quot;NAME&quot;, &quot;AGE&quot;, &quot;SEX&quot;]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>类数组转数组  </p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">var arrayLike &#x3D; &#123;</span><br><span class="line">    0:&#39;name&#39;,</span><br><span class="line">    1:&#39;age&#39;,</span><br><span class="line">    2:&#39;sex&#39;,</span><br><span class="line">    length:3</span><br><span class="line">&#125; </span><br><span class="line">&#x2F;&#x2F;1</span><br><span class="line">Array.prototype.slice.call(arrayLike);</span><br><span class="line">&#x2F;&#x2F;2</span><br><span class="line">Array.prototype.splice.call(arrayLike, 0);</span><br><span class="line">&#x2F;&#x2F;3</span><br><span class="line">Array.from(arrayLike);</span><br><span class="line">&#x2F;&#x2F;4</span><br><span class="line">Array.prototype.concat.apply([], arrayLike)</span><br><span class="line">&#x2F;&#x2F;ES6展开运算符</span><br><span class="line">[...arrayLike]</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="浅拷贝和深拷贝"><a href="#浅拷贝和深拷贝" class="headerlink" title="浅拷贝和深拷贝"></a>浅拷贝和深拷贝</h2><blockquote>
-<p>浅拷贝：复制引用的拷贝方式<br>深拷贝：完全地拷贝一个对象，即使是一个嵌套了对象的对象，二者也是相互独立的，修改一个对象的属性不会影响另一个</p>
-</blockquote>
-<ul>
-<li>深拷贝数组或对象：  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JSON.parse(JSON.stringify(arr))</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="V8引擎的垃圾回收"><a href="#V8引擎的垃圾回收" class="headerlink" title="V8引擎的垃圾回收"></a>V8引擎的垃圾回收</h2><blockquote>
-<p>JS采用自己的一套垃圾回收算法进行自动的内存管理</p>
-</blockquote>
-<ul>
-<li><p>V8内存限制<br>V8只能使用系统的一部分内存。具体来说，在64位系统下，V8最多只能分配1.4G；在32位系统下，最多只能分配0.7G。<br>这么做的原因是由两个因素共同决定的：一是JS单线程的执行机制，另一个是JS垃圾回收机制的限制。<br>首先，JS是单线程运行的，一旦进入到垃圾回收阶段，其他的各种运行逻辑都要暂停。其次，垃圾回收是一个非常耗时的操作。所以，V8通过限制堆内存来获取更快的响应速度。</p>
-</li>
-<li><p>内存的回收<br>V8把堆内存分成了两部分——新生代内存和老生代内存。<br>新生代内存就是临时分配的内存，存活时间短。老生代时常驻内存，存活时间长。V8的堆内存就是这两个内存之和。<br><img src="/memory.png" alt="新老生代内存"></p>
-<ul>
-<li><p>新生代内存回收策略（Scavenge算法）：<br>新生代内存在64位系统和32位系统下的默认限制分别为32Mb和16Mb。<br>首先将新生代内存一分为二：<br><img src="/memory2.png" alt="新生代内存"><br>其中From部分表示正在使用的内存，To是目前闲置的内存。<br>当进行垃圾回收时，V8将From部分的对象检查一遍，如果是存活对象则复制到To内存中（顺序摆放），如果是非存活对象直接回收即可。<br>当所有的From中的存活对象按照顺序进入到To内存之后，二者<strong>角色互换</strong>。From现在被闲置，To位正在使用，如此循环。<br>这样的操作可以使正在使用的内存区中的数据顺序摆放，便于后续的空间分配。</p>
-</li>
-<li><p>老生代内存回收策略：<br>如果新生代内存中的变量经过多次回收后仍然存在，则会被放入老生代内存中，这种现象称为<strong>晋升</strong><br>以下操作会触发晋升：</p>
-<ul>
-<li><p>已经经历过一次Scavenge回收</p>
-</li>
-<li><p>新生代中闲置空间内存占用超过25%</p>
-<p>第一步进行标记-清除。首先遍历堆中的所有对象，对它们做上标记，然后对于代码环境中<strong>使用的变量</strong>以及被<strong>强引用</strong>的变量取消标记。然后在清除阶段进行空间回收<br>第二步，整理内存碎片。在清除阶段结束之后，把存活的对象全部往一端靠拢。由于是移动对象，执行速度慢，故此阶段是整个过程中最耗时的部分。</p>
-</li>
-</ul>
-</li>
-<li><p>增量标记<br>由于JS的单线程机制，V8在进行垃圾回收时，不可避免地会阻塞业务逻辑的执行。如果老生代的垃圾回收任务很重，那么会严重地影响应用的性能。为了避免这样的问题，V8采取了增量标记的方案，即将一口气完成的标记任务分为很多小的部分完成，每完成一个小部分就转而去执行js应用逻辑，之后再继续进行垃圾回收，如此循环。</p>
-</li>
-</ul>
-</li>
-</ul>
-
+<p>浏览器的事件执行需要经过三个阶段：捕获阶段→目标元素阶段→冒泡阶段。</p>
+<p>节点上的原生事件执行是在目标阶段，而合成事件执行是在冒泡阶段。故原生事件执行先于合成事件。二者最好不要混用。</p>
+      
+      <a class="article-more-link" href="/2020/02/23/react/">阅读更多...</a>
+      
       
       <!-- reward -->
       
