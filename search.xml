@@ -11,9 +11,8 @@
 <li><p>HTTP是一个属于应用层的面对对象的协议</p>
 </li>
 <li><p>HTTP协议工作于客户端-服务端架构之上。浏览器作为HTTP客户端通过URL向HTTP服务端，即web服务器发送所有请求。web服务器根据接收到的请求向客户端发送响应信息</p>
-</li>
-</ul>
-<h3 id="HTTP主要特点"><a href="#HTTP主要特点" class="headerlink" title="HTTP主要特点"></a>HTTP主要特点</h3><ul>
+<a id="more"></a>
+<h3 id="HTTP主要特点"><a href="#HTTP主要特点" class="headerlink" title="HTTP主要特点"></a>HTTP主要特点</h3></li>
 <li><p>简单快速：客户端向服务端请求服务时，只需传送请求方法和路径。请求方法常有GET、POST等。每种方法规定了客户端与服务端联系的类型不同。由于HTTP协议简单，使得HTTP服务器的程序规模小，通信速度快。</p>
 </li>
 <li><p>灵活：HTTP允许传输任意类型的数据对象。正在传输的类型由Content-Type加以标记</p>
