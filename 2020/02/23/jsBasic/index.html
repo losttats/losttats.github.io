@@ -63,7 +63,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">2.4k字</span>
+            <span class="post-count">2.5k字</span>
         </span>
     </span>
 
@@ -72,7 +72,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">8分钟</span>
+            <span class="post-count">9分钟</span>
         </span>
     </span>
 </div>
@@ -223,7 +223,8 @@
 </ul>
 <h2 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h2><h3 id="Promise的特性及使用"><a href="#Promise的特性及使用" class="headerlink" title="Promise的特性及使用"></a>Promise的特性及使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">let p &#x3D; new Promise(function(resolve,reject)&#123;</span><br><span class="line">    let value &#x3D; 100;</span><br><span class="line">    setTimeout(function()&#123;</span><br><span class="line">        value +&#x3D; 100;</span><br><span class="line">        resolve(value);</span><br><span class="line">    &#125;,2000);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">p.then(function(value)&#123;</span><br><span class="line">    console.log(value)      &#x2F;&#x2F;value:200</span><br><span class="line">&#125;,function(err)&#123;</span><br><span class="line">    &#x2F;&#x2F;do something</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
-<p>首先通过<strong>new</strong>关键词实例化一个Promise对象，在这个对象中传入一个要执行异步操作的函数。该函数包含两个形参：resolve和reject。这两个形参是Promise中定义的2个函数，分别在异步事件成功和失败时调用。在上述代码中我们在2秒后调用了resolve函数，代表着异步事件的成功，返回一个值。而我们在后面又调用了Promise实例的then方法。then方法接收两个函数作为参数，分别在异步事件成功或失败时执行，并且两个函数的参数正是异步事件<strong>成功时返回的值</strong>或<strong>失败的原因</strong></p>
+<p>首先通过<strong>new</strong>关键词实例化一个Promise对象，在这个对象中传入一个要执行异步操作的函数。该函数包含两个形参：resolve和reject。这两个形参是Promise中定义的2个函数，分别在异步事件成功和失败时调用。在上述代码中我们在2秒后调用了resolve函数，代表着异步事件的成功，返回一个值。而我们在后面又调用了Promise实例的then方法。then方法接收两个函数作为参数，分别在异步事件成功或失败时执行，并且两个函数的参数正是异步事件<strong>成功时返回的值</strong>或<strong>失败的原因</strong>   </p>
+<p>Promise构造函数是同步执行的，then函数是异步执行的</p>
 <h3 id="Promise的状态"><a href="#Promise的状态" class="headerlink" title="Promise的状态"></a>Promise的状态</h3><p>一个Promise对象在实例化后可能拥有以下三种状态的其中之一：</p>
 <ol>
 <li><p>Fulfilled - 当传入的异步事件成功返回值时的状态</p>
@@ -233,11 +234,11 @@
 <li><p>Pending - 当传入的异步事件还没有结果返回时的状态</p>
 </li>
 </ol>
-<p>任何时候Promise对象都只能处于以上状态中的一种。当Promise对象处于Pending状态时，它可以转化成其他两种状态其中的一种。而处于Fulfilled或Rejected状态时，它无法再转化。</p>
+<p>任何时候Promise对象都只能处于以上状态中的一种。当Promise对象处于Pending状态时，它可以转化成其他两种状态其中的一种。而处于Fulfilled或Rejected状态时，它无法再转化。状态一旦改变就无法再变。</p>
 <h3 id="几个函数"><a href="#几个函数" class="headerlink" title="几个函数"></a>几个函数</h3><ol>
-<li><p>resolve<br>resolve方法是在一个Promise对象实例化时传入的任务函数的第一个参数，它的作用是让Promise进入Fulfilled状态，resolve函数只接受一个参数，即异步事件的返回值value。</p>
+<li><p>resolve<br>resolve方法是在一个Promise对象实例化时传入的任务函数的第一个参数，它的作用是让Promise进入Fulfilled状态，resolve函数只接受一个参数，即异步事件的返回值value。多次调用下只有第一次执行有效。</p>
 </li>
-<li><p>reject<br>reject方法是在一个Promise对象实例化时传入的任务函数的第二个参数，它的作用是让Promise进入Rejected状态。它同样只接受一个参数，即异步事件失败或异常的原因reason。</p>
+<li><p>reject<br>reject方法是在一个Promise对象实例化时传入的任务函数的第二个参数，它的作用是让Promise进入Rejected状态。它同样只接受一个参数，即异步事件失败或异常的原因reason。多次调用下只有第一次执行有效。</p>
 </li>
 <li><p>then     </p>
 <ul>
@@ -246,6 +247,8 @@
 <li><p>then方法中的回调函数是可以省略的    </p>
 </li>
 <li><p>当一个Promise失败返回了reason，而then方法没有定义失败时的回调函数时，这个reason会被链式调用的下一个then方法的失败回调函数接收</p>
+</li>
+<li><p>其参数期望值是一个函数，传入非函数值会发生值穿透，即第一个有效值作为最后结果</p>
 </li>
 </ul>
 </li>
