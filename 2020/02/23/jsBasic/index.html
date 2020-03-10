@@ -63,7 +63,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">2.5k字</span>
+            <span class="post-count">2.6k字</span>
         </span>
     </span>
 
@@ -169,6 +169,9 @@
 <p>上图中蓝色的即为原型链</p>
 </blockquote>
 <p><strong>prototype属性只有函数才有</strong></p>
+<p>基本上所有函数都有该属性，但有一个例外      </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let fun &#x3D; Function.prototype.bind()</span><br></pre></td></tr></table></figure>
+
 <p>obj.__proto__相当于Object.getPrototypeOf(obj)</p>
 <p>在上图中，如果我们去获取person.constructor，这时person中并没有constructor属性。那么它会从person的原型，即Person.prototype中读取。<br>因此<strong>person.constructor===Person.prototype.constructor === Person</strong></p>
 <h2 id="typeof和instanceof"><a href="#typeof和instanceof" class="headerlink" title="typeof和instanceof"></a>typeof和instanceof</h2><ul>
@@ -189,9 +192,8 @@
 
 </li>
 </ul>
-<h2 id="浅拷贝和深拷贝"><a href="#浅拷贝和深拷贝" class="headerlink" title="浅拷贝和深拷贝"></a>浅拷贝和深拷贝</h2><blockquote>
-<p>浅拷贝：复制引用的拷贝方式<br>深拷贝：完全地拷贝一个对象，即使是一个嵌套了对象的对象，二者也是相互独立的，修改一个对象的属性不会影响另一个</p>
-</blockquote>
+<h2 id="浅拷贝和深拷贝"><a href="#浅拷贝和深拷贝" class="headerlink" title="浅拷贝和深拷贝"></a>浅拷贝和深拷贝</h2><p>浅拷贝：创建一个新对象，这个对象有着原始对象属性值的一份精确拷贝。如果属性是基本类型，拷贝的就是基本类型的值。如果属性是引用类型，拷贝的就是内存地址，所以如果其中一个对象改变了这个地址，就会影响到另一个对象。</p>
+<p>深拷贝：将一个对象从内存中完整地拷贝一份出来，从堆内存中开辟一个新的区域存放新对象，且修改新对象不会影响原对象</p>
 <ul>
 <li>深拷贝数组或对象：  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JSON.parse(JSON.stringify(arr))</span><br></pre></td></tr></table></figure>
 
@@ -203,9 +205,9 @@
 <ul>
 <li><p>V8内存限制<br>V8只能使用系统的一部分内存。具体来说，在64位系统下，V8最多只能分配1.4G；在32位系统下，最多只能分配0.7G。<br>这么做的原因是由两个因素共同决定的：一是JS单线程的执行机制，另一个是JS垃圾回收机制的限制。<br>首先，JS是单线程运行的，一旦进入到垃圾回收阶段，其他的各种运行逻辑都要暂停。其次，垃圾回收是一个非常耗时的操作。所以，V8通过限制堆内存来获取更快的响应速度。</p>
 </li>
-<li><p>内存的回收<br>V8把堆内存分成了两部分——新生代内存和老生代内存。<br>新生代内存就是临时分配的内存，存活时间短。老生代时常驻内存，存活时间长。V8的堆内存就是这两个内存之和。<br><img src="../images/memory.png" alt="新老生代内存"></p>
+<li><p>内存的回收<br>V8把堆内存分成了两部分——新生代内存和老生代内存。<br>新生代内存就是临时分配的内存，存活时间短。老生代时常驻内存，存活时间长。V8的堆内存就是这两个内存之和。<br><img src="/images/memory.png" alt="新老生代内存"></p>
 <ul>
-<li><p>新生代内存回收策略（Scavenge算法）：<br>新生代内存在64位系统和32位系统下的默认限制分别为32Mb和16Mb。<br>首先将新生代内存一分为二：<br><img src="../images/memory2.png" alt="新生代内存"><br>其中From部分表示正在使用的内存，To是目前闲置的内存。<br>当进行垃圾回收时，V8将From部分的对象检查一遍，如果是存活对象则复制到To内存中（顺序摆放），如果是非存活对象直接回收即可。<br>当所有的From中的存活对象按照顺序进入到To内存之后，二者<strong>角色互换</strong>。From现在被闲置，To位正在使用，如此循环。<br>这样的操作可以使正在使用的内存区中的数据顺序摆放，便于后续的空间分配。</p>
+<li><p>新生代内存回收策略（Scavenge算法）：<br>新生代内存在64位系统和32位系统下的默认限制分别为32Mb和16Mb。<br>首先将新生代内存一分为二：<br><img src="/images/memory2.png" alt="新生代内存"><br>其中From部分表示正在使用的内存，To是目前闲置的内存。<br>当进行垃圾回收时，V8将From部分的对象检查一遍，如果是存活对象则复制到To内存中（顺序摆放），如果是非存活对象直接回收即可。<br>当所有的From中的存活对象按照顺序进入到To内存之后，二者<strong>角色互换</strong>。From现在被闲置，To位正在使用，如此循环。<br>这样的操作可以使正在使用的内存区中的数据顺序摆放，便于后续的空间分配。</p>
 </li>
 <li><p>老生代内存回收策略：<br>如果新生代内存中的变量经过多次回收后仍然存在，则会被放入老生代内存中，这种现象称为<strong>晋升</strong><br>以下操作会触发晋升：</p>
 <ul>

@@ -63,7 +63,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">4.8k字</span>
+            <span class="post-count">5k字</span>
         </span>
     </span>
 
@@ -171,7 +171,7 @@
 <h3 id="请求消息Request"><a href="#请求消息Request" class="headerlink" title="请求消息Request"></a>请求消息Request</h3><blockquote>
 <p>客户端发送一个HTTP请求到服务器的请求消息包括以下格式：请求行、请求头部、空行和请求数据</p>
 </blockquote>
-<p><img src="../images/httpRequest.png" alt="http请求消息结构"></p>
+<p><img src="/images/httpRequest.png" alt="http请求消息结构"></p>
 <p>Get请求例子：   </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">GET &#x2F;562f25980001b1b106000338.jpg HTTP&#x2F;1.1  </span><br><span class="line">Host    img.mukewang.com    </span><br><span class="line">User-Agent    Mozilla&#x2F;5.0 (Windows NT 10.0; WOW64) AppleWebKit&#x2F;537.36 (KHTML, like Gecko) Chrome&#x2F;51.0.2704.106 Safari&#x2F;537.36    </span><br><span class="line">Accept    image&#x2F;webp,image&#x2F;*,*&#x2F;*;q&#x3D;0.8  </span><br><span class="line">Referer    http:&#x2F;&#x2F;www.imooc.com&#x2F;    </span><br><span class="line">Accept-Encoding    gzip, deflate, sdch  </span><br><span class="line">Accept-Language    zh-CN,zh;q&#x3D;0.8</span><br></pre></td></tr></table></figure>
 
@@ -371,6 +371,29 @@
 <li><p>客户端：发回ACK报文确认，并将确认序号设置为收到序号加一</p>
 </li>
 </ul>
+<h2 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h2><blockquote>
+<p>jsonp是一种跨域通信手段</p>
+</blockquote>
+<p>原理：</p>
+<ol>
+<li><p>利用script标签的src属性来实现跨域</p>
+</li>
+<li><p>通过将前端方法作为参数传递到服务器端，然后由服务器端注入参数之后再返回，实现服务器端和客户端的通信。</p>
+</li>
+<li><p>由于使用script的src属性，因此只支持get方法</p>
+</li>
+</ol>
+<p>流程：</p>
+<ol>
+<li><p>设定一个script标签   </p>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src&#x3D;&quot;http:&#x2F;&#x2F;jsonp.js?callback&#x3D;xxx&quot;&gt;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>callback定义了一个函数名，而远程服务端通过调用指定的函数并传入参数来实现传递参数，将fn(response)传递回客户端</p>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$callback &#x3D; !empty($_GET[&#39;callback&#39;]) ? $_GET[&#39;callback&#39;] : &#39;callback&#39;;</span><br><span class="line">echo $callback.&#39;(.json_encode($data).)&#39;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>客户端接收到返回的js脚本，开始解析和执行fn(response)</p>
+</li>
+</ol>
 
       
       <!-- reward -->

@@ -75,7 +75,7 @@
 <h3 id="请求消息Request"><a href="#请求消息Request" class="headerlink" title="请求消息Request"></a>请求消息Request</h3><blockquote>
 <p>客户端发送一个HTTP请求到服务器的请求消息包括以下格式：请求行、请求头部、空行和请求数据</p>
 </blockquote>
-<p><img src="../images/httpRequest.png" alt="http请求消息结构"></p>
+<p><img src="/images/httpRequest.png" alt="http请求消息结构"></p>
 <p>Get请求例子：   </p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">GET &#x2F;562f25980001b1b106000338.jpg HTTP&#x2F;1.1  </span><br><span class="line">Host    img.mukewang.com    </span><br><span class="line">User-Agent    Mozilla&#x2F;5.0 (Windows NT 10.0; WOW64) AppleWebKit&#x2F;537.36 (KHTML, like Gecko) Chrome&#x2F;51.0.2704.106 Safari&#x2F;537.36    </span><br><span class="line">Accept    image&#x2F;webp,image&#x2F;*,*&#x2F;*;q&#x3D;0.8  </span><br><span class="line">Referer    http:&#x2F;&#x2F;www.imooc.com&#x2F;    </span><br><span class="line">Accept-Encoding    gzip, deflate, sdch  </span><br><span class="line">Accept-Language    zh-CN,zh;q&#x3D;0.8</span><br></pre></td></tr></table></figure>
 
@@ -275,6 +275,29 @@
 <li><p>客户端：发回ACK报文确认，并将确认序号设置为收到序号加一</p>
 </li>
 </ul>
+<h2 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h2><blockquote>
+<p>jsonp是一种跨域通信手段</p>
+</blockquote>
+<p>原理：</p>
+<ol>
+<li><p>利用script标签的src属性来实现跨域</p>
+</li>
+<li><p>通过将前端方法作为参数传递到服务器端，然后由服务器端注入参数之后再返回，实现服务器端和客户端的通信。</p>
+</li>
+<li><p>由于使用script的src属性，因此只支持get方法</p>
+</li>
+</ol>
+<p>流程：</p>
+<ol>
+<li><p>设定一个script标签   </p>
+   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;script src&#x3D;&quot;http:&#x2F;&#x2F;jsonp.js?callback&#x3D;xxx&quot;&gt;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>callback定义了一个函数名，而远程服务端通过调用指定的函数并传入参数来实现传递参数，将fn(response)传递回客户端</p>
+   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$callback &#x3D; !empty($_GET[&#39;callback&#39;]) ? $_GET[&#39;callback&#39;] : &#39;callback&#39;;</span><br><span class="line">echo $callback.&#39;(.json_encode($data).)&#39;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>客户端接收到返回的js脚本，开始解析和执行fn(response)</p>
+</li>
+</ol>
 ]]></content>
       <categories>
         <category>Web</category>
@@ -683,7 +706,7 @@ return function(){
 </ol>
 <h2 id="居中为何要用transform而不用marginLeft等"><a href="#居中为何要用transform而不用marginLeft等" class="headerlink" title="居中为何要用transform而不用marginLeft等"></a>居中为何要用transform而不用marginLeft等</h2><p>transform属于合成属性，对合成属性进行transition/animation动画将会创建一个合成层，这使得动画元素在一个独立的层中进行动画。通常情况下，浏览器会将一个层中的内容先绘制进一个位图当中，然后再作为纹理上传到GPU，只要该层的内容不改变，就不会引发重绘，浏览器会通过重新复合来形成一个新的帧。</p>
 <p>top/left属于布局属性，该属性的变化会导致重排，即对这些节点及受这些节点影响的其他节点进行CSS计算→布局→重绘过程，浏览器需要将整个层重绘并重新上传到GPU，造成了极大的性能开销。</p>
-<h2 id="发布-订阅模式-vs-观察者模式"><a href="#发布-订阅模式-vs-观察者模式" class="headerlink" title="发布-订阅模式 vs 观察者模式"></a>发布-订阅模式 vs 观察者模式</h2><p><img src="../images/pubsub.png" alt="模式"></p>
+<h2 id="发布-订阅模式-vs-观察者模式"><a href="#发布-订阅模式-vs-观察者模式" class="headerlink" title="发布-订阅模式 vs 观察者模式"></a>发布-订阅模式 vs 观察者模式</h2><p><img src="/images/pubsub.png" alt="模式"></p>
 <ul>
 <li><p>在观察者模式中，观察者是知道发布者的存在的，而发布者也一直保持着对观察者的记录。在发布-订阅模式中，发布者和订阅者不知道对方的存在，它们通过消息代理进行通信。</p>
 </li>
@@ -775,6 +798,9 @@ return function(){
 <p>上图中蓝色的即为原型链</p>
 </blockquote>
 <p><strong>prototype属性只有函数才有</strong></p>
+<p>基本上所有函数都有该属性，但有一个例外      </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">let fun &#x3D; Function.prototype.bind()</span><br></pre></td></tr></table></figure>
+
 <p>obj.__proto__相当于Object.getPrototypeOf(obj)</p>
 <p>在上图中，如果我们去获取person.constructor，这时person中并没有constructor属性。那么它会从person的原型，即Person.prototype中读取。<br>因此<strong>person.constructor===Person.prototype.constructor === Person</strong></p>
 <h2 id="typeof和instanceof"><a href="#typeof和instanceof" class="headerlink" title="typeof和instanceof"></a>typeof和instanceof</h2><ul>
@@ -795,9 +821,8 @@ return function(){
 
 </li>
 </ul>
-<h2 id="浅拷贝和深拷贝"><a href="#浅拷贝和深拷贝" class="headerlink" title="浅拷贝和深拷贝"></a>浅拷贝和深拷贝</h2><blockquote>
-<p>浅拷贝：复制引用的拷贝方式<br>深拷贝：完全地拷贝一个对象，即使是一个嵌套了对象的对象，二者也是相互独立的，修改一个对象的属性不会影响另一个</p>
-</blockquote>
+<h2 id="浅拷贝和深拷贝"><a href="#浅拷贝和深拷贝" class="headerlink" title="浅拷贝和深拷贝"></a>浅拷贝和深拷贝</h2><p>浅拷贝：创建一个新对象，这个对象有着原始对象属性值的一份精确拷贝。如果属性是基本类型，拷贝的就是基本类型的值。如果属性是引用类型，拷贝的就是内存地址，所以如果其中一个对象改变了这个地址，就会影响到另一个对象。</p>
+<p>深拷贝：将一个对象从内存中完整地拷贝一份出来，从堆内存中开辟一个新的区域存放新对象，且修改新对象不会影响原对象</p>
 <ul>
 <li>深拷贝数组或对象：  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">JSON.parse(JSON.stringify(arr))</span><br></pre></td></tr></table></figure>
 
@@ -809,9 +834,9 @@ return function(){
 <ul>
 <li><p>V8内存限制<br>V8只能使用系统的一部分内存。具体来说，在64位系统下，V8最多只能分配1.4G；在32位系统下，最多只能分配0.7G。<br>这么做的原因是由两个因素共同决定的：一是JS单线程的执行机制，另一个是JS垃圾回收机制的限制。<br>首先，JS是单线程运行的，一旦进入到垃圾回收阶段，其他的各种运行逻辑都要暂停。其次，垃圾回收是一个非常耗时的操作。所以，V8通过限制堆内存来获取更快的响应速度。</p>
 </li>
-<li><p>内存的回收<br>V8把堆内存分成了两部分——新生代内存和老生代内存。<br>新生代内存就是临时分配的内存，存活时间短。老生代时常驻内存，存活时间长。V8的堆内存就是这两个内存之和。<br><img src="../images/memory.png" alt="新老生代内存"></p>
+<li><p>内存的回收<br>V8把堆内存分成了两部分——新生代内存和老生代内存。<br>新生代内存就是临时分配的内存，存活时间短。老生代时常驻内存，存活时间长。V8的堆内存就是这两个内存之和。<br><img src="/images/memory.png" alt="新老生代内存"></p>
 <ul>
-<li><p>新生代内存回收策略（Scavenge算法）：<br>新生代内存在64位系统和32位系统下的默认限制分别为32Mb和16Mb。<br>首先将新生代内存一分为二：<br><img src="../images/memory2.png" alt="新生代内存"><br>其中From部分表示正在使用的内存，To是目前闲置的内存。<br>当进行垃圾回收时，V8将From部分的对象检查一遍，如果是存活对象则复制到To内存中（顺序摆放），如果是非存活对象直接回收即可。<br>当所有的From中的存活对象按照顺序进入到To内存之后，二者<strong>角色互换</strong>。From现在被闲置，To位正在使用，如此循环。<br>这样的操作可以使正在使用的内存区中的数据顺序摆放，便于后续的空间分配。</p>
+<li><p>新生代内存回收策略（Scavenge算法）：<br>新生代内存在64位系统和32位系统下的默认限制分别为32Mb和16Mb。<br>首先将新生代内存一分为二：<br><img src="/images/memory2.png" alt="新生代内存"><br>其中From部分表示正在使用的内存，To是目前闲置的内存。<br>当进行垃圾回收时，V8将From部分的对象检查一遍，如果是存活对象则复制到To内存中（顺序摆放），如果是非存活对象直接回收即可。<br>当所有的From中的存活对象按照顺序进入到To内存之后，二者<strong>角色互换</strong>。From现在被闲置，To位正在使用，如此循环。<br>这样的操作可以使正在使用的内存区中的数据顺序摆放，便于后续的空间分配。</p>
 </li>
 <li><p>老生代内存回收策略：<br>如果新生代内存中的变量经过多次回收后仍然存在，则会被放入老生代内存中，这种现象称为<strong>晋升</strong><br>以下操作会触发晋升：</p>
 <ul>
@@ -1064,7 +1089,51 @@ clearfix:after{
 div:after{
         content: &apos;&apos;;
         padding-top: 100%;
-}</code></pre>]]></content>
+}</code></pre><h2 id="两栏布局"><a href="#两栏布局" class="headerlink" title="两栏布局"></a>两栏布局</h2><blockquote>
+<p>垂直两栏，左边固定右边自适应</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.outer&#123;</span><br><span class="line">	height:100px;</span><br><span class="line">	margin-bottom:10px;</span><br><span class="line">&#125;</span><br><span class="line">.left&#123;</span><br><span class="line">	background:red;</span><br><span class="line">	height:100px;</span><br><span class="line">&#125;</span><br><span class="line">.right&#123;</span><br><span class="line">	background:blue;</span><br><span class="line">	height:100px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;* 浮动 *&#x2F;</span><br><span class="line">.outer1 .left&#123;</span><br><span class="line">	width:200px;</span><br><span class="line">	float:left;</span><br><span class="line">&#125;</span><br><span class="line">.outer1 .right&#123;</span><br><span class="line">	width:auto;</span><br><span class="line">	margin-left:200px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;* flex *&#x2F;</span><br><span class="line">.outer2&#123;</span><br><span class="line">	display:flex;</span><br><span class="line">&#125;</span><br><span class="line">.outer2 .left&#123;</span><br><span class="line">	flex-grow:0;</span><br><span class="line">	flex-shrink:0;</span><br><span class="line">	flex-basis:200px;</span><br><span class="line">&#125;</span><br><span class="line">.outer2 .right&#123;</span><br><span class="line">	flex:auto; &#x2F;* 1 1 auto *&#x2F;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;* position1 *&#x2F;</span><br><span class="line">.outer3&#123;</span><br><span class="line">	position:relative;</span><br><span class="line">&#125;</span><br><span class="line">.outer3 .left&#123;</span><br><span class="line">	position:absolute;</span><br><span class="line">	width:200px;</span><br><span class="line">&#125;</span><br><span class="line">.outer3 .right&#123;</span><br><span class="line">	margin-left:200px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;* position2 *&#x2F;</span><br><span class="line">.outer4&#123;</span><br><span class="line">	position:relative;</span><br><span class="line">&#125;</span><br><span class="line">.outer4 .left&#123;</span><br><span class="line">	width:200px;</span><br><span class="line">&#125;</span><br><span class="line">.outer4 .right&#123;</span><br><span class="line">	position:absolute;</span><br><span class="line">	top:0;</span><br><span class="line">	left:200px;</span><br><span class="line">	right:0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;div class&#x3D;&quot;outer outerN&quot;&gt;</span><br><span class="line">	&lt;div class&#x3D;&quot;left&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">	&lt;div class&#x3D;&quot;right&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="三栏布局"><a href="#三栏布局" class="headerlink" title="三栏布局"></a>三栏布局</h2><blockquote>
+<p>垂直三栏，左右两栏宽度固定，中间自适应</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.outer, .left, .mid, .right&#123;</span><br><span class="line">	height:100px;</span><br><span class="line">	margin-bottom:5px;</span><br><span class="line">&#125;</span><br><span class="line">.left&#123;</span><br><span class="line">	background:red;</span><br><span class="line">&#125;</span><br><span class="line">.mid&#123;</span><br><span class="line">	background:blue;</span><br><span class="line">&#125;</span><br><span class="line">.right&#123;</span><br><span class="line">	background:green;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;* position *&#x2F;</span><br><span class="line">.outer1&#123;</span><br><span class="line">	position:relative;</span><br><span class="line">&#125;</span><br><span class="line">.outer1 .left&#123;</span><br><span class="line">	position:absolute;</span><br><span class="line">	width:100px;</span><br><span class="line">&#125;</span><br><span class="line">.outer1 .mid&#123;</span><br><span class="line">	margin:0 200px 0 100px;</span><br><span class="line">&#125;</span><br><span class="line">.outer1 .right&#123;</span><br><span class="line">	position:absolute;</span><br><span class="line">	width:200px;</span><br><span class="line">	top:0;</span><br><span class="line">	right:0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;* flex *&#x2F;</span><br><span class="line">.outer2&#123;</span><br><span class="line">	display:flex;</span><br><span class="line">&#125;</span><br><span class="line">.outer2 .left&#123;</span><br><span class="line">	flex:0 0 100px;</span><br><span class="line">&#125;</span><br><span class="line">.outer2 .mid&#123;</span><br><span class="line">	flex:auto;</span><br><span class="line">&#125;</span><br><span class="line">.outer2 .right&#123;</span><br><span class="line">	flex:0 0 200px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;* float html中mid一栏要摆放在最后 *&#x2F;</span><br><span class="line">.outer3 .left&#123;</span><br><span class="line">	float:left;</span><br><span class="line">	width:100px;</span><br><span class="line">&#125;</span><br><span class="line">.outer3 .right&#123;</span><br><span class="line">	float:right;</span><br><span class="line">	width:200px;</span><br><span class="line">&#125;</span><br><span class="line">.outer3 .mid&#123;</span><br><span class="line">	margin:0 200px 0 100px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;div class&#x3D;&quot;outer outerN&quot;&gt;</span><br><span class="line">	&lt;div class&#x3D;&quot;left&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">	&lt;div class&#x3D;&quot;mid&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">	&lt;div class&#x3D;&quot;right&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="圣杯布局-双飞翼布局"><a href="#圣杯布局-双飞翼布局" class="headerlink" title="圣杯布局 双飞翼布局"></a>圣杯布局 双飞翼布局</h2><blockquote>
+<p>和三栏布局要求相同，不过中间栏要写在前面保证优先渲染</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.outer, .left, .mid, .right&#123;</span><br><span class="line">	height:100px;</span><br><span class="line">	margin-bottom:5px;</span><br><span class="line">&#125;</span><br><span class="line">.left&#123;</span><br><span class="line">	background:red;</span><br><span class="line">&#125;</span><br><span class="line">.mid&#123;</span><br><span class="line">	background:blue;</span><br><span class="line">&#125;</span><br><span class="line">.right&#123;</span><br><span class="line">	background:green;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;* 圣杯布局 通过浮动和负边距实现*&#x2F;</span><br><span class="line">.outer1&#123;</span><br><span class="line">	padding:0 200px 0 100px;</span><br><span class="line">&#125;</span><br><span class="line">.outer1 .mid&#123;</span><br><span class="line">	width:100%;</span><br><span class="line">	float:left;</span><br><span class="line">&#125;</span><br><span class="line">.outer1 .left&#123;</span><br><span class="line">	width:100px;</span><br><span class="line">	float:left;</span><br><span class="line">&#125;</span><br><span class="line">.outer1 .right&#123;</span><br><span class="line">	width:200px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="水平垂直居中"><a href="#水平垂直居中" class="headerlink" title="水平垂直居中"></a>水平垂直居中</h2><ul>
+<li>定宽高<ul>
+<li>absolute + 负margin</li>
+<li>absolute + margin auto</li>
+<li>absolute + calc</li>
+</ul>
+</li>
+<li>不定宽高<ul>
+<li>absolute + transform</li>
+<li>lineheight</li>
+<li>writing-mode</li>
+<li>table</li>
+<li>css-table</li>
+<li>flex</li>
+<li>grid</li>
+</ul>
+</li>
+</ul>
+<p>HTML代码：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;wp&quot;&gt;</span><br><span class="line">	&lt;div class&#x3D;&quot;box size&quot;&gt;content&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<p>css代码</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.wp&#123;</span><br><span class="line">	border:1px solid red;</span><br><span class="line">	width:300px;</span><br><span class="line">	height:300px;</span><br><span class="line">&#125;</span><br><span class="line">.box&#123;</span><br><span class="line">	background:blue;</span><br><span class="line">&#125;</span><br><span class="line">.size&#123;</span><br><span class="line">	width:100px;</span><br><span class="line">	height:100px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="absolute-负margin"><a href="#absolute-负margin" class="headerlink" title="absolute + 负margin"></a>absolute + 负margin</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.wp&#123;</span><br><span class="line">	position:relative;</span><br><span class="line">&#125;</span><br><span class="line">.box&#123;</span><br><span class="line">	position:absolute;</span><br><span class="line">	top:50%;</span><br><span class="line">	left:50%;</span><br><span class="line">	margin-left:-50px;</span><br><span class="line">	margin-top:-50px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="absolute-margin-auto"><a href="#absolute-margin-auto" class="headerlink" title="absolute + margin auto"></a>absolute + margin auto</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.wp&#123;</span><br><span class="line">	position:relative;</span><br><span class="line">&#125;</span><br><span class="line">.box&#123;</span><br><span class="line">	position:absolute;</span><br><span class="line">	top:0;</span><br><span class="line">	left:0;</span><br><span class="line">	right:0;</span><br><span class="line">	bottom:0;</span><br><span class="line">	margin:auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="absolute-calc"><a href="#absolute-calc" class="headerlink" title="absolute + calc"></a>absolute + calc</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.wp&#123;</span><br><span class="line">	position:relative;</span><br><span class="line">&#125;</span><br><span class="line">.box&#123;</span><br><span class="line">	position:absolute;</span><br><span class="line">	top:calc(50% - 50px);</span><br><span class="line">	left:calc(50% - 50px);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="absolute-transform"><a href="#absolute-transform" class="headerlink" title="absolute + transform"></a>absolute + transform</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.wp&#123;</span><br><span class="line">	position:relative;</span><br><span class="line">&#125;</span><br><span class="line">.box&#123;</span><br><span class="line">	position:absolute;</span><br><span class="line">	top:50%;</span><br><span class="line">	left:50%;</span><br><span class="line">	transform:translate(-50%,-50%);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>CSS</category>
       </categories>
