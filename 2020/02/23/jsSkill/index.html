@@ -63,7 +63,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">2.2k字</span>
+            <span class="post-count">2.3k字</span>
         </span>
     </span>
 
@@ -72,7 +72,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">10分钟</span>
+            <span class="post-count">11分钟</span>
         </span>
     </span>
 </div>
@@ -239,117 +239,63 @@
 <li><p>ver3.0</p>
 <blockquote>
 <p>bind返回的函数作为构造函数时，bind指定的this会失效，但传入的参数仍然生效</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">    Function.prototype.bind2 &#x3D; function(context)&#123;</span><br><span class="line">		var self &#x3D; this;</span><br><span class="line">		var args &#x3D; Array.prototype.slice.call(arguments,1);</span><br><span class="line">		var fBound &#x3D; function()&#123;</span><br><span class="line">			var bindArgs &#x3D; Array.prototype.slice.call(arguments);</span><br><span class="line">			&#x2F;&#x2F; 当作为构造函数时，this 指向实例，此时结果为 true，将绑定函数的 this 指向该实例，可以让实例获得来自绑定函数的值</span><br><span class="line">			&#x2F;&#x2F; 当作为普通函数时，this 指向 window，此时结果为 false，将绑定函数的 this 指向 context</span><br><span class="line">			return self.apply(this instanceof fBound?this:context,args.concat(bindArgs));</span><br><span class="line">		&#125;</span><br><span class="line">		fBound.prototype &#x3D; this.prototype;</span><br><span class="line">		return fBound;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">4. ver4.0</span><br><span class="line">    &gt;在3.0中直接将fBound.prototype &#x3D; this.prototype会导致修改fBound.prototype时也会直接修改绑定函数的prototype。这时可以通过一个空函数来中转</span><br></pre></td></tr></table></figure>
-<p> Function.prototype.bind2 = function(context){</p>
-<pre><code>if (typeof this !== &apos;function&apos;) {
-    throw TypeError(&quot;Bind must be called on a function&quot;);
-}   
-//保存this
-var self = this;</code></pre></blockquote>
-<pre><code>//拿到参数传递给调用者
-var args = Array.prototype.slice.call
-(arguments,1);
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">   Function.prototype.bind2 &#x3D; function(context)&#123;</span><br><span class="line">	var self &#x3D; this;</span><br><span class="line">	var args &#x3D; Array.prototype.slice.call(arguments,1);</span><br><span class="line">	var fBound &#x3D; function()&#123;</span><br><span class="line">		var bindArgs &#x3D; Array.prototype.slice.call(arguments);</span><br><span class="line">		&#x2F;&#x2F; 当作为构造函数时，this 指向实例，此时结果为 true，将绑定函数的 this 指向该实例，可以让实例获得来自绑定函数的值</span><br><span class="line">		&#x2F;&#x2F; 当作为普通函数时，this 指向 window，此时结果为 false，将绑定函数的 this 指向 context</span><br><span class="line">		return self.apply(this instanceof fBound?this:context,args.concat(bindArgs));</span><br><span class="line">	&#125;</span><br><span class="line">	fBound.prototype &#x3D; this.prototype;</span><br><span class="line">	return fBound;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+</li>
+<li><p>ver4.0</p>
+<blockquote>
+<p>在3.0中直接将fBound.prototype = this.prototype会导致修改fBound.prototype时也会直接修改绑定函数的prototype。这时可以通过一个空函数来中转</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">   Function.prototype.bind2 &#x3D; function(context)&#123;</span><br><span class="line">       if (typeof this !&#x3D;&#x3D; &#39;function&#39;) &#123;</span><br><span class="line">           throw TypeError(&quot;Bind must be called on a function&quot;);</span><br><span class="line">       &#125;   </span><br><span class="line">       &#x2F;&#x2F;保存this</span><br><span class="line">	var self &#x3D; this;</span><br><span class="line"></span><br><span class="line">       &#x2F;&#x2F;拿到参数传递给调用者</span><br><span class="line">	var args &#x3D; Array.prototype.slice.call</span><br><span class="line">       (arguments,1);</span><br><span class="line"></span><br><span class="line">       &#x2F;&#x2F;构建一个干净的函数，用于保存原函数的原型</span><br><span class="line">	var fNOP &#x3D; function()&#123;&#125;</span><br><span class="line">       </span><br><span class="line">       &#x2F;&#x2F;绑定的函数</span><br><span class="line">	var fBound &#x3D; function()&#123;</span><br><span class="line">		var bindArgs &#x3D; Array.prototype.slice.call(arguments);</span><br><span class="line">		return self.apply(this instanceof fNOP?this:context,args.concat(bindArgs));</span><br><span class="line">	&#125;</span><br><span class="line">	fNOP.prototype &#x3D; this.prototype;</span><br><span class="line">	fBound.prototype &#x3D; new fNOP();</span><br><span class="line">	return fBound</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+</li>
+</ol>
+<h2 id="new的模拟实现"><a href="#new的模拟实现" class="headerlink" title="new的模拟实现"></a>new的模拟实现</h2><blockquote>
+<p>new运算符创建一个用户定义的对象类型的实例或具有构造函数的内置对象类型之一</p>
+</blockquote>
+<ol>
+<li><p>ver1.0</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">   function objectFactory() &#123;</span><br><span class="line">	var obj &#x3D; new Object(),				</span><br><span class="line">       &#x2F;&#x2F;创建实例对象</span><br><span class="line"></span><br><span class="line">	Constructor &#x3D; [].shift.call(arguments)	</span><br><span class="line">       &#x2F;&#x2F;取到传入的构造函数</span><br><span class="line"></span><br><span class="line">	obj.__proto__ &#x3D; Constructor.prototype;	</span><br><span class="line">       &#x2F;&#x2F;建立原型链,使obj能够访问到构造函数原型中的属性</span><br><span class="line"></span><br><span class="line">	Constructor.apply(obj,arguments)		</span><br><span class="line">       &#x2F;&#x2F;使obj能够访问到构造函数中的属性</span><br><span class="line"></span><br><span class="line">	return obj;								</span><br><span class="line">       &#x2F;&#x2F;返回一个实例对象</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ver2.0</p>
+<blockquote>
+<p>构造函数返回对象时的处理</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">   function objectFactory() &#123;</span><br><span class="line">	var obj &#x3D; new Object(),</span><br><span class="line"></span><br><span class="line">	Constructor &#x3D; [].shift.call(arguments);</span><br><span class="line"></span><br><span class="line">	obj.__proto__ &#x3D; Constructor.prototype;</span><br><span class="line"></span><br><span class="line">	var res &#x3D; Constructor.apply(obj,arguments);</span><br><span class="line"></span><br><span class="line">	return typeof res &#x3D;&#x3D;&#x3D; &#39;object&#39;?res:obj</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+</li>
+</ol>
+<h2 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h2><blockquote>
+<p>防抖：无论怎么触发事件，总是在事件触发n秒之后才执行</p>
+</blockquote>
+<ol>
+<li><p>ver1.0</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">   function debounce(func,wait)&#123;</span><br><span class="line">	var timeout;</span><br><span class="line">	return function()&#123;</span><br><span class="line">		clearTimeout(timeout)</span><br><span class="line">		timeout &#x3D; setTimeout(func,wait)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">container.onmousemove &#x3D; debounce(getUserAction,1000)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在不使用debounce时，getUserAction中的this指向container。<br> 使用之后，指向了window。</p>
+</blockquote>
+</li>
+<li><p>ver2.0</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">  function debounce(func,wait)&#123;</span><br><span class="line">var timeout</span><br><span class="line">return function()&#123;</span><br><span class="line">	var context &#x3D; this</span><br><span class="line">	clearTimeout(timeout)</span><br><span class="line">	timeout &#x3D; setTimeout(</span><br><span class="line">	function()&#123;</span><br><span class="line">		console.log(this);</span><br><span class="line">		func.apply(context)</span><br><span class="line">	    &#125;,wait</span><br><span class="line">    )</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在不使用debounce时，事件对象event时MouseEvent对象<br> 使用之后，事件对象成了undefined。<br> 因为event传递给了debounce，没有传到getUserAction中</p>
+</blockquote>
+</li>
+<li><p>ver3.0</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">   function debounce(func,wait)&#123;</span><br><span class="line">	var timeout</span><br><span class="line">	return function()&#123;</span><br><span class="line">		var context &#x3D; this</span><br><span class="line">		var args &#x3D; arguments</span><br><span class="line">		clearTimeout(timeout)</span><br><span class="line">		timeout &#x3D; setTimeout(</span><br><span class="line">			function()&#123;</span><br><span class="line">				func.apply(context,args)</span><br><span class="line">			&#125;,wait</span><br><span class="line">		)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-//构建一个干净的函数，用于保存原函数的原型
-var fNOP = function(){}
-
-//绑定的函数
-var fBound = function(){
-    var bindArgs = Array.prototype.slice.call(arguments);
-    return self.apply(this instanceof fNOP?this:context,args.concat(bindArgs));
-}
-fNOP.prototype = this.prototype;
-fBound.prototype = new fNOP();
-return fBound</code></pre><p> }</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## new的模拟实现</span><br><span class="line">&gt;new运算符创建一个用户定义的对象类型的实例或具有构造函数的内置对象类型之一</span><br><span class="line"></span><br><span class="line">1. ver1.0</span><br></pre></td></tr></table></figure>
-<p> function objectFactory() {</p>
-<pre><code>var obj = new Object(),                
-//创建实例对象
-
-Constructor = [].shift.call(arguments)    
-//取到传入的构造函数
-
-obj.__proto__ = Constructor.prototype;    
-//建立原型链,使obj能够访问到构造函数原型中的属性
-
-Constructor.apply(obj,arguments)        
-//使obj能够访问到构造函数中的属性
-
-return obj;                                
-//返回一个实例对象</code></pre><p> }</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2. ver2.0</span><br><span class="line">    &gt;构造函数返回对象时的处理</span><br></pre></td></tr></table></figure>
-<p> function objectFactory() {</p>
-<pre><code>var obj = new Object(),
-
-Constructor = [].shift.call(arguments);
-
-obj.__proto__ = Constructor.prototype;
-
-var res = Constructor.apply(obj,arguments);
-
-return typeof res === &apos;object&apos;?res:obj</code></pre><p> }</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 防抖</span><br><span class="line">&gt;防抖：无论怎么触发事件，总是在事件触发n秒之后才执行</span><br><span class="line"></span><br><span class="line">1. ver1.0</span><br></pre></td></tr></table></figure>
-<p> function debounce(func,wait){</p>
-<pre><code>var timeout;
-return function(){
-    clearTimeout(timeout)
-    timeout = setTimeout(func,wait)
-}</code></pre><p> }<br> container.onmousemove = debounce(getUserAction,1000)</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">    &gt;在不使用debounce时，getUserAction中的this指向container。   </span><br><span class="line">    使用之后，指向了window。</span><br><span class="line"></span><br><span class="line">2. ver2.0</span><br></pre></td></tr></table></figure>
-<p> function debounce(func,wait){</p>
-<pre><code>var timeout
-return function(){
-    var context = this
-    clearTimeout(timeout)
-    timeout = setTimeout(
-    function(){
-        console.log(this);
-        func.apply(context)
-        },wait
-    )
-}</code></pre><p> }</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    &gt;在不使用debounce时，事件对象event时MouseEvent对象  </span><br><span class="line">    使用之后，事件对象成了undefined。   </span><br><span class="line">    因为event传递给了debounce，没有传到getUserAction中</span><br><span class="line"></span><br><span class="line">3. ver3.0</span><br></pre></td></tr></table></figure>
-<p> function debounce(func,wait){</p>
-<pre><code>var timeout
-return function(){
-    var context = this
-    var args = arguments
-    clearTimeout(timeout)
-    timeout = setTimeout(
-        function(){
-            func.apply(context,args)
-        },wait
-    )
-}</code></pre><p> }</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 节流</span><br><span class="line">&gt;如果持续触发事件，则每隔一段时间执行一次事件</span><br><span class="line"></span><br><span class="line">1. 时间戳实现</span><br><span class="line">    &gt;当触发事件时，取出当前时间戳，减去之前的时间戳（初始值为0）。如果大于设置的时间周期，则执行函数并更新时间戳。</span><br></pre></td></tr></table></figure>
-<p> function throttle(func,wait){</p>
-<pre><code>var context,args
-var pre = 0
-return function(){
-    var now = +new Date()
-    context = this
-    args = arguments
-    if(now - pre &gt; wait){
-        func.apply(context,args)
-        pre = now
-    }
-}</code></pre><p> }<br> container.onmousemove = throttle(getUserAction,1000)</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2. 定时器实现</span><br><span class="line">    &gt;当第一次触发事件时，设置一个定时器。再次触发事件时，如果定时器存在，则不执行。直到定时器消失时，执行函数并清空定时器</span><br></pre></td></tr></table></figure>
-<p> function throttle(func,wait){</p>
-<pre><code>var timeout
-var pre = 0
-return function(){
-    context = this
-    args = arguments
-    if(!timeout){
-        timeout = setTimeout(
-            function(){
-                timeout = null
-                func.apply(context,args)
-            },wait
-        )
-    }
-}</code></pre><p> }</p>
+</li>
+</ol>
+<h2 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h2><blockquote>
+<p>如果持续触发事件，则每隔一段时间执行一次事件</p>
+</blockquote>
+<ol>
+<li>时间戳实现<blockquote>
+<p>当触发事件时，取出当前时间戳，减去之前的时间戳（初始值为0）。如果大于设置的时间周期，则执行函数并更新时间戳。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">   function throttle(func,wait)&#123;</span><br><span class="line">	var context,args</span><br><span class="line">	var pre &#x3D; 0</span><br><span class="line">	return function()&#123;</span><br><span class="line">		var now &#x3D; +new Date()</span><br><span class="line">		context &#x3D; this</span><br><span class="line">		args &#x3D; arguments</span><br><span class="line">		if(now - pre &gt; wait)&#123;</span><br><span class="line">			func.apply(context,args)</span><br><span class="line">			pre &#x3D; now</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">container.onmousemove &#x3D; throttle(getUserAction,1000)</span><br></pre></td></tr></table></figure></blockquote>
+</li>
+<li>定时器实现<blockquote>
+<p>当第一次触发事件时，设置一个定时器。再次触发事件时，如果定时器存在，则不执行。直到定时器消失时，执行函数并清空定时器</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">   function throttle(func,wait)&#123;</span><br><span class="line">	var timeout</span><br><span class="line">	var pre &#x3D; 0</span><br><span class="line">	return function()&#123;</span><br><span class="line">		context &#x3D; this</span><br><span class="line">		args &#x3D; arguments</span><br><span class="line">		if(!timeout)&#123;</span><br><span class="line">			timeout &#x3D; setTimeout(</span><br><span class="line">				function()&#123;</span><br><span class="line">					timeout &#x3D; null</span><br><span class="line">					func.apply(context,args)</span><br><span class="line">				&#125;,wait</span><br><span class="line">			)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
 </li>
 </ol>
 
