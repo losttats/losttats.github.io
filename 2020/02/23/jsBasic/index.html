@@ -72,7 +72,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">17分钟</span>
+            <span class="post-count">18分钟</span>
         </span>
     </span>
 </div>
@@ -311,43 +311,126 @@
 </li>
 <li><p>通过node_modules/.bin/webpack启动webpack打包</p>
 <p>可以在package.json的scripts中定义打包脚本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">    &quot;scripts&quot;:&#123;</span><br><span class="line">        &quot;build&quot;:&quot;webpack&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    &#96;&#96;&#96;    </span><br><span class="line">    这个脚本在执行的时候，会按照一定的顺序寻找命令对应的位置。首先寻找本地的node_modules&#x2F;.bin路径中对应的命令。如果没找到，则去全局的环境变量中寻找。</span><br><span class="line"></span><br><span class="line">### loader的使用</span><br><span class="line"></span><br><span class="line">&gt;前面介绍的都是处理js文件。webpack还可以将图片、css等当成模块来处理</span><br><span class="line"></span><br><span class="line">#### css准备</span><br><span class="line"></span><br><span class="line">创建了css文件之后，它的样式并不会生效。因为我们没有引用它。webpack也无法找到它，因为我们只设定一个入口，webpack只会从入口开始查找其他依赖的文件</span><br><span class="line"></span><br><span class="line">在入口文件中引用</span><br></pre></td></tr></table></figure>
-<p>require(‘./css/normal.css’);</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">重新打包，报错，提示加载css文件必须使用对应的loader</span><br><span class="line"></span><br><span class="line">#### 认识loader</span><br><span class="line"></span><br><span class="line">&gt;对于webpack本身而言，它无法做到加载css，将ts转成js这些功能。所以我们需要给webpack扩展对应的loader</span><br><span class="line"></span><br><span class="line">loader使用：</span><br><span class="line"></span><br><span class="line">+ 通过npm安装需要使用的loader</span><br><span class="line"></span><br><span class="line">+ 在webpack.config.js中的module关键字下进行配置</span><br><span class="line"></span><br><span class="line">#### css处理的loader</span><br><span class="line"></span><br><span class="line">1. 安装css-loader</span><br></pre></td></tr></table></figure>
-<p>npm install –save-dev css-loader</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2. 配置webpack.config.js</span><br></pre></td></tr></table></figure>
-<p>  module:{<br>  rules:[</p>
-<pre><code>{
-    test:/\.css$/,
-    use:[&apos;css-loader&apos;],
-},</code></pre><p>  ],<br>},</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">3. 重新打包未生效。因为css-loader只负责加载css文件，并不负责将css具体样式嵌入到文档中。我们还需要一个style-loader。</span><br><span class="line"></span><br><span class="line">4. 安装style-loader并配置，注意要放在css-loader前面。因为webpack在读取使用的loader时，是从右向左读取的</span><br><span class="line"></span><br><span class="line">5. 重新打包，css生效</span><br><span class="line"></span><br><span class="line">6. 想引入less也同理（还需安装less）</span><br><span class="line"></span><br><span class="line">#### 资源文件处理</span><br><span class="line"></span><br><span class="line">首先在项目中加入两张图片。一张8kb以下，另一张8kb以上。</span><br><span class="line"></span><br><span class="line">先考虑在css样式中引用图片的情况</span><br><span class="line"></span><br><span class="line">1. 安装url-loader并配置</span><br></pre></td></tr></table></figure>
-<p>  {<br>  test:/.(png|jpg|gif|jpeg)$/,<br>  use:[</p>
-<pre><code>{
-    loader:&apos;url-loader&apos;,
-    options:{
-        limit:8192
-    }
-}</code></pre><p>  ]<br>}</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2. 当图片小于8kb时，配置中的limit属性会让webpack对图片进行base64编码</span><br><span class="line"></span><br><span class="line">3. 而把图片换成8kb以上时，打包报错。因为8kb以上的图片会通过file-loader处理</span><br><span class="line"></span><br><span class="line">4. 安装file-loader，可不进行rules配置</span><br><span class="line"></span><br><span class="line">5. 再次打包，发现dist下多了一个图片文件。该图片名字是一个32位的hash值，目的是防止名字重复。</span><br><span class="line"></span><br><span class="line">6. 配置options可改变图片名字和位置</span><br></pre></td></tr></table></figure>
-<p>options:{<br>  limit:8192,<br>  name:’img/[name].[hash:8].[ext]’<br>}</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    img：文件要打包到的文件夹   </span><br><span class="line">    name：获取图片原来的名字，放在该位置    </span><br><span class="line">    hash:8：为了防止图片名称冲突，仍使用hash，但只保留8位       </span><br><span class="line">    ext：使用图片原来的拓展名</span><br><span class="line"></span><br><span class="line">7. 但是图片并未显示，因为其路径不正确。默认情况下webpack将生成的路径直接返回给使用者。但整个程序是打包在dist文件夹下面的，所以需要在路径下再添加一个dist&#x2F;。output中添加配置</span><br></pre></td></tr></table></figure>
-<p>publicPath:’dist/‘</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">8. 再次打包，一切正常</span><br><span class="line"></span><br><span class="line">### plugin的使用</span><br><span class="line"></span><br><span class="line">#### 认识plugin</span><br><span class="line"></span><br><span class="line">&gt;webpack中的plugin就是对webpack现有功能的各种扩展，比如打包优化、文件压缩等等</span><br><span class="line"></span><br><span class="line">loader和plugin的区别</span><br><span class="line"></span><br><span class="line">+ loader主要用于转换某些类型的模块，它是一个转换器</span><br><span class="line"></span><br><span class="line">+ plugin是插件，它是对webpack本身的扩展，是一个扩展器</span><br><span class="line"></span><br><span class="line">plugin的使用</span><br><span class="line"></span><br><span class="line">+ 通过npm安装需要的plugin（某些内置的插件不需要安装）</span><br><span class="line"></span><br><span class="line">+ 在webpack.config.js中的plugins中配置插件</span><br><span class="line"></span><br><span class="line">#### 添加版权的plugin</span><br><span class="line"></span><br><span class="line">该插件名字叫BannerPlugin，属于webpack自带插件</span><br><span class="line"></span><br><span class="line">配置：</span><br></pre></td></tr></table></figure>
-<p>const webpack = require(‘webpack’)<br>…<br>plugins:[<br>  new webpack.BannerPlugin(‘版权信息’)<br>]</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">打包后查看bundle.js文件的头部出现了版权信息</span><br><span class="line"></span><br><span class="line">#### 打包html的plugin</span><br><span class="line"></span><br><span class="line">目前，index.html文件是存放在项目的根目录下的。而项目发布时，发布的是dist文件夹中的内容，但是现在dist中并没有index.html。所以我们需要将其打包到dist文件夹中。这时候就需要HtmlWebpackPlugin插件。</span><br><span class="line"></span><br><span class="line">HtmlWebpackPlugin插件可以</span><br><span class="line"></span><br><span class="line">+ 自动生成一个index.html文件（可指定模板来生成）</span><br><span class="line"></span><br><span class="line">+ 将打包的js文件自动通过script标签插入到body中</span><br><span class="line"></span><br><span class="line">安装并配置</span><br></pre></td></tr></table></figure>
-<p>const htmlWebpackPlugin = require(‘html-webpack-plugin’)<br>…<br>plugins:[<br>  new webpack.BannerPlugin(‘版权信息’),<br>  new htmlWebpackPlugin({</p>
-<pre><code>template:&apos;index.html&apos;</code></pre><p>  })<br>]</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">这里的template表示根据什么模板来生成index.html</span><br><span class="line"></span><br><span class="line">另外，需要删除之前在output中添加的publicPath属性，否则插入的script标签中的src可能会有问题(?)</span><br><span class="line"></span><br><span class="line">### 搭建本地服务</span><br><span class="line"></span><br><span class="line">&gt;现在每次修改了代码都需要手动编译，编译后要刷新页面才能看见效果</span><br><span class="line"></span><br><span class="line">#### 搭建本地服务</span><br><span class="line"></span><br><span class="line">webpack提供了一个可选的本地开发服务器，它基于nodejs搭建，内部使用express框架，可以实现我们想要的让浏览器自动刷新显示我们修改后的结果</span><br><span class="line"></span><br><span class="line">它是一个单独的模块，在webpack中使用之前需要先安装它</span><br></pre></td></tr></table></figure>
-<p>npm install –save-dev <a href="mailto:webpack-dev-server@2.9.1">webpack-dev-server@2.9.1</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">devServer也是作为webpack中的一个选项，本身可以设置如下属性：</span><br><span class="line"></span><br><span class="line">+ contentBase：为哪一个文件夹提供本地服务，默认是根文件夹，我们选择.&#x2F;dist</span><br><span class="line"></span><br><span class="line">+ port：端口号</span><br><span class="line"></span><br><span class="line">+ inline：页面实时刷新</span><br><span class="line"></span><br><span class="line">+ historyApiFallback：在SPA页面中，依赖HTML5的history模式</span><br><span class="line"></span><br><span class="line">webpack.config.js文件配置：</span><br></pre></td></tr></table></figure>
-<p>devServer:{<br>  contentBase:’./dist’,<br>  inline:true<br>}</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">另外，可以再针对开发环境在package.json中配置一个scripts</span><br></pre></td></tr></table></figure>
-<p>“dev”:”webpack-dev-server –open”<br>```</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;:&#123;</span><br><span class="line">    &quot;build&quot;:&quot;webpack&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个脚本在执行的时候，会按照一定的顺序寻找命令对应的位置。首先寻找本地的node_modules/.bin路径中对应的命令。如果没找到，则去全局的环境变量中寻找。</p>
 </li>
 </ul>
 </li>
 </ol>
+<h3 id="loader的使用"><a href="#loader的使用" class="headerlink" title="loader的使用"></a>loader的使用</h3><blockquote>
+<p>前面介绍的都是处理js文件。webpack还可以将图片、css等当成模块来处理</p>
+</blockquote>
+<h4 id="css准备"><a href="#css准备" class="headerlink" title="css准备"></a>css准备</h4><p>创建了css文件之后，它的样式并不会生效。因为我们没有引用它。webpack也无法找到它，因为我们只设定一个入口，webpack只会从入口开始查找其他依赖的文件</p>
+<p>在入口文件中引用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">require(&#39;.&#x2F;css&#x2F;normal.css&#39;);</span><br></pre></td></tr></table></figure>
+<p>重新打包，报错，提示加载css文件必须使用对应的loader</p>
+<h4 id="认识loader"><a href="#认识loader" class="headerlink" title="认识loader"></a>认识loader</h4><blockquote>
+<p>对于webpack本身而言，它无法做到加载css，将ts转成js这些功能。所以我们需要给webpack扩展对应的loader</p>
+</blockquote>
+<p>loader使用：</p>
+<ul>
+<li><p>通过npm安装需要使用的loader</p>
+</li>
+<li><p>在webpack.config.js中的module关键字下进行配置</p>
+</li>
+</ul>
+<h4 id="css处理的loader"><a href="#css处理的loader" class="headerlink" title="css处理的loader"></a>css处理的loader</h4><ol>
+<li><p>安装css-loader</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev css-loader</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置webpack.config.js</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">    module:&#123;</span><br><span class="line">    rules:[</span><br><span class="line">        &#123;</span><br><span class="line">            test:&#x2F;\.css$&#x2F;,</span><br><span class="line">            use:[&#39;css-loader&#39;],</span><br><span class="line">        &#125;,</span><br><span class="line">    ],</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重新打包未生效。因为css-loader只负责加载css文件，并不负责将css具体样式嵌入到文档中。我们还需要一个style-loader。</p>
+</li>
+<li><p>安装style-loader并配置，注意要放在css-loader前面。因为webpack在读取使用的loader时，是从右向左读取的</p>
+</li>
+<li><p>重新打包，css生效</p>
+</li>
+<li><p>想引入less也同理（还需安装less）</p>
+</li>
+</ol>
+<h4 id="资源文件处理"><a href="#资源文件处理" class="headerlink" title="资源文件处理"></a>资源文件处理</h4><p>首先在项目中加入两张图片。一张8kb以下，另一张8kb以上。</p>
+<p>先考虑在css样式中引用图片的情况</p>
+<ol>
+<li><p>安装url-loader并配置</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">    &#123;</span><br><span class="line">    test:&#x2F;\.(png|jpg|gif|jpeg)$&#x2F;,</span><br><span class="line">    use:[</span><br><span class="line">        &#123;</span><br><span class="line">            loader:&#39;url-loader&#39;,</span><br><span class="line">            options:&#123;</span><br><span class="line">                limit:8192</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>当图片小于8kb时，配置中的limit属性会让webpack对图片进行base64编码</p>
+</li>
+<li><p>而把图片换成8kb以上时，打包报错。因为8kb以上的图片会通过file-loader处理</p>
+</li>
+<li><p>安装file-loader，可不进行rules配置</p>
+</li>
+<li><p>再次打包，发现dist下多了一个图片文件。该图片名字是一个32位的hash值，目的是防止名字重复。</p>
+</li>
+<li><p>配置options可改变图片名字和位置</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">options:&#123;</span><br><span class="line">    limit:8192,</span><br><span class="line">    name:&#39;img&#x2F;[name].[hash:8].[ext]&#39;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> img：文件要打包到的文件夹<br> name：获取图片原来的名字，放在该位置<br> hash:8：为了防止图片名称冲突，仍使用hash，但只保留8位<br> ext：使用图片原来的拓展名</p>
+</li>
+<li><p>但是图片并未显示，因为其路径不正确。默认情况下webpack将生成的路径直接返回给使用者。但整个程序是打包在dist文件夹下面的，所以需要在路径下再添加一个dist/。output中添加配置</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">publicPath:&#39;dist&#x2F;&#39;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>再次打包，一切正常</p>
+</li>
+</ol>
+<h3 id="plugin的使用"><a href="#plugin的使用" class="headerlink" title="plugin的使用"></a>plugin的使用</h3><h4 id="认识plugin"><a href="#认识plugin" class="headerlink" title="认识plugin"></a>认识plugin</h4><blockquote>
+<p>webpack中的plugin就是对webpack现有功能的各种扩展，比如打包优化、文件压缩等等</p>
+</blockquote>
+<p>loader和plugin的区别</p>
+<ul>
+<li><p>loader主要用于转换某些类型的模块，它是一个转换器</p>
+</li>
+<li><p>plugin是插件，它是对webpack本身的扩展，是一个扩展器</p>
+</li>
+</ul>
+<p>plugin的使用</p>
+<ul>
+<li><p>通过npm安装需要的plugin（某些内置的插件不需要安装）</p>
+</li>
+<li><p>在webpack.config.js中的plugins中配置插件</p>
+</li>
+</ul>
+<h4 id="添加版权的plugin"><a href="#添加版权的plugin" class="headerlink" title="添加版权的plugin"></a>添加版权的plugin</h4><p>该插件名字叫BannerPlugin，属于webpack自带插件</p>
+<p>配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const webpack &#x3D; require(&#39;webpack&#39;)</span><br><span class="line">...</span><br><span class="line">plugins:[</span><br><span class="line">        new webpack.BannerPlugin(&#39;版权信息&#39;)</span><br><span class="line">    ]</span><br></pre></td></tr></table></figure>
+<p>打包后查看bundle.js文件的头部出现了版权信息</p>
+<h4 id="打包html的plugin"><a href="#打包html的plugin" class="headerlink" title="打包html的plugin"></a>打包html的plugin</h4><p>目前，index.html文件是存放在项目的根目录下的。而项目发布时，发布的是dist文件夹中的内容，但是现在dist中并没有index.html。所以我们需要将其打包到dist文件夹中。这时候就需要HtmlWebpackPlugin插件。</p>
+<p>HtmlWebpackPlugin插件可以</p>
+<ul>
+<li><p>自动生成一个index.html文件（可指定模板来生成）</p>
+</li>
+<li><p>将打包的js文件自动通过script标签插入到body中</p>
+</li>
+</ul>
+<p>安装并配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">const htmlWebpackPlugin &#x3D; require(&#39;html-webpack-plugin&#39;)</span><br><span class="line">...</span><br><span class="line">plugins:[</span><br><span class="line">        new webpack.BannerPlugin(&#39;版权信息&#39;),</span><br><span class="line">        new htmlWebpackPlugin(&#123;</span><br><span class="line">            template:&#39;index.html&#39;</span><br><span class="line">        &#125;)</span><br><span class="line">    ]</span><br></pre></td></tr></table></figure>
+<p>这里的template表示根据什么模板来生成index.html</p>
+<p>另外，需要删除之前在output中添加的publicPath属性，否则插入的script标签中的src可能会有问题(?)</p>
+<h3 id="搭建本地服务"><a href="#搭建本地服务" class="headerlink" title="搭建本地服务"></a>搭建本地服务</h3><blockquote>
+<p>现在每次修改了代码都需要手动编译，编译后要刷新页面才能看见效果</p>
+</blockquote>
+<h4 id="搭建本地服务-1"><a href="#搭建本地服务-1" class="headerlink" title="搭建本地服务"></a>搭建本地服务</h4><p>webpack提供了一个可选的本地开发服务器，它基于nodejs搭建，内部使用express框架，可以实现我们想要的让浏览器自动刷新显示我们修改后的结果</p>
+<p>它是一个单独的模块，在webpack中使用之前需要先安装它</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev webpack-dev-server@2.9.1</span><br></pre></td></tr></table></figure>
+
+<p>devServer也是作为webpack中的一个选项，本身可以设置如下属性：</p>
+<ul>
+<li><p>contentBase：为哪一个文件夹提供本地服务，默认是根文件夹，我们选择./dist</p>
+</li>
+<li><p>port：端口号</p>
+</li>
+<li><p>inline：页面实时刷新</p>
+</li>
+<li><p>historyApiFallback：在SPA页面中，依赖HTML5的history模式</p>
+</li>
+</ul>
+<p>webpack.config.js文件配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">devServer:&#123;</span><br><span class="line">        contentBase:&#39;.&#x2F;dist&#39;,</span><br><span class="line">        inline:true</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>另外，可以再针对开发环境在package.json中配置一个scripts</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;dev&quot;:&quot;webpack-dev-server --open&quot;</span><br></pre></td></tr></table></figure>
 <p>–open表示直接打开浏览器</p>
 <p>通过npm run dev启动环境，我们就有了一个可以实时刷新页面的本地服务了</p>
 <h4 id="模块热更新"><a href="#模块热更新" class="headerlink" title="模块热更新"></a>模块热更新</h4><blockquote>
