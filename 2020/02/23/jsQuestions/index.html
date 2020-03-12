@@ -63,7 +63,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">1.6k字</span>
+            <span class="post-count">1.7k字</span>
         </span>
     </span>
 
@@ -72,7 +72,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">6分钟</span>
+            <span class="post-count">7分钟</span>
         </span>
     </span>
 </div>
@@ -198,6 +198,12 @@
 </li>
 </ul>
 <h2 id="通用柯里化函数"><a href="#通用柯里化函数" class="headerlink" title="通用柯里化函数"></a>通用柯里化函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function curry(fn,...args)&#123;</span><br><span class="line">    var length &#x3D; fn.length;</span><br><span class="line">    args &#x3D; args || [];</span><br><span class="line">    return function(...rest)&#123;</span><br><span class="line">        var _args &#x3D; [...args,...rest];</span><br><span class="line">        return _args.length &lt; length ? curry(fn,_args) : fn.apply(this,_args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="cookie、sessionStorage、localStorage的区别"><a href="#cookie、sessionStorage、localStorage的区别" class="headerlink" title="cookie、sessionStorage、localStorage的区别"></a>cookie、sessionStorage、localStorage的区别</h2><p>共同点：都保存在浏览器端，同源</p>
+<p>cookie：cookie数据始终在同源的http请求中携带（即使不需要），即cookie在浏览器和服务器间来回传递。而其他两个不会自动把数据发给服务器，仅在本地保存。cookie数据还有路径的概念，可以限制cookie只属于某个路径下，存储大小只有4K左右。</p>
+<p>sessionStorage：仅在当前浏览器窗口关闭前有效</p>
+<p>localStorage：所有同源窗口都会共享，不会失效</p>
+
       
       <!-- reward -->
       
