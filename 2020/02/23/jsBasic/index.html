@@ -63,7 +63,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">4.8k字</span>
+            <span class="post-count">5.2k字</span>
         </span>
     </span>
 
@@ -72,7 +72,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">18分钟</span>
+            <span class="post-count">19分钟</span>
         </span>
     </span>
 </div>
@@ -437,6 +437,53 @@
 <p>本地服务有一个弊端：当我们只有一小部分代码发生变化时，页面却整个刷新了</p>
 </blockquote>
 <p>使用HotModuleReplacementPlugin插件可以实现修改代码后只刷新修改的部分。该插件为内置插件。</p>
+<h2 id="数组API"><a href="#数组API" class="headerlink" title="数组API"></a>数组API</h2><blockquote>
+<p>js中改变原数组的方法有:pop,push,shift,unshift,sort,reverse,splice</p>
+</blockquote>
+<ol>
+<li><p>添加/删除数组末尾元素:push/pop</p>
+</li>
+<li><p>添加/删除数组开头元素:unshift/shift</p>
+</li>
+<li><p>splice:</p>
+<ul>
+<li><p>arrayObject.splice(index,num,item1,…,itemX)</p>
+</li>
+<li><p>index:修改项目的位置,使用负数可从数组尾部开始规定位置</p>
+</li>
+<li><p>num:要删除的项目数量,设为0则不会删除</p>
+</li>
+<li><p>items:向数组中添加的新项目</p>
+</li>
+<li><p>该方法会改变原数组</p>
+</li>
+</ul>
+</li>
+<li><p>slice:</p>
+<ul>
+<li><p>arrayObject.slice(start,end)</p>
+</li>
+<li><p>start:规定从何处开始选取,使用负数可从数组尾部开始规定位置</p>
+</li>
+<li><p>end:规定在何处结束,指定的是结束处的数组下标(不包含该下标的项目).没有指定则会一直选取到数组结束.如果是负数则表示从数组尾部算起.</p>
+</li>
+<li><p>该方法返回一个新数组,不会改变原数组</p>
+</li>
+</ul>
+</li>
+<li><p>concat:合并数组,不改变原数组</p>
+</li>
+<li><p>every:将数组中的每一个元素传入一个函数中,该函数返回true或false.若全返回true,则结果为true.有一个为false,结果就为false</p>
+</li>
+<li><p>some:将数组中的每一个元素传入一个函数中,该函数返回true或false.一旦函数返回true,则迭代结束,返回结果true</p>
+</li>
+<li><p>forEach:快速迭代数组</p>
+</li>
+<li><p>filter:过滤</p>
+</li>
+<li><p>map:映射.将数组的每个元素进行各种变换生成新元素.最后返回一个新数组,不改变原数组</p>
+</li>
+</ol>
 
       
       <!-- reward -->

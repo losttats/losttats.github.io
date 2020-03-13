@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>JS数据结构与算法</title>
+    <url>/2020/03/13/jsAlgorithm/</url>
+    <content><![CDATA[<h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function Stack()&#123;</span><br><span class="line">    var items &#x3D; []</span><br><span class="line"></span><br><span class="line">    this.push &#x3D; function(e)&#123;</span><br><span class="line">        items.push(e)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    this.pop &#x3D; function()&#123;</span><br><span class="line">        return items.pop()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    this.peek &#x3D; function()&#123;</span><br><span class="line">        return items[items.length - 1]</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    this.isEmpty &#x3D; function()&#123;</span><br><span class="line">        return items.length &#x3D;&#x3D; 0</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    this.size &#x3D; function()&#123;</span><br><span class="line">        return items.length</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function Queue()&#123;</span><br><span class="line">    var items &#x3D; []</span><br><span class="line"></span><br><span class="line">    this.enqueue &#x3D; function(e)&#123;</span><br><span class="line">        items.push(e)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    this.dequeue &#x3D; function()&#123;</span><br><span class="line">        return items.shift()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    this.front &#x3D; function()&#123;</span><br><span class="line">        return item[0]</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    this.isEmpty &#x3D; function()&#123;</span><br><span class="line">        return items.length &#x3D;&#x3D; 0</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    this.size &#x3D; function()&#123;</span><br><span class="line">        return items.length</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function LinkedList()&#123;</span><br><span class="line">    function Node(e)&#123;</span><br><span class="line">        this.e &#x3D; e</span><br><span class="line">        this.next &#x3D; null</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    this.length &#x3D; 0</span><br><span class="line">    this.head &#x3D; null</span><br><span class="line"></span><br><span class="line">    LinkedList.prototype.append &#x3D; function(e)&#123;</span><br><span class="line">        var newNode &#x3D; new Node(e)</span><br><span class="line"></span><br><span class="line">        if(this.head &#x3D;&#x3D;&#x3D; null)&#123;</span><br><span class="line">            this.head &#x3D; newNode</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            var cur &#x3D; this.head</span><br><span class="line">            while(cur.next)&#123;</span><br><span class="line">                cur &#x3D; cur.next</span><br><span class="line">            &#125;</span><br><span class="line">            vur.next &#x3D; newNode</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        this.length++</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    LinkedList.prototype.toString &#x3D; function()&#123;</span><br><span class="line">        var cur &#x3D; this.head</span><br><span class="line">        var listString &#x3D; &quot;&quot;</span><br><span class="line"></span><br><span class="line">        while(cur)&#123;</span><br><span class="line">            listString +&#x3D; &quot;,&quot; + cur.e</span><br><span class="line">            cur &#x3D; cur.next</span><br><span class="line">        &#125;</span><br><span class="line">        return listString.slice(1)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    LinkedList.prototype.insert &#x3D; function(position,e)&#123;</span><br><span class="line">        if(position&lt;0||position&gt;this.length)&#123;</span><br><span class="line">            return false</span><br><span class="line">        &#125;</span><br><span class="line">        var newNode &#x3D; new Node(e)</span><br><span class="line">        var cur &#x3D; this.head</span><br><span class="line">        var pre &#x3D; null</span><br><span class="line">        var index &#x3D; 0</span><br><span class="line"></span><br><span class="line">        if(position &#x3D;&#x3D; 0)&#123;</span><br><span class="line">            newNode.next &#x3D; cur</span><br><span class="line">            this.head &#x3D; newNode</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            while(index++ &lt; position)&#123;</span><br><span class="line">                pre &#x3D; cur</span><br><span class="line">                cur &#x3D; cur.next</span><br><span class="line">            &#125;</span><br><span class="line">            newNode.next &#x3D; cur</span><br><span class="line">            pre.next &#x3D; newNode</span><br><span class="line">        &#125;</span><br><span class="line">        this.length++</span><br><span class="line">        return true</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    LinkedList.prototype.removeAt &#x3D; function(position)&#123;</span><br><span class="line">        if(position&lt;0||position&gt;&#x3D;this.length)&#123;</span><br><span class="line">            return null</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        var cur &#x3D; this.head</span><br><span class="line">        var pre &#x3D; null</span><br><span class="line">        var index &#x3D; 0</span><br><span class="line"></span><br><span class="line">        if(position &#x3D;&#x3D;&#x3D; 0)&#123;</span><br><span class="line">            this.head &#x3D; cur.next</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            while(position &gt; index++)&#123;</span><br><span class="line">                pre &#x3D; cur</span><br><span class="line">                cur &#x3D; cur.next</span><br><span class="line">            &#125;</span><br><span class="line">            pre.next &#x3D; cur.next</span><br><span class="line">        &#125;</span><br><span class="line">        this.length--</span><br><span class="line">        return cur.e</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    LinkedList.prototype.indexOf &#x3D; function(e)&#123;</span><br><span class="line">        var cur &#x3D; this.head</span><br><span class="line">        var index &#x3D; 0</span><br><span class="line"></span><br><span class="line">        while(cur)&#123;</span><br><span class="line">            if(cur.e &#x3D;&#x3D;&#x3D; e)&#123;</span><br><span class="line">                return index</span><br><span class="line">            &#125;</span><br><span class="line">            index++</span><br><span class="line">            cur &#x3D; cur.next</span><br><span class="line">        &#125;</span><br><span class="line">        return -1</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    LinkedList.prototype.remove &#x3D; function(e)&#123;</span><br><span class="line">        var index &#x3D; this.indexOf(e)</span><br><span class="line">        return this.removeAt(index)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    LinkedList.prototype.isEmpty &#x3D; function()&#123;</span><br><span class="line">        return this.length &#x3D;&#x3D; 0</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    LinkedList.prototype.size &#x3D; function()&#123;</span><br><span class="line">        return this.length</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    LinkedList.prototype.getFirst &#x3D; function()&#123;</span><br><span class="line">        return this.head.e</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>web基础知识</title>
     <url>/2020/02/24/web/</url>
     <content><![CDATA[<h2 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h2><h3 id="HTTP简介"><a href="#HTTP简介" class="headerlink" title="HTTP简介"></a>HTTP简介</h3><ul>
@@ -1018,6 +1035,53 @@
 <p>本地服务有一个弊端：当我们只有一小部分代码发生变化时，页面却整个刷新了</p>
 </blockquote>
 <p>使用HotModuleReplacementPlugin插件可以实现修改代码后只刷新修改的部分。该插件为内置插件。</p>
+<h2 id="数组API"><a href="#数组API" class="headerlink" title="数组API"></a>数组API</h2><blockquote>
+<p>js中改变原数组的方法有:pop,push,shift,unshift,sort,reverse,splice</p>
+</blockquote>
+<ol>
+<li><p>添加/删除数组末尾元素:push/pop</p>
+</li>
+<li><p>添加/删除数组开头元素:unshift/shift</p>
+</li>
+<li><p>splice:</p>
+<ul>
+<li><p>arrayObject.splice(index,num,item1,…,itemX)</p>
+</li>
+<li><p>index:修改项目的位置,使用负数可从数组尾部开始规定位置</p>
+</li>
+<li><p>num:要删除的项目数量,设为0则不会删除</p>
+</li>
+<li><p>items:向数组中添加的新项目</p>
+</li>
+<li><p>该方法会改变原数组</p>
+</li>
+</ul>
+</li>
+<li><p>slice:</p>
+<ul>
+<li><p>arrayObject.slice(start,end)</p>
+</li>
+<li><p>start:规定从何处开始选取,使用负数可从数组尾部开始规定位置</p>
+</li>
+<li><p>end:规定在何处结束,指定的是结束处的数组下标(不包含该下标的项目).没有指定则会一直选取到数组结束.如果是负数则表示从数组尾部算起.</p>
+</li>
+<li><p>该方法返回一个新数组,不会改变原数组</p>
+</li>
+</ul>
+</li>
+<li><p>concat:合并数组,不改变原数组</p>
+</li>
+<li><p>every:将数组中的每一个元素传入一个函数中,该函数返回true或false.若全返回true,则结果为true.有一个为false,结果就为false</p>
+</li>
+<li><p>some:将数组中的每一个元素传入一个函数中,该函数返回true或false.一旦函数返回true,则迭代结束,返回结果true</p>
+</li>
+<li><p>forEach:快速迭代数组</p>
+</li>
+<li><p>filter:过滤</p>
+</li>
+<li><p>map:映射.将数组的每个元素进行各种变换生成新元素.最后返回一个新数组,不改变原数组</p>
+</li>
+</ol>
 ]]></content>
       <categories>
         <category>JS</category>
