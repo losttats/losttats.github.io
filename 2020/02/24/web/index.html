@@ -63,7 +63,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">5k字</span>
+            <span class="post-count">7.4k字</span>
         </span>
     </span>
 
@@ -72,7 +72,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">17分钟</span>
+            <span class="post-count">26分钟</span>
         </span>
     </span>
 </div>
@@ -295,6 +295,17 @@
 <li><p>安全性。POST安全性是要比GET高的。</p>
 </li>
 </ol>
+<h2 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h2><h3 id="HTTPS是什么"><a href="#HTTPS是什么" class="headerlink" title="HTTPS是什么"></a>HTTPS是什么</h3><p>HTTPS用于在计算机网络的两个端系统之间进行安全的信息交换,它相当于在HTTP的基础上加了一个安全的字眼.在HTTPS中,使用传输层安全性(TLS)或安全套接字层(SSL)对通信协议进行加密.即HTTP+SSL(TLS) = HTTPS</p>
+<h3 id="HTTPS做了什么"><a href="#HTTPS做了什么" class="headerlink" title="HTTPS做了什么"></a>HTTPS做了什么</h3><ul>
+<li><p>加密:HTTPS通过对数据加密来使其免受窃听者对数据的监听,这就意味着用户在浏览网站时,没有人能够监听他和网站之间的信息交换或是跟踪用户活动,访问记录.从而无法窃取用户信息</p>
+</li>
+<li><p>数据一致性:数据在传输的过程中不会被修改</p>
+</li>
+<li><p>身份认证:防止中间人攻击并建立用户信任</p>
+</li>
+</ul>
+<h3 id="认识SSL-TLS"><a href="#认识SSL-TLS" class="headerlink" title="认识SSL/TLS"></a>认识SSL/TLS</h3><p>TLS是SSL的后续版本,它们是用于在互联网两台计算机之间用于身份验证和加密的一种协议</p>
+<p>通常情况下,HTTP会直接和TCP进行通信.在使用SSL的HTTPS后,则会先和SSL进行通信,然后再由SSL和TCP进行通信</p>
 <h2 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h2><h3 id="OSI、TCP-IP各层的结构与功能"><a href="#OSI、TCP-IP各层的结构与功能" class="headerlink" title="OSI、TCP/IP各层的结构与功能"></a>OSI、TCP/IP各层的结构与功能</h3><ul>
 <li><p>OSI：应用层、表示层、会话层、运输层、网络层、数据链路层、物理层</p>
 </li>
@@ -394,6 +405,89 @@
 <li><p>客户端接收到返回的js脚本，开始解析和执行fn(response)</p>
 </li>
 </ol>
+<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><p>缓存一半分为两种:强缓存和协商缓存.二者主要区别在于使用本地缓存的时候,是否需要向服务器验证本地缓存是否依旧有效.即是说,协商缓存就是需要和服务器进行协商,最终才能确定是否使用本地缓存.</p>
+<p>两种缓存方案存在的问题</p>
+<ul>
+<li><p>强缓存: 强缓存主要是通过http请求头中的Cache-Control和Expire两个字段控制.Expire是HTTP1.0标准下的字段.一般来说,我们会设置Cache-Control的值为”public,max-age=xxx”,表示在xxx秒内再次访问该资源均使用本地的缓存,不再向服务器发起请求.那么问题来了,如果在xxx秒内,服务器上的资源更新了,客户端在没有强制刷新的情况下,看见的依旧是旧内容.更为严重的,如果后台接口也更新了,有缓存的用户还在使用旧接口,则引发更严重的问题.</p>
+</li>
+<li><p>协商缓存: 协商缓存最大的问题就是每次都要向服务器验证一下缓存的有效性.这样,使用缓存的意义就不复存在了.</p>
+</li>
+</ul>
+<p>最佳实践:缓存的意义在于减少请求,更多地使用本地的资源,给用户更好的体验的同时,减轻服务器压力.所以最佳的解决方案是在更新版本的时候,把静态资源的路径改掉,这样相当于修改后是第一次访问这些资源,就不会存在缓存的问题了</p>
+<p>webpack在打包的时候,可以在文件的命名上带上哈希值</p>
+<ul>
+<li><p>HTML:使用协商缓存</p>
+</li>
+<li><p>css&amp;js&amp;图片:使用强缓存,文件命名带上哈希值</p>
+</li>
+</ul>
+<p>webpack提供了三种哈希值计算方式</p>
+<ul>
+<li><p>hash: 跟整个项目的构建有关,构建生成的文件hash值都是一样的,只要项目里有文件更改,整个项目构建的hash值都会更改</p>
+</li>
+<li><p>chunkhash:根据不同的入口文件进行依赖文件解析\构建对应的chunk,生成对应的hash值</p>
+</li>
+<li><p>contenthash:由文件内容产生hash值,内容不同产生的contenthash也不同</p>
+</li>
+</ul>
+<h2 id="前端性能优化"><a href="#前端性能优化" class="headerlink" title="前端性能优化"></a>前端性能优化</h2><h3 id="网络传输性能优化"><a href="#网络传输性能优化" class="headerlink" title="网络传输性能优化"></a>网络传输性能优化</h3><ol>
+<li><p>浏览器缓存(强缓存/协商缓存)<br>尽可能多地使用缓存,减少请求书</p>
+</li>
+<li><p>资源打包压缩<br>缓存工作只有在用户第二次访问页面的时候才能展现效果,如果要在用户首次打开页面就展现出优良的性能,则必须对资源进行优化.我们常将网络性能优化措施归结为三大方面:减少请求书,减小请求资源体积,提升网络传输速率.<br>结合前端工程化思想,我们在对上线文件进行自动化打包编译时,需要用到打包工具webpack<br>webpack配置:js压缩,html压缩,提取公共资源,提取css并压缩,将webpack开发环境修改为生产环境.<br>最后在服务器上开启Gzip压缩</p>
+</li>
+<li><p>图片资源优化   </p>
+<ul>
+<li>使用雪碧图</li>
+<li>使用字体图标:矢量图只是往HTML里插入字符和css样式,和图片请求相比资源占用小了非常多</li>
+<li>使用webP,webP格式是谷歌公司开发的一种旨在加快图片加载速度的图片格式</li>
+</ul>
+</li>
+<li><p>使用CDN</p>
+</li>
+</ol>
+<h3 id="页面渲染性能优化"><a href="#页面渲染性能优化" class="headerlink" title="页面渲染性能优化"></a>页面渲染性能优化</h3><ol>
+<li><p>浏览器渲染过程(webkit)<br>浏览器的解释器是包括在渲染引擎之内的.我们常说的chrome(Blink引擎),safari(webkit引擎),Firefox(Gecko引擎)指的就是渲染引擎.而在渲染引擎内,还包括着我们的HTML解释器(渲染时用于构造DOM树),css解释器(渲染时用于合成css规则)还有js解释器.后来,由于js的使用越来越重要,工作越来越繁杂,于是把js解释器独立出来,如V8引擎.</p>
+</li>
+<li><p>DOM渲染层与GPU硬件加速<br>一个页面是由许多DOM元素渲染层(layers)构成的.实际上一个页面在构建完render tree后,经历了以下流程才呈现出来</p>
+<ul>
+<li><p>浏览器获取DOM树并依据样式将其分割成多个独立的渲染层</p>
+</li>
+<li><p>CPU将每个层绘制进绘图中</p>
+</li>
+<li><p>将位图作为纹理上传至GPU绘制</p>
+</li>
+<li><p>GPU将所有的渲染层缓存(如果下次上传的渲染层没有发生变化,GPU就不需要对其进行重绘)并复合多个渲染层最终形成我们的图像     </p>
+<p>从上面的步骤可知,布局是由CPU处理的,而绘制则是由GPU完成的.<br>而因为GPU会缓存渲染层,那么如果我们将那些一直发生大量重排重绘的元素提取出来,单独触发一个渲染层,那么这些元素就不会连带着其他元素一起重绘了<br>video元素,WebGL,Canvas,CSS3 3D,CSS滤镜,z-index大于某个相邻节点的元素都会触发新的layer.最常用的是给某个元素加上以下样式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">transform:translateZ(0);</span><br><span class="line">backface-visibility:hidden;</span><br></pre></td></tr></table></figure>
+<p>我们把容易触发重排重绘的元素单独触发渲染层,让它们与那些”静态”元素隔离,让GPU分担更多的渲染工作,这种举措称为硬件加速或是GPU加速</p>
+</li>
+</ul>
+</li>
+<li><p>重排和重绘     </p>
+<p>   重排:渲染层中的元素布局发生修改,都会导致页面重新排列,比如窗口的尺寸发生了变化,删除或添加DOM元素,修改了影响元素盒子大小的CSS属性     </p>
+<p>   重绘:绘制,即渲染上色,所有对元素视觉表现属性的修改,都会引发重绘</p>
+<p>   不论是重排还是重绘,都会阻塞浏览器.要提高网页性能,就要降低重排和重绘的频率和成本,尽可能地少触发重新渲染.正如我们在之前提到的,重排是由CPU处理的,而重绘是由GPU处理的.CPU处理效率远不如GPU,并且重排一定会引发重绘,而重绘不一定会引发重排.所以在性能优化工作中,我们应当更加注重减少重排的发生.</p>
+</li>
+<li><p>优化策略</p>
+<ul>
+<li><p>CSS属性读写分离:浏览器每次对元素样式进行读操作时,都必须进行一次重新渲染(重排+重绘).所以我们在使用JS对元素样式进行读写时,最好将二者分开,先读后写,避免出现二者交叉使用的情况.最好的方法就是不用JS操作元素样式</p>
+</li>
+<li><p>通过切换class或者style.csstext属性去批量操作元素样式</p>
+</li>
+<li><p>DOM元素离线更新:当对DOM进行相关操作时,可以使用Document Fragment对象进行离线操作,或使用display:none对元素隐藏,在元素”消失”后进行相关操作</p>
+</li>
+<li><p>将没用的元素设为不可见(visibility:none),这样可以减小重绘的压力,必要时再显示</p>
+</li>
+<li><p>压缩DOM的深度,一个渲染层内不要有过深的子元素,少用DOM完成页面样式,多使用伪元素或者box-shadow取代</p>
+</li>
+<li><p>图片在渲染前指定大小:因为img元素是内联元素,所以在加载图片后会改变宽高,严重时会导致整个页面重排,所以最好在渲染之前就指定其大小,或让其脱离文档流.</p>
+</li>
+<li><p>对页面中可能发生大量重排重绘的元素单独触发渲染层,使GPU分担CPU压力.(慎用,要考量以牺牲GPU占用率能否换来可期的性能优化,毕竟页面中存在太多的渲染层对于GPU而言也是一种不必要的压力.通常情况下,我们会对动画元素采取硬件加速)</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="JS阻塞性能"><a href="#JS阻塞性能" class="headerlink" title="JS阻塞性能"></a>JS阻塞性能</h3><p>在编程过程中,如果我们使用了闭包后未将其相关资源加以释放,或者引用了外链后未将其置空(如给某DOM元素绑定了事件回调,后来却remove了该元素)都会造成内存泄漏,进而大量占用用户的CPU,造成卡顿甚至死机.</p>
 
       
       <!-- reward -->
