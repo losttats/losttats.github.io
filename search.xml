@@ -1196,41 +1196,36 @@
 <p>css由选择器和声明块组成，声明块中的一组组<em>名值对</em>称为声明</p>
 </blockquote>
 <h4 id="各类选择器："><a href="#各类选择器：" class="headerlink" title="各类选择器："></a>各类选择器：</h4><ul>
-<li><p>元素选择器：选择页面中的所有指定元素<br>  `h1{</p>
-<pre><code>...</code></pre><p>  }`</p>
-</li>
-<li><p>id选择器：通过元素的id选择唯一的指定元素<br>  `#id{</p>
-<pre><code>...</code></pre><p>  }`</p>
-</li>
-<li><p>类选择器：通过元素的class属性选择一组元素<br>  `.className{</p>
-<pre><code>...</code></pre><p>  }`</p>
-</li>
+<li><p>元素选择器：选择页面中的所有指定元素  </p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">h1&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>id选择器：通过元素的id选择唯一的指定元素  </p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#id&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>类选择器：通过元素的class属性选择一组元素  </p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.className&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li><p>通配选择器：选中所有元素  </p>
 <blockquote>
 <p>不建议使用，拉低性能</p>
 </blockquote>
-<p>  `*{</p>
-<pre><code>...</code></pre><p>  }`</p>
-</li>
-<li><p>伪类选择器：选择某种特殊状态中的元素<br>  `a:link{</p>
-<pre><code>...</code></pre><p>  }`</p>
-</li>
-<li><p>伪元素选择器：选择某些特殊位置的元素<br>  `p:first-letter{</p>
-<pre><code>...</code></pre><p>  }`</p>
-</li>
-<li><p>属性选择器：根据元素的某个属性值选择元素<br>  `input[placeholder=”input”]{</p>
-<pre><code>...</code></pre><p>  }`</p>
-</li>
-<li><p>兄弟元素选择器：选择兄弟元素<br>  `h1 + p {</p>
-<pre><code>//选择h1后紧邻的单个兄弟元素  </code></pre><p>  }<code></code>h1 ~ p {</p>
-<pre><code>//选择h1后所有的兄弟元素  </code></pre><p>  }`</p>
-</li>
-<li><p>后代元素选择器（包含选择器）：选择后代元素<br>  `h1 p{</p>
-<pre><code>...</code></pre><p>  }`</p>
-</li>
-<li><p>子元素选择器：选择子元素<br>  `h1 &gt; p{</p>
-<pre><code>...</code></pre><p>  }`</p>
-</li>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">*&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>伪类选择器：选择某种特殊状态中的元素  </p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">a:link&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>伪元素选择器：选择某些特殊位置的元素  </p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">    p:first-letter&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;&#96;</span><br><span class="line">+ 属性选择器：根据元素的某个属性值选择元素</span><br></pre></td></tr></table></figure>
+<p>  input[placeholder=”input”]{</p>
+<pre><code>...</code></pre><p>  }</p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+ 兄弟元素选择器：选择兄弟元素</span><br></pre></td></tr></table></figure>
+<p>  h1 + p {</p>
+<pre><code>//选择h1后紧邻的单个兄弟元素  </code></pre><p>  }</p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> </span><br></pre></td></tr></table></figure>
+<p>  h1 ~ p {</p>
+<pre><code>//选择h1后所有的兄弟元素  </code></pre><p>  }</p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+ 后代元素选择器（包含选择器）：选择后代元素</span><br></pre></td></tr></table></figure>
+<p>  h1 p{</p>
+<pre><code>...</code></pre><p>  }</p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+ 子元素选择器：选择子元素</span><br></pre></td></tr></table></figure>
+<p>  h1 &gt; p{</p>
+<pre><code>...</code></pre><p>  }</p>
+<pre><code></code></pre></li>
 </ul>
 <h4 id="选择器的优先级"><a href="#选择器的优先级" class="headerlink" title="选择器的优先级"></a>选择器的优先级</h4><ol>
 <li>内联样式（1000）  </li>
