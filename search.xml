@@ -1214,16 +1214,13 @@
 <li><p>属性选择器：根据元素的某个属性值选择元素  </p>
   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">input[placeholder&#x3D;&quot;input&quot;]&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li><p>兄弟元素选择器：选择兄弟元素  </p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">h1 + p &#123;</span><br><span class="line">    &#x2F;&#x2F;选择h1后紧邻的单个兄弟元素  </span><br><span class="line">&#125;</span><br><span class="line">&#96;&#96;&#96;</span><br></pre></td></tr></table></figure>
-<p>  h1 ~ p {</p>
-<pre><code>//选择h1后所有的兄弟元素  </code></pre><p>  }</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+ 后代元素选择器（包含选择器）：选择后代元素</span><br></pre></td></tr></table></figure>
-<p>  h1 p{</p>
-<pre><code>...</code></pre><p>  }</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+ 子元素选择器：选择子元素</span><br></pre></td></tr></table></figure>
-<p>  h1 &gt; p{</p>
-<pre><code>...</code></pre><p>  }</p>
-<pre><code></code></pre></li>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">h1 + p &#123;</span><br><span class="line">    &#x2F;&#x2F;选择h1后紧邻的单个兄弟元素  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">h1 ~ p &#123;</span><br><span class="line">    &#x2F;&#x2F;选择h1后所有的兄弟元素  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>后代元素选择器（包含选择器）：选择后代元素  </p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">h1 p&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>子元素选择器：选择子元素  </p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">h1 &gt; p&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
 </ul>
 <h4 id="选择器的优先级"><a href="#选择器的优先级" class="headerlink" title="选择器的优先级"></a>选择器的优先级</h4><ol>
 <li>内联样式（1000）  </li>
