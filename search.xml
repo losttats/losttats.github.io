@@ -1210,13 +1210,11 @@
 <li><p>伪类选择器：选择某种特殊状态中的元素  </p>
   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">a:link&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li><p>伪元素选择器：选择某些特殊位置的元素  </p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">    p:first-letter&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;&#96;</span><br><span class="line">+ 属性选择器：根据元素的某个属性值选择元素</span><br></pre></td></tr></table></figure>
-<p>  input[placeholder=”input”]{</p>
-<pre><code>...</code></pre><p>  }</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+ 兄弟元素选择器：选择兄弟元素</span><br></pre></td></tr></table></figure>
-<p>  h1 + p {</p>
-<pre><code>//选择h1后紧邻的单个兄弟元素  </code></pre><p>  }</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> </span><br></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">p:first-letter&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>属性选择器：根据元素的某个属性值选择元素  </p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">input[placeholder&#x3D;&quot;input&quot;]&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>兄弟元素选择器：选择兄弟元素  </p>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">h1 + p &#123;</span><br><span class="line">    &#x2F;&#x2F;选择h1后紧邻的单个兄弟元素  </span><br><span class="line">&#125;</span><br><span class="line">&#96;&#96;&#96;</span><br></pre></td></tr></table></figure>
 <p>  h1 ~ p {</p>
 <pre><code>//选择h1后所有的兄弟元素  </code></pre><p>  }</p>
   <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">+ 后代元素选择器（包含选择器）：选择后代元素</span><br></pre></td></tr></table></figure>
@@ -1417,7 +1415,7 @@ div:after{
 <h2 id="圣杯布局-双飞翼布局"><a href="#圣杯布局-双飞翼布局" class="headerlink" title="圣杯布局 双飞翼布局"></a>圣杯布局 双飞翼布局</h2><blockquote>
 <p>和三栏布局要求相同，不过中间栏要写在前面保证优先渲染</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.outer, .left, .mid, .right&#123;</span><br><span class="line">	height:100px;</span><br><span class="line">	margin-bottom:5px;</span><br><span class="line">&#125;</span><br><span class="line">.left&#123;</span><br><span class="line">	background:red;</span><br><span class="line">&#125;</span><br><span class="line">.mid&#123;</span><br><span class="line">	background:blue;</span><br><span class="line">&#125;</span><br><span class="line">.right&#123;</span><br><span class="line">	background:green;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;* 圣杯布局 通过浮动和负边距实现*&#x2F;</span><br><span class="line">.outer1&#123;</span><br><span class="line">	padding:0 200px 0 100px;</span><br><span class="line">&#125;</span><br><span class="line">.outer1 .mid&#123;</span><br><span class="line">	width:100%;</span><br><span class="line">	float:left;</span><br><span class="line">&#125;</span><br><span class="line">.outer1 .left&#123;</span><br><span class="line">	width:100px;</span><br><span class="line">	float:left;</span><br><span class="line">&#125;</span><br><span class="line">.outer1 .right&#123;</span><br><span class="line">	width:200px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.outer, .left, .mid, .right&#123;</span><br><span class="line">	height:100px;</span><br><span class="line">	margin-bottom:5px;</span><br><span class="line">&#125;</span><br><span class="line">.left&#123;</span><br><span class="line">	background:red;</span><br><span class="line">&#125;</span><br><span class="line">.mid&#123;</span><br><span class="line">	background:blue;</span><br><span class="line">&#125;</span><br><span class="line">.right&#123;</span><br><span class="line">	background:green;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;* 圣杯布局 通过浮动和负边距实现*&#x2F;</span><br><span class="line">.outer1&#123;</span><br><span class="line">	padding:0 200px 0 100px;</span><br><span class="line">&#125;</span><br><span class="line">.outer1 .mid&#123;</span><br><span class="line">	width:100%;</span><br><span class="line">	float:left;</span><br><span class="line">&#125;</span><br><span class="line">.outer1 .left&#123;</span><br><span class="line">	width:100px;</span><br><span class="line">	float:left;</span><br><span class="line">	margin-left:-100%;</span><br><span class="line">	position:relative;</span><br><span class="line">	right:100px;</span><br><span class="line">&#125;</span><br><span class="line">.outer1 .right&#123;</span><br><span class="line">	float:left;</span><br><span class="line">	width:200px;</span><br><span class="line">	margin-right:-200px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="水平垂直居中"><a href="#水平垂直居中" class="headerlink" title="水平垂直居中"></a>水平垂直居中</h2><ul>
 <li>定宽高<ul>

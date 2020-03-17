@@ -122,13 +122,11 @@
 <li><p>伪类选择器：选择某种特殊状态中的元素  </p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a:link&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li><p>伪元素选择器：选择某些特殊位置的元素  </p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">    p:first-letter&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;&#96;</span><br><span class="line">+ 属性选择器：根据元素的某个属性值选择元素</span><br></pre></td></tr></table></figure>
-<p>  input[placeholder=”input”]{</p>
-<pre><code>...</code></pre><p>  }</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ 兄弟元素选择器：选择兄弟元素</span><br></pre></td></tr></table></figure>
-<p>  h1 + p {</p>
-<pre><code>//选择h1后紧邻的单个兄弟元素  </code></pre><p>  }</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> </span><br></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">p:first-letter&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>属性选择器：根据元素的某个属性值选择元素  </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">input[placeholder&#x3D;&quot;input&quot;]&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>兄弟元素选择器：选择兄弟元素  </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">h1 + p &#123;</span><br><span class="line">    &#x2F;&#x2F;选择h1后紧邻的单个兄弟元素  </span><br><span class="line">&#125;</span><br><span class="line">&#96;&#96;&#96;</span><br></pre></td></tr></table></figure>
 <p>  h1 ~ p {</p>
 <pre><code>//选择h1后所有的兄弟元素  </code></pre><p>  }</p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ 后代元素选择器（包含选择器）：选择后代元素</span><br></pre></td></tr></table></figure>
@@ -468,9 +466,9 @@ clearfix:after{
       </li>
     </ul>
   </div>
-  <div style="position:fixed; bottom: 0; right: 0;z-index: 77;">
+  <!-- <div style="position:fixed; bottom: 0; right: 0;z-index: 77;">
     <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=26655232&auto=1&height=66"></iframe>
-  </div>
+  </div> -->
 </footer>
     <div class="to_top">
         <div class="totop" id="totop">
