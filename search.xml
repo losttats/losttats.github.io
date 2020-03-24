@@ -303,10 +303,7 @@
 <li><p>客户端：发回ACK报文确认，并将确认序号设置为收到序号加一</p>
 </li>
 </ul>
-<h2 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h2><blockquote>
-<p>jsonp是一种跨域通信手段</p>
-</blockquote>
-<p>原理：</p>
+<h2 id="跨域手段"><a href="#跨域手段" class="headerlink" title="跨域手段"></a>跨域手段</h2><h3 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h3><p>原理：</p>
 <ol>
 <li><p>利用script标签的src属性来实现跨域</p>
 </li>
@@ -326,12 +323,57 @@
 <li><p>客户端接收到返回的js脚本，开始解析和执行fn(response)</p>
 </li>
 </ol>
-<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><p>缓存一半分为两种:强缓存和协商缓存.二者主要区别在于使用本地缓存的时候,是否需要向服务器验证本地缓存是否依旧有效.即是说,协商缓存就是需要和服务器进行协商,最终才能确定是否使用本地缓存.</p>
+<h3 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h3><p>原理:CORS的全称是跨域资源共享.它允许浏览器向跨源服务器发出XMLHttpRequest请求,从而克服了AJAX只能同源使用的限制.实现CORS通信的关键是服务器,只要服务器实现了CORS接口就可以跨源通信</p>
+<p>两种请求:</p>
+<ol>
+<li><p>简单请求:      </p>
+<ul>
+<li>请求方式为HEAD/POST/GET</li>
+<li>http头信息不超出以下字段:Accept/Accept-Language/Content-Language/Last-Event-ID/Content-Type(限三个值)</li>
+<li>实现简单请求就是在信息头中加入一个Origin字段.Origin的作用就是用于说明本次请求来自于哪个源,服务器会根据Origin的值来判断是否接受本次请求.如果服务器拒绝,则返回的信息头中无Access-Control-Allow-Origin字段,并自动抛出错误(无法通过状态码识别)</li>
+</ul>
+</li>
+<li><p>复杂请求:</p>
+<ul>
+<li>除简单请求外就是复杂请求</li>
+<li>复杂请求会先发起一个预检请求,属于option方法,来知悉服务端是否允许跨域请求</li>
+</ul>
+</li>
+</ol>
+<p>CORS不支持IE8/9</p>
+<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><h3 id="缓存流程"><a href="#缓存流程" class="headerlink" title="缓存流程"></a>缓存流程</h3><blockquote>
+<p>缓存优先级:Service Worker→Memory Cache→Disk Cache→网络请求</p>
+</blockquote>
+<ol>
+<li><p>Service Worker<br>Service Worker不同于浏览器内部的Memory Cache和Disk Cache,它更加灵活,可以自主设置许多属性.而且这个缓存是永久性的,即关闭浏览器下次打开还存在(而Memory Cache不是).有两种情况会导致这个缓存中的资源被清除:手动调用API(cache.delete(resource))或者容量超过限制被浏览器清空<br>如果Service Worker没有命中缓存,一般情况会使用fetch()方法继续获取资源.这时浏览器就去Memory Cache或者Disk Cache进行下一次找缓存的工作了<br>经过Service Worker的fetch方法获取的资源,即使没有命中Service Worker缓存甚至走了网络请求,也会标注为from ServiceWorker</p>
+</li>
+<li><p>Memory Cache<br>Memory Cache是内存中的缓存.<br>几乎所有的网络请求资源都会被浏览器自动加入到Memory Cache中.但是也正因为数量很大而浏览器占用的内存不能无限扩大,Memory Cache注定是个短时效的缓存.一般浏览器的TAB关闭后该次浏览的Memory Cache便会失效.极端情况下一个页面占用的缓存太多,那么排在前面的缓存就会失效<br>进入Memory Cache的资源主要有两块:   </p>
+<ul>
+<li><p>preloader</p>
+</li>
+<li><p>preload,如&lt;link rel=”preload”&gt;   </p>
+<p>Memory Cache机制保证了一个页面中如果有两个相同的请求都实际上只会被请求一次,避免浪费<br>在从Memory Cache中获取缓存内容时,浏览器会忽视例如max-age=0,no-cache等头部匹配.例如页面上几个相同src的图片,即便它们设置为不缓存,依然会从Memory Cache中获取.头部设置为no-store则Memory Cache不会存储.</p>
+</li>
+</ul>
+</li>
+<li><p>disk cache<br>disk cache也叫HTTP cache,它是存储在硬盘上的缓存,因此它是长时效的缓存.而且它允许相同的资源在跨会话甚至跨站点的情况下使用.<br>disk cache会严格根据HTTP头信息中的各类字段来判定哪些资源可以缓存等等.当命中缓存后,浏览器会从硬盘中读取资源,虽然比起从内存中读取慢了一点,但是比网络请求还是要快上不少.绝大部分缓存都来自disk cache</p>
+</li>
+<li><p>请求网络<br>如果一个请求在上述三个位置都没能找到缓存,那么浏览器会正是发送网络请求去获取内容.之后,为了提升以后请求的缓存命中率,要把该资源添加到缓存中.具体来说分为以下几个操作:</p>
+<ul>
+<li>根据service worker中的handler决定是否存入Cache Storage(额外的缓存位置)</li>
+<li>根据HTTP头部的相关字段决定是否存入disk cache</li>
+<li>memory cache保存一份资源的引用,以备下次使用</li>
+</ul>
+</li>
+<li><p>按失效策略分类<br>memory cache是浏览器为了加快读取缓存速度而进行的自身行为优化,不受开发者控制,也不受HTTP协议头的约束.<br>service worker是由开发者编写的额外的脚本,且缓存位置独立<br>disk cache使用最多,它遵守HTTP协议头中的字段.强缓存和协商缓存都归于此类</p>
+</li>
+</ol>
+<h3 id="http请求缓存"><a href="#http请求缓存" class="headerlink" title="http请求缓存"></a>http请求缓存</h3><p>缓存一般分为两种:强缓存和协商缓存.二者主要区别在于使用本地缓存的时候,是否需要向服务器验证本地缓存是否依旧有效.即是说,协商缓存就是需要和服务器进行协商,最终才能确定是否使用本地缓存.</p>
 <p>两种缓存方案存在的问题</p>
 <ul>
 <li><p>强缓存: 强缓存主要是通过http请求头中的Cache-Control和Expire两个字段控制.Expire是HTTP1.0标准下的字段.一般来说,我们会设置Cache-Control的值为”public,max-age=xxx”,表示在xxx秒内再次访问该资源均使用本地的缓存,不再向服务器发起请求.那么问题来了,如果在xxx秒内,服务器上的资源更新了,客户端在没有强制刷新的情况下,看见的依旧是旧内容.更为严重的,如果后台接口也更新了,有缓存的用户还在使用旧接口,则引发更严重的问题.</p>
 </li>
-<li><p>协商缓存: 协商缓存最大的问题就是每次都要向服务器验证一下缓存的有效性.这样,使用缓存的意义就不复存在了.</p>
+<li><p>协商缓存: 协商缓存最大的问题就是每次都要向服务器验证一下缓存的有效性.这样,使用缓存的意义就不复存在了.<br>服务器通过Last-Modified告知客户端资源最后一次被修改的时间.浏览器记下这个时间.下一次请求该资源时,将Last-Modified的值写入到请求头的If-Modified-Since字段中.服务器判断If-Modified-Since和Last-Modified是否相等.相等则响应304;反之,响应200,返回数据.<br>还有一种模式是用Etag&amp;If-None-Match,这个的优先级高于前者.</p>
 </li>
 </ul>
 <p>最佳实践:缓存的意义在于减少请求,更多地使用本地的资源,给用户更好的体验的同时,减轻服务器压力.所以最佳的解决方案是在更新版本的时候,把静态资源的路径改掉,这样相当于修改后是第一次访问这些资源,就不会存在缓存的问题了</p>
@@ -351,6 +393,23 @@
 <li><p>contenthash:由文件内容产生hash值,内容不同产生的contenthash也不同</p>
 </li>
 </ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>当浏览器要请求资源时:</p>
+<ol>
+<li><p>调用Service Worker的fetch事件响应</p>
+</li>
+<li><p>查看Memory Cache</p>
+</li>
+<li><p>查看Disk Cache(强缓存或协商缓存)</p>
+</li>
+<li><p>发送网络请求,等待网络响应</p>
+</li>
+<li><p>把响应内容存入Disk Cache(如果HTTP允许)</p>
+</li>
+<li><p>把响应内容的引用存入Memory Cache</p>
+</li>
+<li><p>把响应内容存入Service Worker的Cache Storage(如果Service Worker的脚本调用了cache.put())</p>
+</li>
+</ol>
 <h2 id="前端性能优化"><a href="#前端性能优化" class="headerlink" title="前端性能优化"></a>前端性能优化</h2><h3 id="网络传输性能优化"><a href="#网络传输性能优化" class="headerlink" title="网络传输性能优化"></a>网络传输性能优化</h3><ol>
 <li><p>浏览器缓存(强缓存/协商缓存)<br>尽可能多地使用缓存,减少请求书</p>
 </li>
@@ -409,6 +468,52 @@
 </li>
 </ol>
 <h3 id="JS阻塞性能"><a href="#JS阻塞性能" class="headerlink" title="JS阻塞性能"></a>JS阻塞性能</h3><p>在编程过程中,如果我们使用了闭包后未将其相关资源加以释放,或者引用了外链后未将其置空(如给某DOM元素绑定了事件回调,后来却remove了该元素)都会造成内存泄漏,进而大量占用用户的CPU,造成卡顿甚至死机.</p>
+<h2 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h2><blockquote>
+<p>cookie是指某些网站为了辨别用户身份而储存在用户本地终端上的数据</p>
+</blockquote>
+<p>作为一段一般不超过4kb的小型文本数据,它由一个名称(Name),一个值(Value)和其他几个用于控制cookie有效期,安全性,使用范围的可选属性组成</p>
+<h3 id="cookie的设置"><a href="#cookie的设置" class="headerlink" title="cookie的设置"></a>cookie的设置</h3><ol>
+<li><p>客户端发送HTTP请求到服务器</p>
+</li>
+<li><p>当服务器收到HTTP请求时,在响应头里面添加一个Set-Cookie字段</p>
+</li>
+<li><p>浏览器收到响应后保存下Cookie</p>
+</li>
+<li><p>之后对该服务器的每一次请求中都通过cookie字段将cookie信息发送给服务器</p>
+</li>
+</ol>
+<h3 id="cookie的属性"><a href="#cookie的属性" class="headerlink" title="cookie的属性"></a>cookie的属性</h3><ol>
+<li><p>Name/Value:用js操作cookie时要注意对Value进行编码处理</p>
+</li>
+<li><p>Expires:用于设置cookie的过期时间.当该属性缺省时,表示是会话性cookie.当为会话性cookie时,值保存在客户端内存中,并在用户关闭浏览器时失效.有些浏览器提供会话恢复功能,此时可保留会话性cookie.与会话性cookie相对的是持久性cookie,持久性cookie保存在用户的硬盘中,直到过期或者被清除.</p>
+</li>
+<li><p>Max-age:为正数时,浏览器会将其持久化,写到对应地cookie文件中;为负数时,表示这是一个会话性cookie;为0时,立即删除该cookie.Expires和Max-age同时存在时,Max-age优先级更高</p>
+</li>
+<li><p>Domain:指定了cookie可以送达的主机名.假如没有指定则默认值为当前文档访问地址中的主机部分(不包含子域名)</p>
+</li>
+<li><p>Path:指定一个URL路径,这个路径必须出现在要请求的资源的路径中才可以发送cookie首部.比如设置Path=/docs,/docs/web/下的资源会带cookie首部,/test则不会携带cookie首部.Domain和Path共同定义了cookie的作用域,即cookie应当发送给哪些URL.</p>
+</li>
+<li><p>Secure:有该标记的cookie只应通过被https协议加密过的请求发送给服务器.</p>
+</li>
+<li><p>HTTPOnly:设置该属性可以防止客户端脚本通过document.cookie等方式访问cookie,有助于避免XSS攻击</p>
+</li>
+<li><p>SameSite:使cookie在跨站请求时不会被发送,从而阻止跨站请求伪造攻击(CSRF)     </p>
+<ul>
+<li><p>属性值:Strict仅允许一方请求携带cookie,即浏览器将只发送相同站点请求的cookie,即当前网页URL与请求目标URL完全一致.Lax允许部分第三方请求携带cookie.None无论是否跨站都会发送cookie.Chrome80后默认是Lax</p>
+</li>
+<li><p>跨域和跨站:同源策略是指两个URL的协议/主机名/端口一致.而cookie中的同站是指只要两个URL的eTLD+1相同即可.其中eTLD表示有效顶级域名,如.com等等.eTLD+1表示有效顶级域名+二级域名,例如baidu.com</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="cookie的作用"><a href="#cookie的作用" class="headerlink" title="cookie的作用"></a>cookie的作用</h3><ol>
+<li><p>会话状态管理:用户登录状态/购物车/游戏分数/需要记录的信息</p>
+</li>
+<li><p>个性化设置:用户自定义设置/主题</p>
+</li>
+<li><p>浏览器行为跟踪:跟踪分许用户行为</p>
+</li>
+</ol>
 ]]></content>
       <categories>
         <category>Web</category>
@@ -856,6 +961,23 @@
 <h2 id="this"><a href="#this" class="headerlink" title="this"></a>this</h2><blockquote>
 <p>以函数形式调用时，this永远指向window对象<br>以方法形式调用时，this就是调用该方法的对象<br>以构造函数形式调用时，this指向新建的对象</p>
 </blockquote>
+<p>this的五种绑定方式:</p>
+<ul>
+<li><p>默认绑定:非严格模式下函数中的this指向window,严格模式下指向undefined</p>
+</li>
+<li><p>隐式绑定:当函数引用有上下文对象时,指向调用它的对象.如obj.foo().隐式绑定还有隐式丢失的问题:</p>
+<ul>
+<li>使用另一个变量来给函数取别名</li>
+<li>将函数作为参数传递时,会被隐式赋值,回调函数丢失this绑定.非严格绑定到window,严格则undefined</li>
+</ul>
+</li>
+<li><p>显式绑定:call(),apply(),bind()</p>
+</li>
+<li><p>new绑定</p>
+</li>
+<li><p>箭头函数绑定:this指向由外层作用域决定</p>
+</li>
+</ul>
 <h2 id="原型和原型链"><a href="#原型和原型链" class="headerlink" title="原型和原型链"></a>原型和原型链</h2><p><img src="/images/prototype.png" alt="原型链"></p>
 <blockquote>
 <p>上图中蓝色的即为原型链</p>
@@ -1176,6 +1298,77 @@
 <li><p>map:映射.将数组的每个元素进行各种变换生成新元素.最后返回一个新数组,不改变原数组</p>
 </li>
 </ol>
+<h2 id="arguments"><a href="#arguments" class="headerlink" title="arguments"></a>arguments</h2><p>无论函数中有无形参,arguments都会获取你调用函数时传递的所有实参</p>
+<p>arguments只存在于普通函数中,window全局和箭头函数中都不存在</p>
+<h2 id="JS的词法作用域"><a href="#JS的词法作用域" class="headerlink" title="JS的词法作用域"></a>JS的词法作用域</h2><p>作用域:程序源代码中定义变量的区域</p>
+<p>作用域规定了如何查找变量,也就是确定当前执行代码对变量的访问权限</p>
+<p>JS采用词法作用域,即静态作用域.也就是说函数的作用域在函数定义的时候就决定了</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var value &#x3D; 1;</span><br><span class="line"></span><br><span class="line">function foo()&#123;</span><br><span class="line">    console.log(value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function bar()&#123;</span><br><span class="line">    var value &#x3D; 2;</span><br><span class="line">    foo();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bar();          &#x2F;&#x2F;输出1</span><br></pre></td></tr></table></figure>
+
+<p>执行foo函数,先从函数内部查找是否有变量value,找不到就到定义该函数的地方查找上一层代码,于是输出1.</p>
+<h2 id="执行上下文栈"><a href="#执行上下文栈" class="headerlink" title="执行上下文栈"></a>执行上下文栈</h2><p>可执行代码:全局代码/函数代码/eval代码</p>
+<p>当JS执行一段可执行代码时,会创建对应的执行上下文.而对于每个执行上下文,都有三个重要属性:      </p>
+<ul>
+<li>变量对象(Variable Object,VO)</li>
+<li>作用域链</li>
+<li>this</li>
+</ul>
+<p>当JS开始要解释执行代码时,最先遇到全局代码.所以首先向执行上下文栈中压入一个全局执行上下文,并且只有当整个应用程序结束时,执行上下文栈待会被清空,所以它底部永远有一个全局执行上下文.</p>
+<p>当执行一个函数时,就会创建一个执行上下文,并压入栈,当该函数执行完毕时从栈中弹出</p>
+<h2 id="变量对象"><a href="#变量对象" class="headerlink" title="变量对象"></a>变量对象</h2><p>变量对象是与执行上下文相关的数据作用域,存储了在上下文中定义的变量和函数声明.不同执行上下文的变量对象稍有不同</p>
+<h3 id="全局上下文"><a href="#全局上下文" class="headerlink" title="全局上下文"></a>全局上下文</h3><p>全局对象:</p>
+<ul>
+<li><p>可以通过this引用,客户端JS中,全局对象就是window对象</p>
+</li>
+<li><p>全局对象是由Object构造函数实例化的一个对象</p>
+</li>
+<li><p>预设了一些函数和属性</p>
+</li>
+<li><p>作为全局变量的宿主</p>
+</li>
+<li><p>客户端JS中,全局对象有window属性指向自身</p>
+</li>
+<li><p>全局执行上下文的变量对象就是全局对象</p>
+</li>
+</ul>
+<h3 id="函数上下文"><a href="#函数上下文" class="headerlink" title="函数上下文"></a>函数上下文</h3><p>在函数上下文中,我们用活动对象(AO)来表示变量对象</p>
+<p>活动对象和变量对象其实是一个东西,只是变量对象是规范上的或者说是引擎上实现的,不能在JS环境中访问.只有当进入一个执行上下文中,这个执行上下文的变量对象才会被激活,所以才叫活动对象.而只有被激活的变量对象,也就是活动对象上的各种属性才能被访问</p>
+<p>活动对象是在进入函数上下文时刻被创建的,它通过函数的arguments属性初始化</p>
+<h3 id="执行过程"><a href="#执行过程" class="headerlink" title="执行过程"></a>执行过程</h3><p>执行上下文的代码会分成两个阶段进行处理:分析和执行</p>
+<ul>
+<li><p>进入执行上下文</p>
+</li>
+<li><p>代码执行</p>
+</li>
+</ul>
+<h3 id="进入执行上下文"><a href="#进入执行上下文" class="headerlink" title="进入执行上下文"></a>进入执行上下文</h3><p>当进入执行上下文时,还没有执行代码</p>
+<p>变量对象会包括:</p>
+<ol>
+<li>函数所有形参(如果是函数上下文):<ul>
+<li>由名称和对应值组成的一个变量对象的属性被创建</li>
+<li>没有实参时,属性值设为undefined</li>
+</ul>
+</li>
+<li>函数声明:<ul>
+<li>由名称和对应值(函数对象)组成一个变量对象的属性被创建</li>
+<li>如果变量对象已经存在相同名称的属性,则完全替换这个属性</li>
+</ul>
+</li>
+<li>变量声明:<ul>
+<li>由名称和对应值(undefined)组成一个变量对象的属性被创建</li>
+<li>如果变量名称跟已经声明的形式参数或函数相同,则变量声明不会干扰已经存在的这些属性</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function foo(a) &#123;</span><br><span class="line">    var b &#x3D; 2;</span><br><span class="line">    function c() &#123;&#125;</span><br><span class="line">    var d &#x3D; function() &#123;&#125;;</span><br><span class="line">    b &#x3D; 3;</span><br><span class="line">&#125;</span><br><span class="line">foo(1)</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;在进入执行上下文阶段的AO是</span><br><span class="line">&#123;</span><br><span class="line">    arguments:&#123;</span><br><span class="line">        0:1,</span><br><span class="line">        length:1</span><br><span class="line">    &#125;,</span><br><span class="line">    a:1,</span><br><span class="line">    b:undefined,</span><br><span class="line">    c:reference to function c()&#123;&#125;,</span><br><span class="line">    d:undefined</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="代码执行"><a href="#代码执行" class="headerlink" title="代码执行"></a>代码执行</h3><p>在代码执行阶段,会顺序执行代码.根据代码修改变量对象的值</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;上面代码执行完的AO:</span><br><span class="line">&#123;</span><br><span class="line">    arguments:&#123;</span><br><span class="line">        0:1,</span><br><span class="line">        length:1</span><br><span class="line">    &#125;,</span><br><span class="line">    a:1,</span><br><span class="line">    b:3,</span><br><span class="line">    c:reference to function c()&#123;&#125;,</span><br><span class="line">    d:reference to FunctionExpression &quot;d&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h2><p>当查找变量时,会先从当前上下文的变量对象中查找,如果没有找到,就会从父级执行上下文的变量对象中查找,一直找到全局上下文的变量对象.这样由多个执行上下文的变量对象构成的链表就叫做作用域链</p>
+<h3 id="函数创建"><a href="#函数创建" class="headerlink" title="函数创建"></a>函数创建</h3><p>函数的作用域在函数定义的时候就已经决定了</p>
+<p>因为函数有一个内部属性[[scope]],当函数创建的时候就会保存所有父变量对象到其中.即[[scope]]就是所有父变量对象的层级链(并不代表完整的层级链)</p>
+<h3 id="函数激活"><a href="#函数激活" class="headerlink" title="函数激活"></a>函数激活</h3><p>当函数激活时,进入函数上下文,创建VO/AO后,就会将活动对象添加到作用链的前端</p>
 ]]></content>
       <categories>
         <category>JS</category>

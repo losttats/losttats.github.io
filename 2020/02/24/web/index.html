@@ -63,7 +63,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">7.4k字</span>
+            <span class="post-count">9.5k字</span>
         </span>
     </span>
 
@@ -72,7 +72,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">26分钟</span>
+            <span class="post-count">33分钟</span>
         </span>
     </span>
 </div>
@@ -382,10 +382,7 @@
 <li><p>客户端：发回ACK报文确认，并将确认序号设置为收到序号加一</p>
 </li>
 </ul>
-<h2 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h2><blockquote>
-<p>jsonp是一种跨域通信手段</p>
-</blockquote>
-<p>原理：</p>
+<h2 id="跨域手段"><a href="#跨域手段" class="headerlink" title="跨域手段"></a>跨域手段</h2><h3 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h3><p>原理：</p>
 <ol>
 <li><p>利用script标签的src属性来实现跨域</p>
 </li>
@@ -405,12 +402,57 @@
 <li><p>客户端接收到返回的js脚本，开始解析和执行fn(response)</p>
 </li>
 </ol>
-<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><p>缓存一半分为两种:强缓存和协商缓存.二者主要区别在于使用本地缓存的时候,是否需要向服务器验证本地缓存是否依旧有效.即是说,协商缓存就是需要和服务器进行协商,最终才能确定是否使用本地缓存.</p>
+<h3 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h3><p>原理:CORS的全称是跨域资源共享.它允许浏览器向跨源服务器发出XMLHttpRequest请求,从而克服了AJAX只能同源使用的限制.实现CORS通信的关键是服务器,只要服务器实现了CORS接口就可以跨源通信</p>
+<p>两种请求:</p>
+<ol>
+<li><p>简单请求:      </p>
+<ul>
+<li>请求方式为HEAD/POST/GET</li>
+<li>http头信息不超出以下字段:Accept/Accept-Language/Content-Language/Last-Event-ID/Content-Type(限三个值)</li>
+<li>实现简单请求就是在信息头中加入一个Origin字段.Origin的作用就是用于说明本次请求来自于哪个源,服务器会根据Origin的值来判断是否接受本次请求.如果服务器拒绝,则返回的信息头中无Access-Control-Allow-Origin字段,并自动抛出错误(无法通过状态码识别)</li>
+</ul>
+</li>
+<li><p>复杂请求:</p>
+<ul>
+<li>除简单请求外就是复杂请求</li>
+<li>复杂请求会先发起一个预检请求,属于option方法,来知悉服务端是否允许跨域请求</li>
+</ul>
+</li>
+</ol>
+<p>CORS不支持IE8/9</p>
+<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><h3 id="缓存流程"><a href="#缓存流程" class="headerlink" title="缓存流程"></a>缓存流程</h3><blockquote>
+<p>缓存优先级:Service Worker→Memory Cache→Disk Cache→网络请求</p>
+</blockquote>
+<ol>
+<li><p>Service Worker<br>Service Worker不同于浏览器内部的Memory Cache和Disk Cache,它更加灵活,可以自主设置许多属性.而且这个缓存是永久性的,即关闭浏览器下次打开还存在(而Memory Cache不是).有两种情况会导致这个缓存中的资源被清除:手动调用API(cache.delete(resource))或者容量超过限制被浏览器清空<br>如果Service Worker没有命中缓存,一般情况会使用fetch()方法继续获取资源.这时浏览器就去Memory Cache或者Disk Cache进行下一次找缓存的工作了<br>经过Service Worker的fetch方法获取的资源,即使没有命中Service Worker缓存甚至走了网络请求,也会标注为from ServiceWorker</p>
+</li>
+<li><p>Memory Cache<br>Memory Cache是内存中的缓存.<br>几乎所有的网络请求资源都会被浏览器自动加入到Memory Cache中.但是也正因为数量很大而浏览器占用的内存不能无限扩大,Memory Cache注定是个短时效的缓存.一般浏览器的TAB关闭后该次浏览的Memory Cache便会失效.极端情况下一个页面占用的缓存太多,那么排在前面的缓存就会失效<br>进入Memory Cache的资源主要有两块:   </p>
+<ul>
+<li><p>preloader</p>
+</li>
+<li><p>preload,如&lt;link rel=”preload”&gt;   </p>
+<p>Memory Cache机制保证了一个页面中如果有两个相同的请求都实际上只会被请求一次,避免浪费<br>在从Memory Cache中获取缓存内容时,浏览器会忽视例如max-age=0,no-cache等头部匹配.例如页面上几个相同src的图片,即便它们设置为不缓存,依然会从Memory Cache中获取.头部设置为no-store则Memory Cache不会存储.</p>
+</li>
+</ul>
+</li>
+<li><p>disk cache<br>disk cache也叫HTTP cache,它是存储在硬盘上的缓存,因此它是长时效的缓存.而且它允许相同的资源在跨会话甚至跨站点的情况下使用.<br>disk cache会严格根据HTTP头信息中的各类字段来判定哪些资源可以缓存等等.当命中缓存后,浏览器会从硬盘中读取资源,虽然比起从内存中读取慢了一点,但是比网络请求还是要快上不少.绝大部分缓存都来自disk cache</p>
+</li>
+<li><p>请求网络<br>如果一个请求在上述三个位置都没能找到缓存,那么浏览器会正是发送网络请求去获取内容.之后,为了提升以后请求的缓存命中率,要把该资源添加到缓存中.具体来说分为以下几个操作:</p>
+<ul>
+<li>根据service worker中的handler决定是否存入Cache Storage(额外的缓存位置)</li>
+<li>根据HTTP头部的相关字段决定是否存入disk cache</li>
+<li>memory cache保存一份资源的引用,以备下次使用</li>
+</ul>
+</li>
+<li><p>按失效策略分类<br>memory cache是浏览器为了加快读取缓存速度而进行的自身行为优化,不受开发者控制,也不受HTTP协议头的约束.<br>service worker是由开发者编写的额外的脚本,且缓存位置独立<br>disk cache使用最多,它遵守HTTP协议头中的字段.强缓存和协商缓存都归于此类</p>
+</li>
+</ol>
+<h3 id="http请求缓存"><a href="#http请求缓存" class="headerlink" title="http请求缓存"></a>http请求缓存</h3><p>缓存一般分为两种:强缓存和协商缓存.二者主要区别在于使用本地缓存的时候,是否需要向服务器验证本地缓存是否依旧有效.即是说,协商缓存就是需要和服务器进行协商,最终才能确定是否使用本地缓存.</p>
 <p>两种缓存方案存在的问题</p>
 <ul>
 <li><p>强缓存: 强缓存主要是通过http请求头中的Cache-Control和Expire两个字段控制.Expire是HTTP1.0标准下的字段.一般来说,我们会设置Cache-Control的值为”public,max-age=xxx”,表示在xxx秒内再次访问该资源均使用本地的缓存,不再向服务器发起请求.那么问题来了,如果在xxx秒内,服务器上的资源更新了,客户端在没有强制刷新的情况下,看见的依旧是旧内容.更为严重的,如果后台接口也更新了,有缓存的用户还在使用旧接口,则引发更严重的问题.</p>
 </li>
-<li><p>协商缓存: 协商缓存最大的问题就是每次都要向服务器验证一下缓存的有效性.这样,使用缓存的意义就不复存在了.</p>
+<li><p>协商缓存: 协商缓存最大的问题就是每次都要向服务器验证一下缓存的有效性.这样,使用缓存的意义就不复存在了.<br>服务器通过Last-Modified告知客户端资源最后一次被修改的时间.浏览器记下这个时间.下一次请求该资源时,将Last-Modified的值写入到请求头的If-Modified-Since字段中.服务器判断If-Modified-Since和Last-Modified是否相等.相等则响应304;反之,响应200,返回数据.<br>还有一种模式是用Etag&amp;If-None-Match,这个的优先级高于前者.</p>
 </li>
 </ul>
 <p>最佳实践:缓存的意义在于减少请求,更多地使用本地的资源,给用户更好的体验的同时,减轻服务器压力.所以最佳的解决方案是在更新版本的时候,把静态资源的路径改掉,这样相当于修改后是第一次访问这些资源,就不会存在缓存的问题了</p>
@@ -430,6 +472,23 @@
 <li><p>contenthash:由文件内容产生hash值,内容不同产生的contenthash也不同</p>
 </li>
 </ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>当浏览器要请求资源时:</p>
+<ol>
+<li><p>调用Service Worker的fetch事件响应</p>
+</li>
+<li><p>查看Memory Cache</p>
+</li>
+<li><p>查看Disk Cache(强缓存或协商缓存)</p>
+</li>
+<li><p>发送网络请求,等待网络响应</p>
+</li>
+<li><p>把响应内容存入Disk Cache(如果HTTP允许)</p>
+</li>
+<li><p>把响应内容的引用存入Memory Cache</p>
+</li>
+<li><p>把响应内容存入Service Worker的Cache Storage(如果Service Worker的脚本调用了cache.put())</p>
+</li>
+</ol>
 <h2 id="前端性能优化"><a href="#前端性能优化" class="headerlink" title="前端性能优化"></a>前端性能优化</h2><h3 id="网络传输性能优化"><a href="#网络传输性能优化" class="headerlink" title="网络传输性能优化"></a>网络传输性能优化</h3><ol>
 <li><p>浏览器缓存(强缓存/协商缓存)<br>尽可能多地使用缓存,减少请求书</p>
 </li>
@@ -488,6 +547,52 @@
 </li>
 </ol>
 <h3 id="JS阻塞性能"><a href="#JS阻塞性能" class="headerlink" title="JS阻塞性能"></a>JS阻塞性能</h3><p>在编程过程中,如果我们使用了闭包后未将其相关资源加以释放,或者引用了外链后未将其置空(如给某DOM元素绑定了事件回调,后来却remove了该元素)都会造成内存泄漏,进而大量占用用户的CPU,造成卡顿甚至死机.</p>
+<h2 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h2><blockquote>
+<p>cookie是指某些网站为了辨别用户身份而储存在用户本地终端上的数据</p>
+</blockquote>
+<p>作为一段一般不超过4kb的小型文本数据,它由一个名称(Name),一个值(Value)和其他几个用于控制cookie有效期,安全性,使用范围的可选属性组成</p>
+<h3 id="cookie的设置"><a href="#cookie的设置" class="headerlink" title="cookie的设置"></a>cookie的设置</h3><ol>
+<li><p>客户端发送HTTP请求到服务器</p>
+</li>
+<li><p>当服务器收到HTTP请求时,在响应头里面添加一个Set-Cookie字段</p>
+</li>
+<li><p>浏览器收到响应后保存下Cookie</p>
+</li>
+<li><p>之后对该服务器的每一次请求中都通过cookie字段将cookie信息发送给服务器</p>
+</li>
+</ol>
+<h3 id="cookie的属性"><a href="#cookie的属性" class="headerlink" title="cookie的属性"></a>cookie的属性</h3><ol>
+<li><p>Name/Value:用js操作cookie时要注意对Value进行编码处理</p>
+</li>
+<li><p>Expires:用于设置cookie的过期时间.当该属性缺省时,表示是会话性cookie.当为会话性cookie时,值保存在客户端内存中,并在用户关闭浏览器时失效.有些浏览器提供会话恢复功能,此时可保留会话性cookie.与会话性cookie相对的是持久性cookie,持久性cookie保存在用户的硬盘中,直到过期或者被清除.</p>
+</li>
+<li><p>Max-age:为正数时,浏览器会将其持久化,写到对应地cookie文件中;为负数时,表示这是一个会话性cookie;为0时,立即删除该cookie.Expires和Max-age同时存在时,Max-age优先级更高</p>
+</li>
+<li><p>Domain:指定了cookie可以送达的主机名.假如没有指定则默认值为当前文档访问地址中的主机部分(不包含子域名)</p>
+</li>
+<li><p>Path:指定一个URL路径,这个路径必须出现在要请求的资源的路径中才可以发送cookie首部.比如设置Path=/docs,/docs/web/下的资源会带cookie首部,/test则不会携带cookie首部.Domain和Path共同定义了cookie的作用域,即cookie应当发送给哪些URL.</p>
+</li>
+<li><p>Secure:有该标记的cookie只应通过被https协议加密过的请求发送给服务器.</p>
+</li>
+<li><p>HTTPOnly:设置该属性可以防止客户端脚本通过document.cookie等方式访问cookie,有助于避免XSS攻击</p>
+</li>
+<li><p>SameSite:使cookie在跨站请求时不会被发送,从而阻止跨站请求伪造攻击(CSRF)     </p>
+<ul>
+<li><p>属性值:Strict仅允许一方请求携带cookie,即浏览器将只发送相同站点请求的cookie,即当前网页URL与请求目标URL完全一致.Lax允许部分第三方请求携带cookie.None无论是否跨站都会发送cookie.Chrome80后默认是Lax</p>
+</li>
+<li><p>跨域和跨站:同源策略是指两个URL的协议/主机名/端口一致.而cookie中的同站是指只要两个URL的eTLD+1相同即可.其中eTLD表示有效顶级域名,如.com等等.eTLD+1表示有效顶级域名+二级域名,例如baidu.com</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="cookie的作用"><a href="#cookie的作用" class="headerlink" title="cookie的作用"></a>cookie的作用</h3><ol>
+<li><p>会话状态管理:用户登录状态/购物车/游戏分数/需要记录的信息</p>
+</li>
+<li><p>个性化设置:用户自定义设置/主题</p>
+</li>
+<li><p>浏览器行为跟踪:跟踪分许用户行为</p>
+</li>
+</ol>
 
       
       <!-- reward -->
